@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , useEffect } from 'react';
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
           }, 
     },
     margin: {
-        margin: theme.spacing(1),
+        marginBottom: '2em',
         background : '#9b5de5',
         '&:hover': {
             backgroundColor: '#c77dff',
@@ -36,48 +36,62 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
+  const USER_INFO = {
+    'UserName': '',
+    'firstName': '',
+    'secondName': '',
+    'Email': '',
+
+  }
+
 function PrivateSettings () {
     
+    const [ disableEdit , setDisableEdit ] = useState(true);
+    const [editButton, setEditButton] = useState('Edit');
+    const [userInfo, setUserInfo] = useState(USER_INFO);
+
+    
+    const handleButtonClick = () => {
+        if (disableEdit) {
+            setDisableEdit(false);
+            setEditButton('Done');
+        }
+        else {
+            setDisableEdit(true);
+            setEditButton('Edit'); 
+        }
+        
+    }
+
     const classes = useStyles();
     const content = () => (
         <div>
             <h1>Private Settings</h1>
             <Avatar 
-                alt="Remy Sharp" 
+                alt="User Photo " 
                 src="/static/images/avatar/1.jpg" 
                 className={classes.large} 
             />
             <TextField
-                id="standard-read-only-input"
-                label="Chosen IGN Name"
-                defaultValue="ChosenIGNName"
-                InputProps={{
-                    readOnly: true,
-                }}
+                name="UserName"
+                label="Chosen User Name"
+                defaultValue={userInfo.UserName}
+                InputProps={ disableEdit ? {readOnly: true,} : {} }
             />
             <TextField
-            id="standard-read-only-input"
-            label="Name"
-            defaultValue="UserName"
-            InputProps={{
-                readOnly: true,
-            }}
+                label="Name"
+                defaultValue="UserName"
+                InputProps={ disableEdit ? {readOnly: true,} : {} }
             />
             <TextField
-            id="standard-read-only-input"
-            label="Last Name"
-            defaultValue="UserLastName"
-            InputProps={{
-                readOnly: true,
-            }}
+                label="Last Name"
+                defaultValue="UserLastName"
+                InputProps={ disableEdit ? {readOnly: true,} : {} }
             />
             <TextField
-            id="standard-read-only-input"
-            label="Email"
-            defaultValue="UserEmail"
-            InputProps={{
-                readOnly: true,
-            }}
+                label="Email"
+                defaultValue="UserEmail"
+                InputProps={ disableEdit ? {readOnly: true,} : {} }
             />
             <div>
                 <Button 
@@ -85,8 +99,10 @@ function PrivateSettings () {
                     color="primary"
                     size="medium"
                     className={classes.margin}
+                    type="submit"
+                    onClick={handleButtonClick}
                     >
-                        Edit
+                        {editButton}
                 </Button>
             </div>
         </div>
