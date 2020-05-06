@@ -4,12 +4,13 @@ import { Card,
         CardMedia, 
         CardContent,
         CardActionArea } from '@material-ui/core';
+// import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ProfileDetail from '../../../components/ProfileDetail/ProfileDetail';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
       border: 0,
       borderRadius: 3,
@@ -34,12 +35,30 @@ const useStyles = makeStyles({
         left: '370px',
         width:'20%',
     },
+    // margin: {
+    //     margin: theme.spacing(1),
+    //     background : '#9b5de5',
+    //     '&:hover': {
+    //         backgroundColor: '#c77dff',
+    //         color: '#FFF'
+    //     }
+    // },
+    profileDetailsContainer: {
+        marginTop: '2em',
+    },
 
-  });
+  }));
 
 function Profile () {
     const [ isEditting , setIsEditting ] = useState(false);
     const classes = useStyles();
+    const cardMediaContent = () => (
+        <img   
+            className={classes.photo} 
+            alt='user' 
+            src='https://www.w3schools.com/howto/img_avatar.png'
+        />
+    )
 
     return (
              <Card className={classes.root}>
@@ -47,12 +66,8 @@ function Profile () {
                     <CardMedia
                     className={classes.media}
                     image='https://marketplace.canva.com/EAD297uecnM/2/0/1600w/canva-rainbow-gradient-pink-orange-and-blue-zoom-virtual-background-VwJMC37j5jQ.jpg'
+                    children={cardMediaContent()}
                     >  
-                    <img   
-                        className={classes.photo} 
-                        alt='user' 
-                        src='https://www.w3schools.com/howto/img_avatar.png'
-                    />
                     </CardMedia>
                     <CardHeader
                         title='UserName'
@@ -67,11 +82,19 @@ function Profile () {
                             A pretty cool person Hello, my name is blank! I like doing blank stuff. 
                             A pretty cool person
                         </Typography>
-                        <br/>
-                        <div className='profileDetailsContainer'>
+                        <div className={classes.profileDetailsContainer}>
+                            <ProfileDetail />
                             <ProfileDetail />
                         </div>
                     </CardContent>
+                    {/* <Button 
+                    variant="contained" 
+                    color="primary"
+                    size="medium"
+                    className={classes.margin}
+                    >
+                        Edit
+                    </Button> */}
                 </CardActionArea>
             </Card>
     )

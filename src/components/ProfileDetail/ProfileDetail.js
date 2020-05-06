@@ -6,21 +6,31 @@ const useStyles = makeStyles({
     root: {
         width: '47%',
         borderRadius: '8px',
+        marginBottom: '1em',
     },
     header: {
-        fontSize:'2px',
+        fontSize:'18px',
+        marginTop: '1em',
     }
 })
 
 function ProfileDetail () {
+
     const classes = useStyles();
+    
+    const content = () => (
+        <div>
+            <header className={classes.header}>Detail</header>
+            <p>Number of Detail Info</p>
+        </div>
+    );
 
     return (
        <Paper 
        className={classes.root}
        variant="outlined" 
        square
-       children='hi'
+       children={content()}
        />
     )
 }
