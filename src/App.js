@@ -1,5 +1,5 @@
 import React from 'react';
-import PrimarySearchAppBar from './components/primarySearchAppBar/PrimarySearchAppBar';
+import PrimarySearchAppBar from './components/PrimarySearchAppBar/PrimarySearchAppBar';
 import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';

@@ -56,8 +56,7 @@ function Profile () {
                     </CardMedia>
                     <CardHeader
                         title='UserName'
-                    >
-                    </CardHeader>
+                    />
                     <CardContent>
                         <Typography 
                             variant="body1" 
