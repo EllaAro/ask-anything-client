@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { useStyles, AppBarStyle, accountDetails } from './PrimarySearchAppBarStyle'
+import useStyles from './PrimarySearchAppBarStyle'
 import { Link } from 'react-router-dom';
 
 export default function PrimarySearchAppBar() {
@@ -39,12 +39,12 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
         <MenuItem onClick={handleMenuClose}> 
-          <Link exact to="/account/profile" style={accountDetails}>
+          <Link exact to="/account/profile" className={classes.accountDetails}>
               Profile
           </Link>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}> 
-          <Link exact to="/account/private-settings" style={accountDetails}>
+          <Link exact to="/account/private-settings" className={classes.accountDetails}>
             Private Settings
           </Link>
         </MenuItem>
@@ -53,7 +53,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" style={AppBarStyle}>
+      <AppBar position="static" className={classes.AppBarStyle}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             AskAnything

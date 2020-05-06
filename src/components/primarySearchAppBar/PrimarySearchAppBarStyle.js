@@ -58,15 +58,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'none',
       },
     },
+    AppBarStyle: {
+      background : '#9b5de5',
+      fontFamily: 'Geneva Tahoma, Verdana, sans-serif',
+    },
+    accountDetails: {
+      color: 'black',
+      textDecoration: 'none',
+    },
   }));
 
-const AppBarStyle = {
-    background : '#9b5de5',
-    fontFamily: 'Geneva Tahoma, Verdana, sans-serif',
-}
-
-const accountDetails = {
-    color: 'black',
-    textDecoration: 'none',
-}
-  export  {useStyles, AppBarStyle, accountDetails}
+ export default useStyles
