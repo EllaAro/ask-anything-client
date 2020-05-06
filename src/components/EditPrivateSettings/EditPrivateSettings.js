@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,14 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-function PrivateSettings () {
+function EditPrivateSettings () {
     
     const classes = useStyles();
     const content = () => (
         <div>
-            <h1 className={classes.header}>Private Settings</h1>
+            <h1 className={classes.header}>Edit Private Settings</h1>
             <Avatar 
-                alt="User Photo " 
+                alt="User Photo" 
                 src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg" 
                 className={classes.large} 
             />
@@ -55,43 +54,29 @@ function PrivateSettings () {
                 name="UserName"
                 label="Chosen User Name"
                 defaultValue='chosenusername'
-                InputProps={{
-                    readOnly: true,
-                }}
             />
             <TextField
                 label="Name"
                 defaultValue="UserName"
-                InputProps={{
-                    readOnly: true,
-                }}
             />
             <TextField
                 label="Last Name"
                 defaultValue="UserLastName"
-                InputProps={{
-                    readOnly: true,
-                }}
             />
             <TextField
                 label="Email"
                 defaultValue="UserEmail"
-                InputProps={{
-                    readOnly: true,
-                }}
             />
             <div>
-                <Link style={{textDecoration: 'none'}} exact to='/account/edit-private-settings'>
-                    <Button 
-                        variant="contained" 
-                        color="primary"
-                        size="medium"
-                        className={classes.margin}
-                        type="submit"
-                        >
-                            Edit
-                    </Button>
-                </Link>
+                <Button 
+                    variant="contained" 
+                    color="primary"
+                    size="medium"
+                    className={classes.margin}
+                    type="submit"
+                    >
+                        Submit
+                </Button>
             </div>
         </div>
     ) 
@@ -106,4 +91,4 @@ function PrivateSettings () {
     )
 }
 
-export default PrivateSettings
+export default EditPrivateSettings
