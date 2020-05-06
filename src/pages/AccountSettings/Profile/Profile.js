@@ -4,7 +4,6 @@ import { Card,
         CardMedia, 
         CardContent,
         CardActionArea } from '@material-ui/core';
-// import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ProfileDetail from '../../../components/ProfileDetail/ProfileDetail';
@@ -35,14 +34,6 @@ const useStyles = makeStyles((theme) => ({
         left: '370px',
         width:'20%',
     },
-    // margin: {
-    //     margin: theme.spacing(1),
-    //     background : '#9b5de5',
-    //     '&:hover': {
-    //         backgroundColor: '#c77dff',
-    //         color: '#FFF'
-    //     }
-    // },
     profileDetailsContainer: {
         marginTop: '2em',
     },
@@ -87,14 +78,6 @@ function Profile () {
                             <ProfileDetail />
                         </div>
                     </CardContent>
-                    {/* <Button 
-                    variant="contained" 
-                    color="primary"
-                    size="medium"
-                    className={classes.margin}
-                    >
-                        Edit
-                    </Button> */}
                 </CardActionArea>
             </Card>
     )
