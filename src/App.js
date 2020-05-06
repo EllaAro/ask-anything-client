@@ -3,7 +3,7 @@ import PrimarySearchAppBar from './components/PrimarySearchAppBar/PrimarySearchA
 import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
-import EditPrivateSettings from './components/EditPrivateSettings/EditPrivateSettings'; 
+
 function App() {
   return (
     <div >
@@ -16,9 +16,6 @@ function App() {
           </Route>
           <Route exact path='/account/private-settings'>
                 <PrivateSettings />
-          </Route>
-          <Route exact path='/account/edit-private-settings'>
-              <EditPrivateSettings />
           </Route>
         </Switch>
 

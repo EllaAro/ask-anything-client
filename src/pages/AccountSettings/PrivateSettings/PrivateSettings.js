@@ -1,10 +1,10 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(4),
             width: '35ch',
           }, 
-    },
-    header: {
-        fontFamily: 'Sans-serif',
     },
     margin: {
         marginBottom: '2em',
@@ -40,58 +37,89 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
+  const INITIAL_VALUES = {
+        userName: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+  }
+
 function PrivateSettings () {
+
+    const [ title , setTitle ] = useState('Private Settings');
+    const [buttonText , setButtonText ] = useState('Edit');
+    const [ isEdit , setIsEdit ] = useState(false);
+    const [ userInfo , setUserInfo ] = useState(INITIAL_VALUES);
+
+    const handleEdit = () => {
+        if(!isEdit) {
+            setIsEdit(prevIsEdit => !prevIsEdit);
+            setTitle('Edit Private Settings');
+            setButtonText('Done');
+        }
+        else {
+            setIsEdit(prevIsEdit => !prevIsEdit);
+            setTitle('Private Settings');
+            setButtonText('Edit');
+        }
+        
+    }
+
+    const handleTextChange = (event) => {
+       const {name , value } = event.target;
+       setUserInfo(prevUserInfo => {   
+           return {...prevUserInfo, [name]:[value]}
+           })
+    }
     
     const classes = useStyles();
     const content = () => (
         <div>
-            <h1 className={classes.header}>Private Settings</h1>
+            <Typography variant="h4">{title}</Typography>
             <Avatar 
-                alt="User Photo " 
+                alt="User Photo" 
                 src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg" 
                 className={classes.large} 
             />
             <TextField
-                name="UserName"
-                label="Chosen User Name"
-                defaultValue='chosenusername'
-                InputProps={{
-                    readOnly: true,
-                }}
+                name="userName"
+                label="User Name"
+                onChange={handleTextChange}
+                value={userInfo.userName}
+                InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
-                label="Name"
-                defaultValue="UserName"
-                InputProps={{
-                    readOnly: true,
-                }}
+                name="firstName"
+                label="First Name"
+                onChange={handleTextChange}
+                value={userInfo.firstName}
+                InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
+                name="lastName"
                 label="Last Name"
-                defaultValue="UserLastName"
-                InputProps={{
-                    readOnly: true,
-                }}
+                onChange={handleTextChange}
+                value={userInfo.lastName}
+                InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
+                name="email"
                 label="Email"
-                defaultValue="UserEmail"
-                InputProps={{
-                    readOnly: true,
-                }}
+                onChange={handleTextChange}
+                value={userInfo.email}
+                InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <div>
-                <Link style={{textDecoration: 'none'}} exact to='/account/edit-private-settings'>
-                    <Button 
-                        variant="contained" 
-                        color="primary"
-                        size="medium"
-                        className={classes.margin}
-                        type="submit"
-                        >
-                            Edit
-                    </Button>
-                </Link>
+                <Button 
+                    variant="contained" 
+                    color="primary"
+                    size="medium"
+                    className={classes.margin}
+                    type="submit"
+                    onClick={handleEdit}
+                    >
+                        {buttonText}
+                </Button>
             </div>
         </div>
     ) 
@@ -99,7 +127,7 @@ function PrivateSettings () {
     return (
         <div className={classes.root}>
             <Paper
-            elevation={3}
+            elevation={4}
             children={content()}
             />
         </div>
