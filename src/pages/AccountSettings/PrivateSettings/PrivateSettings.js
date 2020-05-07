@@ -1,4 +1,5 @@
-import React , { useState } from 'react'; //useEffect will load the user vals into the userInfo state
+import React , { useState , useEffect } from 'react'; //useEffect will load the user vals into the userInfo state
+import {useSelector, useDispatch} from "react-redux"
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -37,19 +38,19 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-  const INITIAL_VALUES = {
-        userName: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-  }
-
 function PrivateSettings () {
 
     const [ title , setTitle ] = useState('Private Settings');
     const [buttonText , setButtonText ] = useState('Edit');
     const [ isEdit , setIsEdit ] = useState(false);
-    const [ userInfo , setUserInfo ] = useState(INITIAL_VALUES);
+    const [ userInfo , setUserInfo ] = useState({});
+    const initialUserInfo = useSelector(state => state.privateSettings);
+    const dispatch = useDispatch();
+    const classes = useStyles();
+
+    useEffect(() => {
+        setUserInfo(initialUserInfo);
+    },[]);
 
     const handleEdit = () => {
         if(!isEdit) {
@@ -72,7 +73,6 @@ function PrivateSettings () {
            })
     }
     
-    const classes = useStyles();
     const content = () => (
         <div>
             <br/>
