@@ -8,8 +8,9 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    width: '25%',
+    width: '31%',
     margin: '0.5em',
+    display: 'inline-block',
   },
   bullet: {
     display: 'inline-block',
@@ -24,24 +25,23 @@ const useStyles = makeStyles({
   },
 });
 
-const Post = () => {
+const Post = ({postData}) => {
     const classes = useStyles();
-
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography variant="h5" component="h2">
-                    Post Title
+                    {postData.name}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    tag1, tag2, tag3...
+                    {postData.tags}
                 </Typography>
                 <Typography 
                     variant="body2" 
                     component="p" 
                     noWrap={true} 
                 >
-                    This is basically the body of the Post its basically the body of this Post it is actually.
+                    {postData.body}
                 </Typography>
             </CardContent>
             <CardActions>

@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react'; 
-import {useSelector, useDispatch } from 'react-redux'
+import {useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
