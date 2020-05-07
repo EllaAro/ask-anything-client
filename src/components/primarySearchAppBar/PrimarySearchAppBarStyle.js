@@ -68,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
       color: 'black',
       textDecoration: 'none',
     },
+    postButton: {
+      color: 'white',
+      fontWeight: 'bold',
+      },
   }));
 
  export default useStyles
