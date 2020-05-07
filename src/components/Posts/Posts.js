@@ -29,27 +29,33 @@ const POSTS_FROM_SERVER = [
     },
     {name: 'Post Number 2',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 2,   
     },
     {name: 'Post Number 3',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 3,    
     },
     {name: 'Post Number 4',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 4,    
     },
     {name: 'Post Number 5',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 5,    
     },
     {name: 'Post Number 6',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 6,    
     },
     {name: 'Post Number 7',
     body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...'    
+    tags: 'tag1, tag2, tag3...',
+    id: 7,    
     },
 ]
 

@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -45,7 +46,9 @@ const Post = ({postData}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Link exact to={`/posts/post/${postData.id}`} style={{textDecoration: 'none'}}>
+                    <Button size="small">Learn More</Button>
+                </Link>
             </CardActions>
         </Card>
     );

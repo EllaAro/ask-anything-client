@@ -3,9 +3,10 @@ import PrimarySearchAppBar from './components/PrimarySearchAppBar/PrimarySearchA
 import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
+import FullPost from './pages/FullPost/FullPost';
 import Main from './pages/Main/Main';
 
-function App() {
+const App = () => {
   return (
     <div >
       <Router>
@@ -20,6 +21,11 @@ function App() {
           <Route exact path='/account/private-settings'>
             <PrivateSettings />
           </Route>
+          <Route path='/posts/post/:id' render={({match}) => (
+            <FullPost
+              id={match.params.id}
+            />
+          )}/>
         </Switch>
       </Router>
     </div>
