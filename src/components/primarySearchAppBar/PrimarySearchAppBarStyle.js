@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
+      cursor: 'pointer',
+      color: 'white',
+      textDecoration: 'none',
     },
     search: {
       position: 'relative',

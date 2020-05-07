@@ -55,9 +55,11 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.AppBarStyle}>
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            AskAnything
-          </Typography>
+          <Link exact to='/' className={classes.title}>
+            <Typography  variant="h6" noWrap>
+              AskAnything
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

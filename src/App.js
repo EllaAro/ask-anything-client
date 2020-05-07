@@ -3,22 +3,24 @@ import PrimarySearchAppBar from './components/PrimarySearchAppBar/PrimarySearchA
 import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
+import Main from './pages/Main/Main';
 
 function App() {
   return (
     <div >
       <Router>
         <PrimarySearchAppBar />
-
         <Switch>
+          <Route exact path='/'>
+            <Main />
+          </Route>
           <Route exact path='/account/profile'>
-                <Profile />
+            <Profile />
           </Route>
           <Route exact path='/account/private-settings'>
-                <PrivateSettings />
+            <PrivateSettings />
           </Route>
         </Switch>
-
       </Router>
     </div>
   );
