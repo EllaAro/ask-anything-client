@@ -1,5 +1,5 @@
-import React , { useState , useEffect } from 'react'; //useEffect will load the user vals into the userInfo state
-import {useSelector, useDispatch} from "react-redux"
+import React , { useState , useEffect } from 'react'; 
+import {useSelector, useDispatch } from 'react-redux'
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -59,6 +59,7 @@ function PrivateSettings () {
             setButtonText('Done');
         }
         else {
+            //dispatch new info to store
             setIsEdit(prevIsEdit => !prevIsEdit);
             setTitle('Private Settings');
             setButtonText('Edit');
@@ -78,45 +79,45 @@ function PrivateSettings () {
             <br/>
             <Typography variant="h4">{title}</Typography>
             <Avatar 
-                alt="User Photo" 
+                alt='User Photo' 
                 src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg" 
                 className={classes.large} 
             />
             <TextField
-                name="userName"
-                label="User Name"
+                name='userName'
+                label='User Name'
                 onChange={handleTextChange}
                 value={userInfo.userName}
                 InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
-                name="firstName"
-                label="First Name"
+                name='firstName'
+                label='First Name'
                 onChange={handleTextChange}
                 value={userInfo.firstName}
                 InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
-                name="lastName"
-                label="Last Name"
+                name='lastName'
+                label='Last Name'
                 onChange={handleTextChange}
                 value={userInfo.lastName}
                 InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <TextField
-                name="email"
-                label="Email"
+                name='email'
+                label='Email'
                 onChange={handleTextChange}
                 value={userInfo.email}
                 InputProps={ isEdit ? {} : {readOnly: true}}
             />
             <div>
                 <Button 
-                    variant="contained" 
-                    color="primary"
-                    size="medium"
+                    variant='contained' 
+                    color='primary'
+                    size='medium'
                     className={classes.margin}
-                    type="submit"
+                    type='submit'
                     onClick={handleEdit}
                     >
                         {buttonText}
