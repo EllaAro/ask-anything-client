@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     AppBarStyle: {
-      background : '#9b5de5',
       fontFamily: 'Geneva Tahoma, Verdana, sans-serif',
     },
     accountDetails: {

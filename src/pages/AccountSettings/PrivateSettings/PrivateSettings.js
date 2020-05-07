@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , { useState } from 'react'; //useEffect will load the user vals into the userInfo state
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        marginTop: '1em',
         border: 0,
         borderRadius: 3,
         margin: '0 auto',
@@ -16,15 +17,14 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         marginBottom: '1em',
         '& .MuiTextField-root': {
-            margin: theme.spacing(4),
+            margin: theme.spacing(3),
             width: '35ch',
           }, 
     },
     margin: {
         marginBottom: '2em',
-        background : '#9b5de5',
         '&:hover': {
-            backgroundColor: '#c77dff',
+            backgroundColor: '##ea80fc',
             color: '#FFF'
         }
     },
@@ -75,6 +75,7 @@ function PrivateSettings () {
     const classes = useStyles();
     const content = () => (
         <div>
+            <br/>
             <Typography variant="h4">{title}</Typography>
             <Avatar 
                 alt="User Photo" 
