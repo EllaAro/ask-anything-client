@@ -8,8 +8,6 @@ import theme from './theme';
 import store from './redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-//handle the provider of redux
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

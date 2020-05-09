@@ -3,7 +3,7 @@ import {useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import PostButton from '../../../components/PostButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -21,13 +21,6 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(3),
             width: '35ch',
           }, 
-    },
-    margin: {
-        marginBottom: '2em',
-        '&:hover': {
-            backgroundColor: '##ea80fc',
-            color: '#FFF'
-        }
     },
     large: {
         margin: '0 auto',
@@ -115,18 +108,7 @@ const PrivateSettings = () => {
                     value={userInfo.email}
                     InputProps={ isEdit ? {} : {readOnly: true}}
                 />
-                <div>
-                    <Button 
-                        variant='contained' 
-                        color='primary'
-                        size='medium'
-                        className={classes.margin}
-                        type='submit'
-                        onClick={handleEdit}
-                        >
-                            {buttonText}
-                    </Button>
-                </div>
+                <PostButton buttonName={buttonText} handleSubmit={handleEdit}/>
              </Container>       
         </Paper>
     )

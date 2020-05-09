@@ -1,5 +1,5 @@
 import React from 'react';
-import PrimarySearchAppBar from './components/PrimarySearchAppBar/PrimarySearchAppBar';
+import Header from './components/Header/Header';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
@@ -34,7 +34,7 @@ const App = () => {
   return (
     <Grid container direction="column">
        <Grid item>
-        <PrimarySearchAppBar />
+        <Header />
       </Grid>
       <Grid item container>
         <Grid item xs={false} sm={2} />

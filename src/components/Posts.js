@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {useStylesPaper} from '../../theme';
+import {useStylesPaper} from '../theme';
 import Container from '@material-ui/core/Container';
-import Post from '../Post/Post';
+import Post from './Post';
 
 const useStyles = makeStyles((theme) => ({
     root: {

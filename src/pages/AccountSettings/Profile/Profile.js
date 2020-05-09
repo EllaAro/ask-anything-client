@@ -6,7 +6,7 @@ import { Card,
         CardActionArea } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ProfileDetail from '../../../components/ProfileDetail/ProfileDetail';
+import ProfileDetail from '../../../components/ProfileDetail';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 3,
       boxShadow: '0 3px 5px 2px rgba(192,192,192,0.3)',
       margin: '0 auto',
-      width: '73.5%',
       textAlign: 'center',
     },
     media: {

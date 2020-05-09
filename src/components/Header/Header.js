@@ -12,10 +12,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import useStyles from './PrimarySearchAppBarStyle'
+import useStyles from './HeaderStyle'
 import { Link } from 'react-router-dom';
 
-const PrimarySearchAppBar = () => {
+const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -57,7 +57,7 @@ const PrimarySearchAppBar = () => {
       <AppBar position="static" className={classes.AppBarStyle}>
         <Toolbar>
           <Link exact to='/' className={classes.title}>
-            <Typography  variant="h6" noWrap style={{fontWeight: 'bold'}}>
+            <Typography  variant="header" noWrap style={{fontWeight: 'bold'}}>
               AskAnything
             </Typography>
           </Link>
@@ -109,4 +109,4 @@ const PrimarySearchAppBar = () => {
   );
 }
 
-export default PrimarySearchAppBar
+export default Header
