@@ -1,39 +1,35 @@
 import React from 'react'
 import { Paper } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-
+import {useStylesPaper} from '../../theme'
 const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: '1em',
-        marginBottom: '1em',
-        border: 0,
-        borderRadius: 3,
-        margin: '0 auto',
-        width: '70%',
-        flexWrap: 'wrap',
-        '& .MuiTextField-root': {
-            margin: theme.spacing(3),
-            width: '35ch',
-          }, 
-    },
+  
 }));
 
 const NewPost = () => {
-
+    
     const classes = useStyles();
 
-    const content = () => (
-        <div>HI THIS IS A NEW POST</div>
-    )
-
     return (
-        <div className={classes.root}>
-            <Paper 
+        <Paper 
+            className={useStylesPaper().rootPaper}
             elevation={4}
-            children={content()}
-            />
-        </div>
-     )
+            >
+            <Container>
+                <Typography  variant="h4">Add A New Post</Typography>
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    name='postName'
+                    label='Post Name'
+                    value='postName'  
+                />
+            </Container>        
+        </Paper> 
+        )
 }
 
 export default NewPost

@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
@@ -6,6 +7,18 @@ const theme = createMuiTheme({
     secondary: {main: '#f50057' },
   },
 });
+
+export const useStylesPaper = makeStyles((theme) => ({
+  rootPaper: {
+    width: '70%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '0 auto',
+    marginTop: '1em',
+    borderRadius: 3,
+    textAlign:'center',
+  },
+}));
 
 export default theme;
 

@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,66 +74,62 @@ const PrivateSettings = () => {
            return {...prevUserInfo, [name]:[value]}
            })
     }
-    
-    const content = () => (
-        <div>
-            <br/>
-            <Typography variant="h4">{title}</Typography>
-            <Avatar 
-                alt='User Photo' 
-                src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg" 
-                className={classes.large} 
-            />
-            <TextField
-                name='userName'
-                label='User Name'
-                onChange={handleTextChange}
-                value={userInfo.userName}
-                InputProps={ isEdit ? {} : {readOnly: true}}
-            />
-            <TextField
-                name='firstName'
-                label='First Name'
-                onChange={handleTextChange}
-                value={userInfo.firstName}
-                InputProps={ isEdit ? {} : {readOnly: true}}
-            />
-            <TextField
-                name='lastName'
-                label='Last Name'
-                onChange={handleTextChange}
-                value={userInfo.lastName}
-                InputProps={ isEdit ? {} : {readOnly: true}}
-            />
-            <TextField
-                name='email'
-                label='Email'
-                onChange={handleTextChange}
-                value={userInfo.email}
-                InputProps={ isEdit ? {} : {readOnly: true}}
-            />
-            <div>
-                <Button 
-                    variant='contained' 
-                    color='primary'
-                    size='medium'
-                    className={classes.margin}
-                    type='submit'
-                    onClick={handleEdit}
-                    >
-                        {buttonText}
-                </Button>
-            </div>
-        </div>
-    ) 
 
     return (
-        <div className={classes.root}>
-            <Paper
+        <Paper
+            className={classes.root}
             elevation={4}
-            children={content()}
-            />
-        </div>
+        >
+            <Container>
+                <br/>
+                <Typography variant="h4">{title}</Typography>
+                <Avatar 
+                    alt='User Photo' 
+                    src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg" 
+                    className={classes.large} 
+                />
+                <TextField
+                    name='userName'
+                    label='User Name'
+                    onChange={handleTextChange}
+                    value={userInfo.userName}
+                    InputProps={ isEdit ? {} : {readOnly: true}}
+                />
+                <TextField
+                    name='firstName'
+                    label='First Name'
+                    onChange={handleTextChange}
+                    value={userInfo.firstName}
+                    InputProps={ isEdit ? {} : {readOnly: true}}
+                />
+                <TextField
+                    name='lastName'
+                    label='Last Name'
+                    onChange={handleTextChange}
+                    value={userInfo.lastName}
+                    InputProps={ isEdit ? {} : {readOnly: true}}
+                />
+                <TextField
+                    name='email'
+                    label='Email'
+                    onChange={handleTextChange}
+                    value={userInfo.email}
+                    InputProps={ isEdit ? {} : {readOnly: true}}
+                />
+                <div>
+                    <Button 
+                        variant='contained' 
+                        color='primary'
+                        size='medium'
+                        className={classes.margin}
+                        type='submit'
+                        onClick={handleEdit}
+                        >
+                            {buttonText}
+                    </Button>
+                </div>
+             </Container>       
+        </Paper>
     )
 }
 
