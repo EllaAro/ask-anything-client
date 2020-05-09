@@ -18,7 +18,7 @@ const NewPost = () => {
             className={useStylesPaper().rootPaper}
             elevation={4}
             >
-            <Container>
+            <Container >
                 <Typography  variant="h4">Add A New Post</Typography>
                 <TextField
                     fullWidth
