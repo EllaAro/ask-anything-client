@@ -3,10 +3,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-    },
     margin: {
+        marginTop: '1em',
         marginBottom: '2em',
         '&:hover': {
             backgroundColor: '##ea80fc',

@@ -9,28 +9,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import PostButton from '../../components/PostButton';
-import {useStylesPaper} from '../../theme'
+import TagsAutoComplete from '../../components/TagsAutoComplete';
+import {useStylesPaper} from '../../theme';
 import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-    },
-  }));
 
 const NewPost = () => {
     
-    const classes = useStyles();
-
     const [ postName, setPostName ] = useState('');
     const [ postContent, setPostContent ] = useState('');
-    const [ categories, setCategories ] = useState({
-        ComputerScience: false,
-        Psychology: false,
-        Sport: false,
-      });
     const [ postButton, setPostButton ] =useState('Post');
-    const { ComputerScience, Psychology, Sport } = categories;
 
     const handlePostNameChange = (event) => {
         setPostName(event.target.value);
@@ -40,42 +27,12 @@ const NewPost = () => {
         setPostContent(event.target.value);
     }
 
-    const handleTagsChange = (event) => {
-        setCategories({ ...categories, [event.target.name]: event.target.checked });
-      };
-    
     const handleSubmitPost = () => {
         setTimeout(()=> {
 
         },3000);
     }
     
-    const error = [ComputerScience, Psychology, Sport].filter((v) => v).length < 2;
-
-    const tags = (
-        <div className={classes.root}>
-            <FormControl component='fieldset' className={classes.formControl}>
-            </FormControl>
-            <FormControl required error={error} component='fieldset' className={classes.formControl}>
-                <FormLabel component='legend'>Pick atleast two tags</FormLabel>
-                <FormGroup row='true'>
-                    <FormControlLabel
-                        control={<Checkbox checked={ComputerScience} onChange={handleTagsChange} name='ComputerScience' />}
-                        label='Computer Science'
-                    />
-                    <FormControlLabel
-                        control={<Checkbox checked={Psychology} onChange={handleTagsChange} name='Psychology' />}
-                        label='Psychology'
-                    />
-                    <FormControlLabel
-                        control={<Checkbox checked={Sport} onChange={handleTagsChange} name='Sport' />}
-                        label='Sport'
-                    />
-                </FormGroup>
-            </FormControl>
-        </div>
-    )
-
     return (
         <Paper 
             className={useStylesPaper().rootPaper}
@@ -104,7 +61,7 @@ const NewPost = () => {
                     value={postContent}
                     onChange={handlePostContentChange}  
                 />
-                {tags}
+                <TagsAutoComplete />
                 <PostButton buttonName={postButton} handleSubmit={handleSubmitPost}/>
             </Container>        
         </Paper> 

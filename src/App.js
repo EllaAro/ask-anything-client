@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
