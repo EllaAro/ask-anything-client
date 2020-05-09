@@ -5,6 +5,7 @@ import Profile from './pages/AccountSettings/Profile/Profile';
 import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
 import FullPost from './pages/FullPost/FullPost';
 import Main from './pages/Main/Main';
+import NewPost from './pages/NewPost/NewPost'
 
 const App = () => {
   return (
@@ -20,6 +21,9 @@ const App = () => {
           </Route>
           <Route exact path='/account/private-settings'>
             <PrivateSettings />
+          </Route>
+          <Route exact path='/posts/add-a-post'>
+            <NewPost />
           </Route>
           <Route path='/posts/post/:id' render={({match}) => (
             <FullPost

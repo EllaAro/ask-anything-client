@@ -15,7 +15,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import useStyles from './PrimarySearchAppBarStyle'
 import { Link } from 'react-router-dom';
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -57,7 +57,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static" className={classes.AppBarStyle}>
         <Toolbar>
           <Link exact to='/' className={classes.title}>
-            <Typography  variant="h6" noWrap>
+            <Typography  variant="h6" noWrap style={{fontWeight: 'bold'}}>
               AskAnything
             </Typography>
           </Link>
@@ -76,7 +76,11 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button className={classes.postButton}>Add A Post</Button>
+          <Button >
+            <Link exact to='/posts/add-a-post' className={classes.postButton} >
+              Add A Post
+            </Link>
+          </Button>
             <IconButton aria-label="show new mails" color="inherit">
               <Badge badgeContent={1} color="secondary">
                 <MailIcon />
@@ -104,3 +108,5 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+export default PrimarySearchAppBar

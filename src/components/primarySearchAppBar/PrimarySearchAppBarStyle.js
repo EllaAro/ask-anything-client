@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     postButton: {
       color: 'white',
       fontWeight: 'bold',
+      textDecoration: 'none',
       },
   }));
 

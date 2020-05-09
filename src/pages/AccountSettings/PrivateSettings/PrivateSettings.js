@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-function PrivateSettings () {
+const PrivateSettings = () => {
 
     const [ title , setTitle ] = useState('Private Settings');
     const [buttonText , setButtonText ] = useState('Edit');

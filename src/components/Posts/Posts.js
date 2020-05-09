@@ -47,16 +47,7 @@ const POSTS_FROM_SERVER = [
     tags: 'tag1, tag2, tag3...',
     id: 5,    
     },
-    {name: 'Post Number 6',
-    body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...',
-    id: 6,    
-    },
-    {name: 'Post Number 7',
-    body: ' This is basically the body of the Post its basically the body of this Post it is actually.',
-    tags: 'tag1, tag2, tag3...',
-    id: 7,    
-    },
+  
 ]
 
 const Posts = () => {

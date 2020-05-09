@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-function Profile () {
+const Profile = () => {
     const [ isEditting , setIsEditting ] = useState(false);
     const classes = useStyles();
     const cardMediaContent = () => (

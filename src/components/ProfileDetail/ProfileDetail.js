@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     }
 })
 
-function ProfileDetail () {
+const ProfileDetail = () => {
 
     const classes = useStyles();
     
