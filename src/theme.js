@@ -10,10 +10,8 @@ const theme = createMuiTheme({
 
 export const useStylesPaper = makeStyles((theme) => ({
   rootPaper: {
-    width: '70%',
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '0 auto',
     marginTop: '1em',
     borderRadius: 3,
     textAlign:'center',

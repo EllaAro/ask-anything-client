@@ -5,7 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {Provider} from "react-redux"
 import theme from './theme';
-import store from './redux'
+import store from './redux';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 //handle the provider of redux
 
@@ -13,7 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

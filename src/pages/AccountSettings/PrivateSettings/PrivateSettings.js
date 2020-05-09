@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         borderRadius: 3,
         margin: '0 auto',
-        width: '70%',
         textAlign: 'center',
         flexWrap: 'wrap',
         marginBottom: '1em',
