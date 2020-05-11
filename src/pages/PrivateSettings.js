@@ -3,7 +3,7 @@ import {useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-import PostButton from '../../../components/PostButton';
+import PostButton from '../components/PostButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';

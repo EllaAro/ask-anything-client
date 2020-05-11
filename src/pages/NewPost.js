@@ -3,11 +3,11 @@ import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import PostButton from '../../components/PostButton';
-import TagsAutoComplete from '../../components/TagsAutoComplete';
-import {useStylesPaper} from '../../theme';
+import PostButton from '../components/PostButton';
+import TagsAutoComplete from '../components/TagsAutoComplete';
+import {useStylesPaper} from '../theme';
 import { useDispatch } from "react-redux"
-import { createPost } from '../../redux/posts';
+import { createPost } from '../redux/posts';
 
 const NewPost = () => {
     const dispatch = useDispatch();

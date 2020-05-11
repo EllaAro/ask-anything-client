@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { Paper } from '@material-ui/core';
-import {useStylesPaper} from '../../theme'
+import {useStylesPaper} from '../theme'
 
 const FullPost = (props) => {
 

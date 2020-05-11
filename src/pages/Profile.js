@@ -6,7 +6,7 @@ import { Card,
         CardActionArea } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ProfileDetail from '../../../components/ProfileDetail';
+import ProfileDetail from '../components/ProfileDetail';
 
 
 const useStyles = makeStyles((theme) => ({

@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './components/Header';
 import { Switch, Route } from 'react-router-dom';
-import Profile from './pages/AccountSettings/Profile/Profile';
-import PrivateSettings from './pages/AccountSettings/PrivateSettings/PrivateSettings';
-import FullPost from './pages/FullPost/FullPost';
-import Main from './pages/Main/Main';
-import NewPost from './pages/NewPost/NewPost'
+import Profile from './pages/Profile';
+import PrivateSettings from './pages/PrivateSettings';
+import FullPost from './pages/FullPost';
+import Main from './pages/Main';
+import NewPost from './pages/NewPost'
 import { Grid } from "@material-ui/core";
 
 const App = () => {

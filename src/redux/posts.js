@@ -3,13 +3,14 @@ const initialState = []
 export const createPost = (postDetails) => {
     console.log(postDetails);
 
-    const graphqlQuery = `
+    const graphqlQuery = {
+        query: `
         mutation {
-            createPost(postInput: {title: ${postDetails.postTitle}, content:${postDetails.content}}) {
+            createPost(postInput: {title: "${postDetails.postTitle}", content:"${postDetails.content}"}) {
                 content
             }
-        }
-    `;
+        }`
+    };
 
     fetch('http://localhost:8080/graphql',{
         method: 'POST',
