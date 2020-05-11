@@ -1,26 +1,22 @@
-import React, { useState }from 'react'
+import React, { useState } from 'react'
 import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import PostButton from '../../components/PostButton';
 import TagsAutoComplete from '../../components/TagsAutoComplete';
 import {useStylesPaper} from '../../theme';
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from "react-redux"
+import { createPost } from '../../redux/posts';
 
 const NewPost = () => {
-    
-    const [ postName, setPostName ] = useState('');
+    const dispatch = useDispatch();
+    const [ postTitle, setPostTitle ] = useState('');
     const [ postContent, setPostContent ] = useState('');
     const [ postButton, setPostButton ] =useState('Post');
 
-    const handlePostNameChange = (event) => {
-        setPostName(event.target.value);
+    const handlePostTitleChange = (event) => {
+        setPostTitle(event.target.value);
     }
 
     const handlePostContentChange = (event) => {
@@ -28,9 +24,7 @@ const NewPost = () => {
     }
 
     const handleSubmitPost = () => {
-        setTimeout(()=> {
-
-        },3000);
+        dispatch(createPost({postTitle,postContent}));
     }
     
     return (
@@ -40,14 +34,14 @@ const NewPost = () => {
             >
             <Container >
                 <br/>
-                <Typography variant="h4">Add A New Post</Typography>
+                <Typography variant="h4">Create Post</Typography>
                 <TextField
                     fullWidth
                     margin="normal"
-                    name='postName'
+                    name='postTitle'
                     label='Post Name'
-                    value={postName}
-                    onChange={handlePostNameChange}  
+                    value={postTitle}
+                    onChange={handlePostTitleChange}  
                 />
                 <TextField
                     fullWidth
