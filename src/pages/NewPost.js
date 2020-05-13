@@ -95,7 +95,7 @@ const NewPost = () => {
             >
             <Container >
                 <br/>
-                <Typography variant="h4">Create Post</Typography>
+                <Typography variant="h5">Create A New Post</Typography>
                 <TextField
                     error={!isTitleValid() && postTitle}
                     helperText={isTitleValid() || !postTitle ? '' : `Title too short. Make it atleast ${VALID_TITLE_LENGTH} characters long.`}
