@@ -1,30 +1,15 @@
-import React ,{ useState } from 'react';
+import React from 'react';
 import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const categories = [ //this is dummy data
-    { title: 'Sport', id: 1 },
-    { title: 'News', id: 2 },
-    { title: 'Art', id: 3 },
-    { title: 'Cooking', id: 4 },
-    { title: 'TV Shows', id: 5 },
-  ];
-
-const TagsAutoComplete = () => {
-  const fixedOptions = [];
-  const [value, setValue] = useState([]);
+const TagsAutoComplete = ({categories, fixedOptions, value, handleChange}) => {
 
   return (
     <Autocomplete
       multiple
       value={value}
-      onChange={(event, newValue) => {
-        setValue([
-          ...fixedOptions,
-          ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
-        ]);
-      }}
+      onChange={handleChange}
       options={categories}
       getOptionLabel={(option) => option.title}
       renderTags={(tagValue, getTagProps) =>

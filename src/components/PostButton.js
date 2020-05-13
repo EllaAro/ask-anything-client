@@ -13,20 +13,21 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const PostButton = props => {
+const PostButton = ({disabled,buttonName,handleSubmit}) => {
     const classes = useStyles();
     
     return (
         <div>
             <Button 
+                disabled={disabled}
                 variant='contained' 
                 color='primary'
                 size='medium'
                 className={classes.margin}
                 type='submit'
-                onClick={props.handleSubmit}
+                onClick={handleSubmit}
             >
-                {props.buttonName}
+                {buttonName}
             </Button>
         </div>
     )

@@ -9,11 +9,25 @@ import {useStylesPaper} from '../theme';
 import { useDispatch } from "react-redux"
 import { createPost } from '../redux/posts';
 
+const VALID_CONTENT_LENGTH = 150;
+const VALID_TITLE_LENGTH = 5;
+const categories = [ //this is dummy data
+    { title: 'Sport', id: 1 },
+    { title: 'News', id: 2 },
+    { title: 'Art', id: 3 },
+    { title: 'Cooking', id: 4 },
+    { title: 'TV Shows', id: 5 },
+  ];
+
 const NewPost = () => {
+    
     const dispatch = useDispatch();
     const [ postTitle, setPostTitle ] = useState('');
     const [ postContent, setPostContent ] = useState('');
-    const [ postButton, setPostButton ] =useState('Post');
+    const fixedOptions = [];
+    const [tagsValue, setTagsValue] = useState([]);
+    const [ postButton, setPostButton ] = useState('Post');
+    const [enablePost , setEnablePost ] = useState(false);
 
     const handlePostTitleChange = (event) => {
         setPostTitle(event.target.value);
@@ -23,8 +37,36 @@ const NewPost = () => {
         setPostContent(event.target.value);
     }
 
+    const handleTagsChange = (event, newValue) => {
+        setTagsValue([
+          ...fixedOptions,
+          ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
+        ]);
+      }
+
     const handleSubmitPost = () => {
-        dispatch(createPost({postTitle,postContent}));
+        setPostButton('Sending');
+        setEnablePost(true);
+        dispatch(createPost({postTitle,postContent}))
+        .then(res =>{
+            resetValues();
+        });
+    }
+
+    const resetValues = () => {
+        setPostButton('Post');
+        setEnablePost(false);
+        setPostTitle('');
+        setPostContent('');
+        setTagsValue([]);
+    }
+
+    const isTitleValid = () => {
+        return postTitle.length >= VALID_TITLE_LENGTH
+    }
+
+    const isContentValid = () => {
+        return postContent.length < VALID_CONTENT_LENGTH
     }
     
     return (
@@ -36,6 +78,8 @@ const NewPost = () => {
                 <br/>
                 <Typography variant="h4">Create Post</Typography>
                 <TextField
+                    error={!isTitleValid() && postTitle}
+                    helperText={isTitleValid() || !postTitle ? '' : `Title too short. Make it atleast ${VALID_TITLE_LENGTH} characters long.`}
                     fullWidth
                     margin="normal"
                     name='postTitle'
@@ -44,6 +88,8 @@ const NewPost = () => {
                     onChange={handlePostTitleChange}  
                 />
                 <TextField
+                    error={!isContentValid()}
+                    helperText={isContentValid() ? `${VALID_CONTENT_LENGTH - postContent.length} characters left.` : `Content is too long. Make it less than ${VALID_CONTENT_LENGTH} characters.`}
                     fullWidth
                     margin="normal"
                     name='postContent'
@@ -55,8 +101,19 @@ const NewPost = () => {
                     value={postContent}
                     onChange={handlePostContentChange}  
                 />
-                <TagsAutoComplete />
-                <PostButton buttonName={postButton} handleSubmit={handleSubmitPost}/>
+                <TagsAutoComplete 
+                    error
+                    categories={categories}
+                    fixedOptions={fixedOptions}
+                    value={tagsValue}
+                    setValue={setTagsValue}
+                    handleChange={handleTagsChange}
+                />
+                <PostButton 
+                    disabled={enablePost}
+                    buttonName={postButton} 
+                    handleSubmit={handleSubmitPost}
+                />
             </Container>        
         </Paper> 
         )

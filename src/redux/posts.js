@@ -1,33 +1,31 @@
 const initialState = []
 
 export const createPost = (postDetails) => {
-    console.log(postDetails);
 
     const graphqlQuery = {
         query: `
         mutation {
-            createPost(postInput: {title: "${postDetails.postTitle}", content:"${postDetails.content}"}) {
+            createPost(postInput: {title: "${postDetails.postTitle}", content:"${postDetails.postContent}", tags:["hi"]}) {
                 content
             }
         }`
     };
 
-    fetch('http://localhost:8080/graphql',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(graphqlQuery)
-    })
-    .then(res => res.json())
-    .then(resData => {
-        return (dispatch) => {
-            dispatch({
+    return dispatch => {
+        return fetch('http://localhost:8080/graphql',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(graphqlQuery)
+            })
+            .then(res => res.json())
+            .then(resData => dispatch({
                 type: "CREATE_POST",
                 post: resData
-            });
-        }
-    })
+            }))
+            .catch(err => console.log(err));
+    }
 }
 
 export default function postsReducer(state = initialState, action) {
