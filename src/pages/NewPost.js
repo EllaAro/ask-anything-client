@@ -70,7 +70,15 @@ const NewPost = () => {
     }
 
     const isContentValid = () => {
-        return  postContent.length > MIN_VALID_CONTENT_LENGTH && postContent.length < VALID_CONTENT_LENGTH 
+        return postContent.length > MIN_VALID_CONTENT_LENGTH && postContent.length < VALID_CONTENT_LENGTH 
+    }
+
+    const areTagsValid = () => {
+        return tagsValue.length > 0
+    }
+
+    const isSendButtonEnabled = () => {
+        return isTitleValid() && isContentValid() && areTagsValid()
     }
 
     const helpTextPostContent = () => {
@@ -121,7 +129,7 @@ const NewPost = () => {
                     handleChange={handleTagsChange}
                 />
                 <PostButton 
-                    disabled={enablePost}
+                    disabled={!isSendButtonEnabled() || enablePost}
                     buttonName={postButton} 
                     handleSubmit={handleSubmitPost}
                 />
