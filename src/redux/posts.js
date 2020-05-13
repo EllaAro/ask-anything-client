@@ -1,12 +1,22 @@
 const initialState = []
 
+const fromArrToSqlArr = (arr) => {
+    let returnVal = ``;
+    arr.forEach(element => returnVal+=`"${element.title}", `)
+    return returnVal;
+}
+
 export const createPost = (postDetails) => {
 
     const graphqlQuery = {
-        query: `
-        mutation {
-            createPost(postInput: {title: "${postDetails.postTitle}", content:"${postDetails.postContent}", tags:["hi"]}) {
-                content
+        query: 
+        `mutation {
+            createPost(postInput: 
+                {title: "${postDetails.postTitle}", 
+                content:"${postDetails.postContent}", 
+                tags:[${fromArrToSqlArr(postDetails.tagsValue)}]}),
+            {
+                _id
             }
         }`
     };
@@ -26,6 +36,10 @@ export const createPost = (postDetails) => {
             }))
             .catch(err => console.log(err));
     }
+}
+
+export const fetchAllPosts = () => {
+    
 }
 
 export default function postsReducer(state = initialState, action) {
