@@ -12,6 +12,7 @@ import { createPost } from '../redux/posts';
 const VALID_CONTENT_LENGTH = 150;
 const VALID_TITLE_LENGTH = 5;
 const MIN_VALID_CONTENT_LENGTH = 10;
+
 const categories = [ //this is dummy data
     { title: 'Sport', id: 1 },
     { title: 'News', id: 2 },
@@ -75,7 +76,7 @@ const NewPost = () => {
     const helpTextPostContent = () => {
         if(!postContent) return `${VALID_CONTENT_LENGTH} characters left.`
         else if (postContent.length > VALID_CONTENT_LENGTH) return `Content is too long. Make it less than ${VALID_CONTENT_LENGTH} characters.`;
-        else if (postContent.length < MIN_VALID_CONTENT_LENGTH) return `The content of the post cannot be less than ${MIN_VALID_CONTENT_LENGTH}.`
+        else if (postContent.length < MIN_VALID_CONTENT_LENGTH) return `The content of the post cannot be less than ${MIN_VALID_CONTENT_LENGTH} characters.`
         else return `${VALID_CONTENT_LENGTH - postContent.length} characters left.`
     }
     
