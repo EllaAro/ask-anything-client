@@ -31,10 +31,18 @@ const Post = ({postData}) => {
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography 
+                  variant="h5"
+                  component="h2"
+                  noWrap={true} 
+                >
                     {postData.title}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                <Typography 
+                  className={classes.pos} 
+                  color="textSecondary"
+                  noWrap={true} 
+                >
                     {postData.tags.toString()}
                 </Typography>
                 <Typography 
