@@ -32,17 +32,17 @@ const Post = ({postData}) => {
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography variant="h5" component="h2">
-                    {postData.name}
+                    {postData.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {postData.tags}
+                    {postData.tags.toString()}
                 </Typography>
                 <Typography 
                     variant="body2" 
                     component="p" 
                     noWrap={true} 
                 >
-                    {postData.body}
+                    {postData.content}
                 </Typography>
             </CardContent>
             <CardActions>

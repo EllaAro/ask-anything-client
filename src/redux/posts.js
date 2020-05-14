@@ -1,4 +1,4 @@
-const initialState = []
+const initialState = [];
 
 const fromArrToSqlArr = (arr) => {
     let returnVal = ``;
@@ -7,7 +7,6 @@ const fromArrToSqlArr = (arr) => {
 }
 
 export const createPost = (postDetails) => {
-
     const graphqlQuery = {
         query: 
         `mutation {
@@ -20,7 +19,6 @@ export const createPost = (postDetails) => {
             }
         }`
     };
-
     return dispatch => {
         return fetch('http://localhost:8080/graphql',{
                 method: 'POST',
@@ -32,20 +30,47 @@ export const createPost = (postDetails) => {
             .then(res => res.json())
             .then(resData => dispatch({
                 type: "CREATE_POST",
-                post: resData
+                post: resData.data.createPost
+            }))
+            .catch(err => console.log(err));
+    };
+}
+
+export const fetchAllPosts = () => {
+    const graphqlQuery = {
+        query: 
+        `query{fetchAllPosts {
+            _id,
+            title,
+            content,
+            tags,
+            createdAt
+          }
+        }`
+    };
+    return dispatch => {
+        return fetch('http://localhost:8080/graphql',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(graphqlQuery)
+            })
+            .then(res => res.json())
+            .then(resData => dispatch({
+                type: "FETCH_ALL_POSTS",
+                posts: resData.data.fetchAllPosts
             }))
             .catch(err => console.log(err));
     }
 }
 
-export const fetchAllPosts = () => {
-    
-}
-
 export default function postsReducer(state = initialState, action) {
     switch(action.type) {
         case "CREATE_POST":
-            return action.post
+            return [...state, action.post];
+        case "FETCH_ALL_POSTS":
+            return action.posts;
         default:
             return state    
     }
