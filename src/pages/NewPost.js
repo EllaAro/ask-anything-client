@@ -27,7 +27,7 @@ const NewPost = () => {
 
     const [ postValues, setPostValues ] = useState(initPostValues);
     const { postTitle, postContent } = postValues;
-    const [tagsValue, setTagsValue] = useState([]);
+    const [ tagsValue, setTagsValue ] = useState([]);
     const [ postButton, setPostButton ] = useState('Post');
     const [ enablePost , setEnablePost ] = useState(false);
 
