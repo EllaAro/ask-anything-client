@@ -55,7 +55,9 @@ const NewPost = () => {
         dispatch(createPost({ postTitle, postContent, tagsValue }))
         .then(res => {
             resetValues();
-        });
+        })
+        .catch(err =>
+            console.loo(err));
     }
 
     const resetValues = () => {
@@ -66,7 +68,7 @@ const NewPost = () => {
     }
 
     const isSendButtonEnabled = () => {
-        return isTextLengthValid(0, MIN_VALID_TITLE_LENGTH, postTitle) &&
+        return isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle) &&
                isTextLengthValid(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent) && 
                isTagsLengthValid(tagsValue)
     }
