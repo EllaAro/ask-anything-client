@@ -54,7 +54,7 @@ const Post = ({postData}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Link exact to={`/posts/post/${postData.id}`} style={{textDecoration: 'none'}}>
+                <Link exact to={`/posts/post/${postData._id}`} style={{textDecoration: 'none'}}>
                     <Button size="small">KEEP READING</Button>
                 </Link>
             </CardActions>

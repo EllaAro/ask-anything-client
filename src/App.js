@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from './components/Header';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './pages/Profile';
 import PrivateSettings from './pages/PrivateSettings';
 import FullPost from './pages/FullPost';
 import Main from './pages/Main';
-import NewPost from './pages/NewPost'
+import NewPost from './pages/NewPost';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import { Grid } from "@material-ui/core";
 
 const App = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const router = (
       <Switch>
@@ -31,10 +35,11 @@ const App = () => {
         )}/>
       </Switch>
   )
-  return (
-    <Grid container direction="column">
-       <Grid item>
-        <Header />
+
+  const loggedUserPages = () => (
+    <div>
+      <Grid item>
+      <Header />
       </Grid>
       <Grid item container>
         <Grid item xs={false} sm={2} />
@@ -43,6 +48,21 @@ const App = () => {
         </Grid>
         <Grid item xs={false} sm={2} />
       </Grid>
+    </div>
+  )
+
+
+  return (
+    <Grid container direction="column">
+      {/* <Switch>
+        <Route exact path='/'>
+          {isLoggedIn? loggedUserPages() : (<SignIn />)}
+        </Route>
+        <Route exact path='/sign-up'>
+          {isLoggedIn? loggedUserPages() : (<SignUp />)}
+        </Route>
+      </Switch> */}
+      {loggedUserPages()}
     </Grid>
   );
 }

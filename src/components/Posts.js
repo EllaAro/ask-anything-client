@@ -17,8 +17,6 @@ const Posts = () => {
 
     const fetchedPosts = useSelector(state => state.posts);
 
-    console.log(fetchedPosts);
-
     const posts = fetchedPosts.map(post => (<Post postData={post} />))
 
     return (

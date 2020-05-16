@@ -5,39 +5,42 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import PostButton from '../components/PostButton';
 import TagsAutoComplete from '../components/TagsAutoComplete';
-import {useStylesPaper} from '../theme';
+import { useStylesPaper } from '../theme';
 import { useDispatch } from "react-redux"
 import { createPost } from '../redux/posts';
-
-const VALID_CONTENT_LENGTH = 150;
-const VALID_TITLE_LENGTH = 5;
-const MIN_VALID_CONTENT_LENGTH = 10;
-
-const categories = [ //this is dummy data
-    { title: 'Sport', id: 1 },
-    { title: 'News', id: 2 },
-    { title: 'Art', id: 3 },
-    { title: 'Cooking', id: 4 },
-    { title: 'TV Shows', id: 5 },
-  ];
+import { MAX_VALID_CONTENT_LENGTH, 
+         MIN_VALID_TITLE_LENGTH, 
+         MAX_VALID_TITLE_LENGTH,
+         MIN_VALID_CONTENT_LENGTH, 
+         categories,
+         initPostValues, } from '../utils/consts/newPostConsts';
+import { isTextLengthValid,
+         isTagsLengthValid,
+         helpTextMessage,
+         } from '../utils/errorHandler';
 
 const NewPost = () => {
     
     const dispatch = useDispatch();
-    const [ postTitle, setPostTitle ] = useState('');
-    const [ postContent, setPostContent ] = useState('');
+
     const fixedOptions = [];
+
+    const [ postValues, setPostValues ] = useState(initPostValues);
+    const { postTitle, postContent } = postValues;
     const [tagsValue, setTagsValue] = useState([]);
     const [ postButton, setPostButton ] = useState('Post');
-    const [enablePost , setEnablePost ] = useState(false);
+    const [ enablePost , setEnablePost ] = useState(false);
 
-    const handlePostTitleChange = (event) => {
-        setPostTitle(event.target.value);
-    }
-
-    const handlePostContentChange = (event) => {
-        setPostContent(event.target.value);
-    }
+    const handlePostValuesChange = (event) => {
+        const {name, value} = event.target;
+        
+        setPostValues(prevPostValues => {
+            return {
+                ...prevPostValues,
+                [name] : value
+            }
+        });
+    };
 
     const handleTagsChange = (event, newValue) => {
         setTagsValue([
@@ -47,47 +50,27 @@ const NewPost = () => {
       }
 
     const handleSubmitPost = () => {
-        if (isTitleValid() && isContentValid()) {
-            setPostButton('Sending');
-            setEnablePost(true);
-            dispatch(createPost({ postTitle, postContent, tagsValue }))
-            .then(res => {
-                resetValues();
-            });
-        }
+        setPostButton('Sending');
+        setEnablePost(true);
+        dispatch(createPost({ postTitle, postContent, tagsValue }))
+        .then(res => {
+            resetValues();
+        });
     }
 
     const resetValues = () => {
         setPostButton('Post');
         setEnablePost(false);
-        setPostTitle('');
-        setPostContent('');
+        setPostValues(initPostValues);
         setTagsValue([]);
     }
 
-    const isTitleValid = () => {
-        return postTitle.length >= VALID_TITLE_LENGTH
-    }
-
-    const isContentValid = () => {
-        return postContent.length > MIN_VALID_CONTENT_LENGTH && postContent.length < VALID_CONTENT_LENGTH 
-    }
-
-    const areTagsValid = () => {
-        return tagsValue.length > 0
-    }
-
     const isSendButtonEnabled = () => {
-        return isTitleValid() && isContentValid() && areTagsValid()
+        return isTextLengthValid(0, MIN_VALID_TITLE_LENGTH, postTitle) &&
+               isTextLengthValid(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent) && 
+               isTagsLengthValid(tagsValue)
     }
 
-    const helpTextPostContent = () => {
-        if(!postContent) return `${VALID_CONTENT_LENGTH} characters left.`
-        else if (postContent.length > VALID_CONTENT_LENGTH) return `Content is too long. Make it less than ${VALID_CONTENT_LENGTH} characters.`;
-        else if (postContent.length < MIN_VALID_CONTENT_LENGTH) return `The content of the post cannot be less than ${MIN_VALID_CONTENT_LENGTH} characters.`
-        else return `${VALID_CONTENT_LENGTH - postContent.length} characters left.`
-    }
-    
     return (
         <Paper 
             className={useStylesPaper().rootPaper}
@@ -97,18 +80,18 @@ const NewPost = () => {
                 <br/>
                 <Typography variant="h5">Create A New Post</Typography>
                 <TextField
-                    error={!isTitleValid() && postTitle}
-                    helperText={isTitleValid() || !postTitle ? '' : `Title too short. Make it atleast ${VALID_TITLE_LENGTH} characters long.`}
+                    error={!isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle) && postTitle}
+                    helperText={helpTextMessage(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle,'Title')}
                     fullWidth
                     margin="normal"
                     name='postTitle'
                     label='Post Name'
                     value={postTitle}
-                    onChange={handlePostTitleChange}  
+                    onChange={handlePostValuesChange}  
                 />
                 <TextField
-                    error={!isContentValid() && postContent}
-                    helperText={helpTextPostContent()}
+                    error={!isTextLengthValid(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent) && postContent}
+                    helperText={helpTextMessage(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent,'Content')}
                     fullWidth
                     margin="normal"
                     name='postContent'
@@ -118,10 +101,10 @@ const NewPost = () => {
                     defaultValue="Default Value"
                     variant="outlined"
                     value={postContent}
-                    onChange={handlePostContentChange}  
+                    onChange={handlePostValuesChange}  
                 />
                 <TagsAutoComplete 
-                    error
+                    name='tagsValue'
                     categories={categories}
                     fixedOptions={fixedOptions}
                     value={tagsValue}
