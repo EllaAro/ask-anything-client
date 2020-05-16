@@ -16,7 +16,7 @@ import { isPasswordValid,
          isEmailValid,
          helpTextEmailMessage,
          isFieldValueValid,
-         helpTextEmptyField,
+         helpTextField,
        } from '../utils/errorHandler';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,8 +58,8 @@ const SignUp = () => {
   const inputFields = () => {
     return Object.keys(signUpDetails).filter(field => field!=='email' && field!=='password').map(field => (
       <TextField
-            error={!isFieldValueValid(signUpDetails.field)}
-            helperText={helpTextEmptyField(signUpDetails.field)}
+            error={!isFieldValueValid(signUpDetails[field])}
+            helperText={helpTextField(signUpDetails[field])}
             margin="normal"
             required
             fullWidth
@@ -71,7 +71,7 @@ const SignUp = () => {
       />
     ))
   }
-
+  
   const passwordField = () => (
     <TextField
             error = {!isPasswordValid(signUpDetails.password, VALID_PASSWORD_LENGTH)}
@@ -86,8 +86,7 @@ const SignUp = () => {
             autoFocus
             onChange={handleInputChange}
       />
-
-  )
+  );
 
   const emailField = () => (
     <TextField
@@ -102,7 +101,7 @@ const SignUp = () => {
             autoFocus
             onChange={handleInputChange}
       />
-  )
+  );
 
   return (
     <Container component="main" maxWidth="xs">
@@ -124,7 +123,7 @@ const SignUp = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Sign Up
           </Button>
       </div>
       <Copyright />
