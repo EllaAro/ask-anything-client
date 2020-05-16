@@ -3,15 +3,21 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Box from '@material-ui/core/Box';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from '../components/Copyright';
-import { initSignUpValues } from '../utils/consts/signUpConsts';
+import { initSignUpValues,
+         VALID_PASSWORD_LENGTH,
+        } from '../utils/consts/signUpConsts';
+import { isPasswordValid,
+         helpTextPasswordMessage,
+         isEmailValid,
+         helpTextEmailMessage,
+         isFieldValueValid,
+         helpTextEmptyField,
+       } from '../utils/errorHandler';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,8 +56,10 @@ const SignUp = () => {
   }
 
   const inputFields = () => {
-    return Object.keys(signUpDetails).map(field => (
+    return Object.keys(signUpDetails).filter(field => field!=='email' && field!=='password').map(field => (
       <TextField
+            error={!isFieldValueValid(signUpDetails.field)}
+            helperText={helpTextEmptyField(signUpDetails.field)}
             margin="normal"
             required
             fullWidth
@@ -60,9 +68,41 @@ const SignUp = () => {
             value={signUpDetails.field}
             autoFocus
             onChange={handleInputChange}
-          />
+      />
     ))
   }
+
+  const passwordField = () => (
+    <TextField
+            error = {!isPasswordValid(signUpDetails.password, VALID_PASSWORD_LENGTH)}
+            helperText = {helpTextPasswordMessage(signUpDetails.password, VALID_PASSWORD_LENGTH)}
+            type='password'
+            margin="normal"
+            required
+            fullWidth
+            label='password'
+            name='password'
+            value={signUpDetails.password}
+            autoFocus
+            onChange={handleInputChange}
+      />
+
+  )
+
+  const emailField = () => (
+    <TextField
+            error = {!isEmailValid(signUpDetails.email)}
+            helperText = {helpTextEmailMessage(signUpDetails.email)}
+            margin="normal"
+            required
+            fullWidth
+            label='email'
+            name='email'
+            value={signUpDetails.email}
+            autoFocus
+            onChange={handleInputChange}
+      />
+  )
 
   return (
     <Container component="main" maxWidth="xs">
@@ -75,6 +115,8 @@ const SignUp = () => {
           Sign Up
         </Typography>
           {inputFields()}
+          {passwordField()}
+          {emailField()}
           <Button
             type="submit"
             fullWidth
@@ -85,9 +127,7 @@ const SignUp = () => {
             Sign In
           </Button>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+      <Copyright />
     </Container>
   );
 }
