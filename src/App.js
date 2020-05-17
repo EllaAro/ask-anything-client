@@ -54,14 +54,16 @@ const App = () => {
 
   return (
     <Grid container direction="column">
-      <Switch>
+      {/* <Switch>
         <Route exact path='/'>
           {isLoggedIn? loggedUserPages() : (<SignIn />)}
         </Route>
         <Route exact path='/sign-up'>
           {isLoggedIn? loggedUserPages() : (<SignUp />)}
         </Route>
-      </Switch>
+      </Switch> */}
+      {/* {loggedUserPages()} */}
+      <SignUp />
     </Grid>
   );
 }

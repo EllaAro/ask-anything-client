@@ -1,19 +1,19 @@
 const initialState = [];
 
-const fromArrToSqlArr = (arr) => {
+const fromArrToQlArr = (arr) => {
     let returnVal = ``;
     arr.forEach(element => returnVal+=`"${element.title}", `)
     return returnVal;
 }
 
-export const createPost = (postDetails) => {
+export const createPost = ({ postTitle, postContent, tagsValue}) => {
     const graphqlQuery = {
         query: 
         `mutation {
             createPost(postInput: 
-                {title: "${postDetails.postTitle}", 
-                content:"${postDetails.postContent}", 
-                tags:[${fromArrToSqlArr(postDetails.tagsValue)}]}),
+                {title: "${postTitle}", 
+                content:"${postContent}", 
+                tags:[${fromArrToQlArr(tagsValue)}]}),
             {
                 _id
             }

@@ -82,7 +82,7 @@ const NewPost = () => {
                 <br/>
                 <Typography variant="h5">Create A New Post</Typography>
                 <TextField
-                    error={!isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle)}
+                    error={postTitle && !isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle)}
                     helperText={helpTextMessage(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle,'Title')}
                     fullWidth
                     margin="normal"
@@ -92,7 +92,7 @@ const NewPost = () => {
                     onChange={handlePostValuesChange}  
                 />
                 <TextField
-                    error={!isTextLengthValid(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent)}
+                    error={postContent && !isTextLengthValid(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent)}
                     helperText={helpTextMessage(MIN_VALID_CONTENT_LENGTH, MAX_VALID_CONTENT_LENGTH, postContent,'Content')}
                     fullWidth
                     margin="normal"

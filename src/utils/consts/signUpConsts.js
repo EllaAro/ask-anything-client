@@ -1,5 +1,4 @@
-export const initSignUpValues = {
-    userName: '', 
+export const initSignUpValues = { 
     firstName: '',
     lastName: '',
     email: '',

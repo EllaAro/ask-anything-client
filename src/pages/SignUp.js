@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createUser } from '../redux/signup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,7 +23,7 @@ import { isPasswordValid,
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -40,10 +42,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-
+  
   const classes = useStyles();
-
   const [ signUpDetails, setSignUpDetails ] = useState(initSignUpValues);
+  const [ isEmailTaken, setIsEmailTaken ] = useState(false);
+  const { firstName, lastName, email, password } = signUpDetails;
+  const dispatch = useDispatch();
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -58,7 +63,7 @@ const SignUp = () => {
   const inputFields = () => {
     return Object.keys(signUpDetails).filter(field => field!=='email' && field!=='password').map(field => (
       <TextField
-            error={!isFieldValueValid(signUpDetails[field])}
+            error={signUpDetails[field] && !isFieldValueValid(signUpDetails[field])}
             helperText={helpTextField(signUpDetails[field])}
             margin="normal"
             required
@@ -74,15 +79,15 @@ const SignUp = () => {
   
   const passwordField = () => (
     <TextField
-            error = {!isPasswordValid(signUpDetails.password, VALID_PASSWORD_LENGTH)}
-            helperText = {helpTextPasswordMessage(signUpDetails.password, VALID_PASSWORD_LENGTH)}
+            error = {password && !isPasswordValid(password, VALID_PASSWORD_LENGTH)}
+            helperText = {helpTextPasswordMessage(password, VALID_PASSWORD_LENGTH)}
             type='password'
             margin="normal"
             required
             fullWidth
             label='password'
             name='password'
-            value={signUpDetails.password}
+            value={password}
             autoFocus
             onChange={handleInputChange}
       />
@@ -90,18 +95,36 @@ const SignUp = () => {
 
   const emailField = () => (
     <TextField
-            error = {!isEmailValid(signUpDetails.email)}
-            helperText = {helpTextEmailMessage(signUpDetails.email)}
+            error = {(email && !isEmailValid(email)) || isEmailTaken }
+            helperText = {helpTextEmailMessage(email, isEmailTaken)}
             margin="normal"
             required
             fullWidth
             label='email'
             name='email'
-            value={signUpDetails.email}
+            value={email}
             autoFocus
             onChange={handleInputChange}
       />
   );
+
+  const isInputValid = () => (isFieldValueValid(firstName) && 
+                              isFieldValueValid(lastName) &&
+                              isPasswordValid(password, VALID_PASSWORD_LENGTH) &&
+                              isEmailValid(email));
+
+  const enableSignUpButton = () => !isInputValid();
+
+  const handleSignUpButton = () => {
+    if (isInputValid()){
+      dispatch(createUser({ firstName, lastName, email, password }))
+      .then(res => 
+        setIsEmailTaken(false))
+      .catch(err => 
+        setIsEmailTaken(true)
+        );
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -117,11 +140,12 @@ const SignUp = () => {
           {passwordField()}
           {emailField()}
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={enableSignUpButton()}
+            onClick={handleSignUpButton}
           >
             Sign Up
           </Button>
