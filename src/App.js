@@ -63,7 +63,7 @@ const App = () => {
         </Route>
       </Switch> */}
       {/* {loggedUserPages()} */}
-      <SignUp />
+      <SignIn />
     </Grid>
   );
 }
