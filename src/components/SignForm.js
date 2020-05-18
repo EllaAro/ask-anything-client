@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignForm = (props) => {
+const SignForm = ({ title, buttonDisable, handleButtonClick, children }) => {
   const classes = useStyles();
 
   return (
@@ -39,19 +39,19 @@ const SignForm = (props) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {props.title}
+          {title}
         </Typography>
-        {props.children}
+        {children}
         <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={props.buttonDisable}
-            onClick={props.handleButtonClick}
+            disabled={buttonDisable}
+            onClick={handleButtonClick}
           >
-            {props.title}
+            {title}
         </Button>
       </div>
       <Copyright />
