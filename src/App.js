@@ -12,7 +12,7 @@ import { Grid } from "@material-ui/core";
 
 const App = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const router = (
       <Switch>
@@ -51,19 +51,26 @@ const App = () => {
     </div>
   )
 
+  const notLoggedInPages = () => (
+    <Switch>
+      <Route exact path='/'>
+        <SignIn />
+      </Route>
+      <Route exact path='/sign-up'>
+        <SignUp />
+      </Route>
+    </Switch>
+    )
+
+  const content = () => {
+    if ( isLoggedIn ) return loggedUserPages();
+    return notLoggedInPages();
+  }
+
 
   return (
     <Grid container direction="column">
-      {/* <Switch>
-        <Route exact path='/'>
-          {isLoggedIn? loggedUserPages() : (<SignIn />)}
-        </Route>
-        <Route exact path='/sign-up'>
-          {isLoggedIn? loggedUserPages() : (<SignUp />)}
-        </Route>
-      </Switch> */}
-      {/* {loggedUserPages()} */}
-      <SignIn />
+     {content()}
     </Grid>
   );
 }
