@@ -1,4 +1,4 @@
-import signUpQuery from '../graphql/signUpQueries';
+import { signUpQuery } from '../graphql/signUpQueries';
 const initialState = [];
 
 export const createUser = ({ firstName, lastName, email, password }) => {

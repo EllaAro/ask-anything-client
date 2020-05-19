@@ -1,3 +1,6 @@
+import { createPostQuery,
+        fetchAllPostsQuery,
+       } from '../graphql/postQueries';
 const initialState = [];
 
 const fromArrToQlArr = (arr) => {
@@ -7,25 +10,14 @@ const fromArrToQlArr = (arr) => {
 }
 
 export const createPost = ({ postTitle, postContent, tagsValue}) => {
-    const graphqlQuery = {
-        query: 
-        `mutation {
-            createPost(postInput: 
-                {title: "${postTitle}", 
-                content:"${postContent}", 
-                tags:[${fromArrToQlArr(tagsValue)}]}),
-            {
-                _id
-            }
-        }`
-    };
+    
     return dispatch => {
         return fetch('http://localhost:8080/graphql',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify(graphqlQuery)
+                body: createPostQuery( postTitle, postContent, fromArrToQlArr(tagsValue) )
             })
             .then(res => res.json())
             .then(resData => dispatch({
@@ -37,24 +29,14 @@ export const createPost = ({ postTitle, postContent, tagsValue}) => {
 }
 
 export const fetchAllPosts = () => {
-    const graphqlQuery = {
-        query: 
-        `query{fetchAllPosts {
-            _id,
-            title,
-            content,
-            tags,
-            createdAt
-          }
-        }`
-    };
+    
     return dispatch => {
         return fetch('http://localhost:8080/graphql',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body:JSON.stringify(graphqlQuery)
+                body: fetchAllPostsQuery
             })
             .then(res => res.json())
             .then(resData => dispatch({
