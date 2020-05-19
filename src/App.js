@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import { Switch, Route } from 'react-router-dom';
 import Profile from './pages/Profile';
@@ -13,6 +13,23 @@ import { Grid } from "@material-ui/core";
 const App = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   const expiryDate = localStorage.getItem('expiryDate');
+  //   if (!token || !expiryDate) {
+  //     return;
+  //   }
+  //   if (new Date(expiryDate) <= new Date()) {
+  //     this.logoutHandler();
+  //     return;
+  //   }
+  //   const userId = localStorage.getItem('userId');
+  //   const remainingMilliseconds =
+  //     new Date(expiryDate).getTime() - new Date().getTime();
+  //   this.setState({ isAuth: true, token: token, userId: userId });
+  //   this.setAutoLogout(remainingMilliseconds);
+  // })
 
   const router = (
       <Switch>
