@@ -9,10 +9,10 @@ import { initSignUpValues,
 import { isPasswordValid,
          helpTextPasswordMessage,
          isEmailValid,
-         helpTextEmailMessage,
+         helpTextEmailMessageForSignUp,
          isFieldValueValid,
          helpTextField,
-       } from '../utils/errorHandler';
+       } from '../utils/errorHandlers/inputErrorHandler';
 
 const SignUp = () => {
   
@@ -68,7 +68,7 @@ const SignUp = () => {
   const emailField = () => (
     <TextField
             error = {(email && !isEmailValid(email)) || isEmailTaken }
-            helperText = {helpTextEmailMessage(email, isEmailTaken)}
+            helperText = {helpTextEmailMessageForSignUp(email, isEmailTaken)}
             margin="normal"
             required
             fullWidth

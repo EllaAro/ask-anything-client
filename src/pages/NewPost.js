@@ -17,7 +17,7 @@ import { MAX_VALID_CONTENT_LENGTH,
 import { isTextLengthValid,
          isTagsLengthValid,
          helpTextMessage,
-         } from '../utils/errorHandler';
+         } from '../utils/errorHandlers/inputErrorHandler';
 
 const NewPost = () => {
     

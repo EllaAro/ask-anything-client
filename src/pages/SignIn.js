@@ -1,24 +1,59 @@
-import React from 'react';
+import React , { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../redux/signin';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import SignForm from '../components/SignForm';
+import { helpTextEmailMessageForSignIn,
+         isEmailValid,
+         isPasswordEmpty,
+        } from '../utils/errorHandlers/inputErrorHandler';
 
-const SignIn = () => (
+const SignIn = () => {
+
+  const initialInput = { email: '' , password: '' };
+  const [ inputDetails, setInputDetails ] = useState(initialInput);
+  const { email, password } = inputDetails;
+  const dispatch = useDispatch();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputDetails(prevSignUpDetails => {
+      return {
+        ...prevSignUpDetails,
+        [name] : value
+      }
+    })
+  }
+
+  const isInputValid = () => isEmailValid(email) && !isPasswordEmpty(password);
+
+  const handleSignInButton = () => {
+    if (isInputValid()) dispatch(signIn({ password, email }))
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+  }
+
+  return (
     <SignForm
       title='Sign In'
-      buttonDisable={false}
-      handleButtonClick={''}
+      buttonDisable={!isInputValid()}
+      handleButtonClick={handleSignInButton}
     >
       <TextField
+        error={ email && !isEmailValid(email)}
+        helperText={helpTextEmailMessageForSignIn(email)}
         margin="normal"
         required
         fullWidth
-        id="email"
         label="Email Address"
         name="email"
         autoComplete="email"
         autoFocus
+        value={email}
+        onChange={handleInputChange}
       />
       <TextField
         margin="normal"
@@ -27,8 +62,9 @@ const SignIn = () => (
         name="password"
         label="Password"
         type="password"
-        id="password"
         autoComplete="current-password"
+        value={password}
+        onChange={handleInputChange}
       />
       <Grid container>
         <Grid item>
@@ -38,6 +74,7 @@ const SignIn = () => (
         </Grid>
       </Grid>
     </SignForm>
-  );
+    );
+  };
 
 export default SignIn;

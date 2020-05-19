@@ -24,12 +24,16 @@ export const helpTextPasswordMessage = (pwd , validPwdLength) => {
 
 export const isEmailValid = email => /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/.test(email);
 
-export const helpTextEmailMessage = (email, isEmailTaken) => { 
+export const helpTextEmailMessageForSignUp = (email, isEmailTaken) => { 
     if (!email) return `A valid email is of the form 'example@email.com'.`;
     if (email && !isEmailTaken) return isEmailValid(email) ? '' : 'invalid email!';
     else if (email && isEmailTaken) return 'This email is taken, please choose a different one!';
 }
 
+export const helpTextEmailMessageForSignIn = email => email ?  isEmailValid(email) ? `` : `invalid email!` : ``;
+
 export const isFieldValueValid = fieldValue =>  (fieldValue).indexOf(' ') < 0;
 
 export const helpTextField = fieldValue => isFieldValueValid(fieldValue) ?  '' : 'The value cannot be empty nor contain white spaces!';
+
+export const isPasswordEmpty = password => password.length < 1; 
