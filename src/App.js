@@ -1,89 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import { Switch, Route } from 'react-router-dom';
-import Profile from './pages/Profile';
-import PrivateSettings from './pages/PrivateSettings';
-import FullPost from './pages/FullPost';
-import Main from './pages/Main';
-import NewPost from './pages/NewPost';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
 import { Grid } from "@material-ui/core";
+import NotLoggedInPages from './pages/NotLoggedInPages';
+import LoggedInPages from './pages/LoggedInPages';
+
+
+// const logoutHandler = () => {
+//   localStorage.removeItem('token');
+//   localStorage.removeItem('expiryDate');
+//   localStorage.removeItem('userId');
+// };
 
 const App = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // useEffect(() => {
+
   //   const token = localStorage.getItem('token');
   //   const expiryDate = localStorage.getItem('expiryDate');
-  //   if (!token || !expiryDate) {
-  //     return;
-  //   }
+  //   if (!token || !expiryDate) setIsLoggedIn(false)
   //   if (new Date(expiryDate) <= new Date()) {
-  //     this.logoutHandler();
-  //     return;
+  //     logoutHandler();
+  //     setIsLoggedIn(false);
   //   }
   //   const userId = localStorage.getItem('userId');
   //   const remainingMilliseconds =
   //     new Date(expiryDate).getTime() - new Date().getTime();
-  //   this.setState({ isAuth: true, token: token, userId: userId });
-  //   this.setAutoLogout(remainingMilliseconds);
-  // })
-
-  const router = (
-      <Switch>
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        <Route exact path='/account/profile'>
-          <Profile />
-        </Route>
-        <Route exact path='/account/private-settings'>
-          <PrivateSettings />
-        </Route>
-        <Route exact path='/posts/add-a-post'>
-          <NewPost />
-        </Route>
-        <Route path='/posts/post/:id' render={({match}) => (
-          <FullPost
-            id={match.params.id}
-            />
-        )}/>
-      </Switch>
-  )
-
-  const loggedUserPages = () => (
-    <div>
-      <Grid item>
-      <Header />
-      </Grid>
-      <Grid item container>
-        <Grid item xs={false} sm={2} />
-        <Grid item xs={12} sm={8}>
-          {router}
-        </Grid>
-        <Grid item xs={false} sm={2} />
-      </Grid>
-    </div>
-  )
-
-  const notLoggedInPages = () => (
-    <Switch>
-      <Route exact path='/'>
-        <SignIn />
-      </Route>
-      <Route exact path='/sign-up'>
-        <SignUp />
-      </Route>
-    </Switch>
-    )
-
-  const content = () => {
-    if ( isLoggedIn ) return loggedUserPages();
-    return notLoggedInPages();
-  }
-
+  //   // this.setState({ isAuth: true, token: token, userId: userId });
+  //   // this.setAutoLogout(remainingMilliseconds);
+  // },[])
+  
+  const content = () => isLoggedIn ? <LoggedInPages /> : <NotLoggedInPages /> ;
+  
   return (
     <Grid container direction="column">
      {content()}
