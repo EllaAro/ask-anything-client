@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createUser } from '../redux/signup';
 import TextField from '@material-ui/core/TextField';
 import SignForm from '../components/SignForm';
@@ -20,7 +21,7 @@ const SignUp = () => {
   const [ isEmailTaken, setIsEmailTaken ] = useState(false);
   const { firstName, lastName, email, password } = signUpDetails;
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -95,6 +96,7 @@ const SignUp = () => {
       .catch(err => 
         setIsEmailTaken(true)
         );
+      history.push("/");
     }
   }
 

@@ -1,13 +1,15 @@
-export const createPostQuery = ( postTitle, postContent, tagsValue ) => JSON.stringify({
+export const createPostQuery = ( userId, postTitle, postContent, tagsValue ) => JSON.stringify({
     query: 
     `mutation {
-        createPost(postInput: 
-            {title: "${postTitle}", 
-            content:"${postContent}", 
-            tags:[${tagsValue}]}),
-        {
-            _id
-        }
+        createPost(postInput: {
+                userId: "${userId}",
+                title: "${postTitle}", 
+                content:"${postContent}", 
+                tags:[${tagsValue}]
+            }),
+            {
+                _id
+            }
     }`
 });
 

@@ -23,8 +23,9 @@ export const signIn = ({ password, email }) => {
             .then(res => res.json())
             .then(resData => {
                 if ( resData.errors && resData.errors[0].status === 422 ) throw new Error ( `Validation has failed. Make sure that you've entered the right details!` );
+                console.log(resData.errors);
                 if ( resData.errors ) throw new Error (`User validation has failed.`);
-                
+                console.log(resData);
                 setLocalStorageAuto( resData.data.signIn.token, resData.data.signIn.userId, expiryDate );
 
                 return dispatch({

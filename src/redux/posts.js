@@ -9,22 +9,28 @@ const fromArrToQlArr = (arr) => {
     return returnVal;
 }
 
-export const createPost = ({ postTitle, postContent, tagsValue}) => {
+export const createPost = ({ postTitle, postContent, tagsValue, userId, token }) => {
     
     return dispatch => {
         return fetch('http://localhost:8080/graphql',{
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+
                 },
                 body: createPostQuery( postTitle, postContent, fromArrToQlArr(tagsValue) )
             })
             .then(res => res.json())
-            .then(resData => dispatch({
+            .then(resData => {
+                if ( resData.errors && resData.errors[0].status === 401 ) throw new Error ( `Posting a post has failed, invalid input!` );
+                if ( resData.errors ) throw new Error (`Post creation has failed`);
+
+                return dispatch({
                 type: "CREATE_POST",
                 post: resData.data.createPost
-            }))
-            .catch(err => console.log(err));
+                })
+            });
     };
 }
 
@@ -41,7 +47,7 @@ export const fetchAllPosts = () => {
             .then(res => res.json())
             .then(resData => dispatch({
                 type: "FETCH_ALL_POSTS",
-                posts: resData.data.fetchAllPosts
+                posts: resData.data.fetchAllPosts.posts
             }))
             .catch(err => console.log(err));
     }

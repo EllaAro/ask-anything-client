@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import PostButton from '../components/PostButton';
 import TagsAutoComplete from '../components/TagsAutoComplete';
 import { useStylesPaper } from '../theme';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createPost } from '../redux/posts';
 import { MAX_VALID_CONTENT_LENGTH, 
          MIN_VALID_TITLE_LENGTH, 
@@ -30,6 +30,7 @@ const NewPost = () => {
     const [ tagsValue, setTagsValue ] = useState([]);
     const [ postButton, setPostButton ] = useState('Post');
     const [ enablePost , setEnablePost ] = useState(false);
+    const { userId, token } = useSelector(state => state.signin);
 
     const handlePostValuesChange = (event) => {
         const {name, value} = event.target;
@@ -52,12 +53,12 @@ const NewPost = () => {
     const handleSubmitPost = () => {
         setPostButton('Sending');
         setEnablePost(true);
-        dispatch(createPost({ postTitle, postContent, tagsValue }))
+        dispatch(createPost({ postTitle, postContent, tagsValue, userId, token }))
         .then(res => {
             resetValues();
         })
         .catch(err =>
-            console.loo(err));
+            console.log(err));
     }
 
     const resetValues = () => {
