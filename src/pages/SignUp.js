@@ -19,6 +19,7 @@ const SignUp = () => {
   
   const [ signUpDetails, setSignUpDetails ] = useState(initSignUpValues);
   const [ isEmailTaken, setIsEmailTaken ] = useState(false);
+  const [ disableSignInButton, setDisableSignInButton ] = useState(false);
   const { firstName, lastName, email, password } = signUpDetails;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -90,20 +91,21 @@ const SignUp = () => {
 
   const handleSignUpButton = () => {
     if (isInputValid()){
+      setDisableSignInButton(true);
       dispatch(createUser({ firstName, lastName, email, password }))
       .then(res => 
-        setIsEmailTaken(false))
-      .catch(err => 
-        setIsEmailTaken(true)
+        history.push("/"))
+      .catch(err => { 
+        setDisableSignInButton(false);
+        setIsEmailTaken(true);}
         );
-      history.push("/");
     }
   }
 
   return (
     <SignForm 
       title='Sign Up'
-      buttonDisable={enableSignUpButton()}
+      buttonDisable={disableSignInButton || enableSignUpButton()}
       handleButtonClick={handleSignUpButton}
     >
       {inputFields()}
