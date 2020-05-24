@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createUser } from "../redux/signup";
+import { createUser } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
 import SignForm from "../components/SignForm";
 import {

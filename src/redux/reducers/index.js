@@ -2,13 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import privateSettingsReducer from "./privateSettings";
 import postsReducer from "./posts";
-import signupReducer from "./signup";
-import signinReducer from "./signin";
+import signinReducer from "./auth";
 
 const rootReducer = combineReducers({
   privateSettings: privateSettingsReducer,
   posts: postsReducer,
-  signup: signupReducer,
   signin: signinReducer,
 });
 

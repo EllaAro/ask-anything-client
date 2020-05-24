@@ -1,4 +1,4 @@
-import { createPostQuery, fetchAllPostsQuery } from "../graphql/postQueries";
+import { createPostQuery, fetchAllPostsQuery } from "../../graphql/postQueries";
 const initialState = [];
 
 const fromArrToQlArr = (arr) => {
