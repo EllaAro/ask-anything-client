@@ -7,13 +7,7 @@ const fromArrToQlArr = (arr) => {
   return returnVal;
 };
 
-export const createPost = ({
-  postTitle,
-  postContent,
-  tagsValue,
-  userId,
-  token,
-}) => {
+export const createPost = ({ postTitle, postContent, tagsValue, token }) => {
   return (dispatch) => {
     return fetch("http://localhost:8080/graphql", {
       method: "POST",

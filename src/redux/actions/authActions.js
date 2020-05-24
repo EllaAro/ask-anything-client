@@ -1,7 +1,3 @@
-import {
-  expiryDate,
-  setLocalStorageAuto,
-} from "../../utils/consts/signInConsts";
 import { CREATE_USER, SIGN_IN } from "./types";
 import { signUpQuery } from "../../graphql/signUpQueries";
 import { signInQuery } from "../../graphql/signInQueries";
@@ -20,13 +16,10 @@ export const signIn = ({ password, email }) => async (dispatch) => {
       `Validation has failed. Make sure that you've entered the right details!`
     );
   else if (resData.errors) throw new Error(`User validation has failed.`);
-  setLocalStorageAuto(
-    resData.data.signIn.token,
-    resData.data.signIn.userId,
-    expiryDate
-  );
+
   return dispatch({
     type: SIGN_IN,
+    payload: resData.data.signIn,
   });
 };
 
