@@ -15,12 +15,13 @@ export const createPostQuery = ( userId, postTitle, postContent, tagsValue ) => 
 
 export const fetchAllPostsQuery = JSON.stringify({
     query: 
-    `query{fetchAllPosts {
-        _id,
-        title,
-        content,
-        tags,
-        createdAt
+    `query {
+        fetchAllPosts {
+            _id,
+            title,
+            content,
+            tags,
+            createdAt
       }
     }`
 });
