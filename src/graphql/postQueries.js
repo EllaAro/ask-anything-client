@@ -1,21 +1,20 @@
-export const createPostQuery = ( userId, postTitle, postContent, tagsValue ) => JSON.stringify({
-    query: 
-    `mutation {
+export const createPostQuery = (userId, postTitle, postContent, tagsValue) =>
+  JSON.stringify({
+    query: `mutation {
         createPost(postInput: {
                 userId: "${userId}",
                 title: "${postTitle}", 
                 content:"${postContent}", 
-                tags:[${tagsValue}]
+                tags:[${tagsValue}],
             }),
             {
                 _id
             }
-    }`
-});
+    }`,
+  });
 
 export const fetchAllPostsQuery = JSON.stringify({
-    query: 
-    `query {
+  query: `query {
         fetchAllPosts {
             _id,
             title,
@@ -23,5 +22,5 @@ export const fetchAllPostsQuery = JSON.stringify({
             tags,
             createdAt
       }
-    }`
+    }`,
 });

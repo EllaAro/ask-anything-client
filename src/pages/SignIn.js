@@ -1,49 +1,49 @@
-import React , { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { signIn } from '../redux/signin';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import SignForm from '../components/SignForm';
-import { helpTextEmailMessageForSignIn,
-         isEmailValid,
-         isPasswordEmpty,
-        } from '../utils/errorHandlers/inputErrorHandler';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signIn } from "../redux/signin";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import SignForm from "../components/SignForm";
+import {
+  helpTextEmailMessageForSignIn,
+  isEmailValid,
+  isPasswordEmpty,
+} from "../utils/errorHandlers/inputErrorHandler";
 
 const SignIn = () => {
-
-  const initialInput = { email: '' , password: '' };
-  const [ inputDetails, setInputDetails ] = useState(initialInput);
+  const initialInput = { email: "", password: "" };
+  const [inputDetails, setInputDetails] = useState(initialInput);
   const { email, password } = inputDetails;
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setInputDetails(prevSignUpDetails => {
+    setInputDetails((prevSignUpDetails) => {
       return {
         ...prevSignUpDetails,
-        [name] : value
-      }
-    })
-  }
+        [name]: value,
+      };
+    });
+  };
 
   const isInputValid = () => isEmailValid(email) && !isPasswordEmpty(password);
 
   const handleSignInButton = () => {
-    if (isInputValid()) dispatch(signIn({ password, email }))
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-
-  }
+    if (isInputValid())
+      dispatch(signIn({ password, email }))
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+  };
 
   return (
     <SignForm
-      title='Sign In'
+      title="Sign In"
       buttonDisable={!isInputValid()}
       handleButtonClick={handleSignInButton}
     >
       <TextField
-        error={ email && !isEmailValid(email)}
+        error={email && !isEmailValid(email)}
         helperText={helpTextEmailMessageForSignIn(email)}
         margin="normal"
         required
@@ -68,13 +68,13 @@ const SignIn = () => {
       />
       <Grid container>
         <Grid item>
-          <Link href='./sign-up' variant="body2">
+          <Link href="./sign-up" variant="body2">
             {"Don't have an account? Sign Up"}
           </Link>
         </Grid>
       </Grid>
     </SignForm>
-    );
-  };
+  );
+};
 
 export default SignIn;

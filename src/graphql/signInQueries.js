@@ -1,6 +1,6 @@
-export const signInQuery = ( password, email ) => JSON.stringify({
-    query: 
-    `query {
+export const signInQuery = (password, email) =>
+  JSON.stringify({
+    query: `query {
         signIn(signinInput: {
             email: "${email}",
             password: "${password}",
@@ -9,6 +9,5 @@ export const signInQuery = ( password, email ) => JSON.stringify({
             userId,
             token,
         }
-    }`
-});
-
+    }`,
+  });

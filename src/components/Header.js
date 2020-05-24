@@ -1,96 +1,96 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { Link } from 'react-router-dom';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MailIcon from "@material-ui/icons/Mail";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import { Link } from "react-router-dom";
 
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    grow: {
-      flexGrow: 1,
+  grow: {
+    flexGrow: 1,
+  },
+  title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
-    title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-      cursor: 'pointer',
-      color: 'white',
-      textDecoration: 'none',
+    cursor: "pointer",
+    color: "white",
+    textDecoration: "none",
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100/%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100/%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
     },
-    searchIcon: {
-      padding: theme.spacing(0, 2),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "30ch",
     },
-    inputRoot: {
-      color: 'inherit',
+  },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
     },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '30ch',
-      },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
     },
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
-      },
-    },
-    sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-    },
-    AppBarStyle: {
-      fontFamily: 'Geneva Tahoma, Verdana, sans-serif',
-    },
-    accountDetails: {
-      color: 'black',
-      textDecoration: 'none',
-    },
-    postButton: {
-      color: 'white',
-      fontWeight: 'bold',
-      textDecoration: 'none',
-      },
-  }));
+  },
+  AppBarStyle: {
+    fontFamily: "Geneva Tahoma, Verdana, sans-serif",
+  },
+  accountDetails: {
+    color: "black",
+    textDecoration: "none",
+  },
+  postButton: {
+    color: "white",
+    fontWeight: "bold",
+    textDecoration: "none",
+  },
+}));
 
 const Header = () => {
   const classes = useStyles();
@@ -117,38 +117,42 @@ const Header = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        <MenuItem onClick={handleMenuClose}> 
-          <Link exact to="/account/profile" className={classes.accountDetails}>
-              Profile
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}> 
-          <Link exact to="/account/private-settings" className={classes.accountDetails}>
-            Private Settings
-          </Link>
-        </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link exact to="/account/profile" className={classes.accountDetails}>
+          Profile
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          exact
+          to="/account/private-settings"
+          className={classes.accountDetails}
+        >
+          Private Settings
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
@@ -186,8 +190,8 @@ const Header = () => {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.AppBarStyle}>
         <Toolbar>
-          <Link exact to='/' className={classes.title}>
-            <Typography  variant="header" noWrap style={{fontWeight: 'bold'}}>
+          <Link exact to="/" className={classes.title}>
+            <Typography variant="header" noWrap style={{ fontWeight: "bold" }}>
               AskAnything
             </Typography>
           </Link>
@@ -201,16 +205,16 @@ const Header = () => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
             />
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          <Button >
-            <Link exact to='/posts/add-a-post' className={classes.postButton} >
-              Add A Post
-            </Link>
-          </Button>
+            <Button>
+              <Link exact to="/posts/add-a-post" className={classes.postButton}>
+                Add A Post
+              </Link>
+            </Button>
             <IconButton aria-label="show new mails" color="inherit">
               <Badge badgeContent={1} color="secondary">
                 <MailIcon />
@@ -249,6 +253,6 @@ const Header = () => {
       {renderMenu}
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

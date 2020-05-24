@@ -1,6 +1,6 @@
-export const signUpQuery = ( firstName, lastName, password, email ) => JSON.stringify({
-    query: 
-    `mutation {
+export const signUpQuery = (firstName, lastName, password, email) =>
+  JSON.stringify({
+    query: `mutation {
         createUser(userInput: {
             firstName:"${firstName}", 
             lastName:"${lastName}",
@@ -10,5 +10,5 @@ export const signUpQuery = ( firstName, lastName, password, email ) => JSON.stri
         {
             _id
         }
-    }`
-});
+    }`,
+  });

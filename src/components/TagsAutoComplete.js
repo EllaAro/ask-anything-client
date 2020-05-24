@@ -1,10 +1,14 @@
-import React from 'react';
-import Chip from '@material-ui/core/Chip';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import React from "react";
+import Chip from "@material-ui/core/Chip";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const TagsAutoComplete = ({categories, fixedOptions, value, handleChange}) => {
-
+const TagsAutoComplete = ({
+  categories,
+  fixedOptions,
+  value,
+  handleChange,
+}) => {
   return (
     <Autocomplete
       multiple
@@ -23,11 +27,15 @@ const TagsAutoComplete = ({categories, fixedOptions, value, handleChange}) => {
       }
       fullWidth
       renderInput={(params) => (
-        <TextField {...params} label="Tags" variant="outlined" placeholder="Categories" />
+        <TextField
+          {...params}
+          label="Tags"
+          variant="outlined"
+          placeholder="Categories"
+        />
       )}
     />
   );
-}
+};
 
-export default TagsAutoComplete
-
+export default TagsAutoComplete;

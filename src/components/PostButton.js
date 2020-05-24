@@ -1,36 +1,36 @@
-import React from 'react'
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    margin: {
-        marginTop: '1em',
-        marginBottom: '2em',
-        '&:hover': {
-            backgroundColor: '##ea80fc',
-            color: '#FFF'
-        }
+  margin: {
+    marginTop: "1em",
+    marginBottom: "2em",
+    "&:hover": {
+      backgroundColor: "##ea80fc",
+      color: "#FFF",
     },
-  }));
+  },
+}));
 
-const PostButton = ({disabled,buttonName,handleSubmit}) => {
-    const classes = useStyles();
-    
-    return (
-        <div>
-            <Button 
-                disabled={disabled}
-                variant='contained' 
-                color='primary'
-                size='medium'
-                className={classes.margin}
-                type='submit'
-                onClick={handleSubmit}
-            >
-                {buttonName}
-            </Button>
-        </div>
-    )
-}
+const PostButton = ({ disabled, buttonName, handleSubmit }) => {
+  const classes = useStyles();
 
-export default PostButton
+  return (
+    <div>
+      <Button
+        disabled={disabled}
+        variant="contained"
+        color="primary"
+        size="medium"
+        className={classes.margin}
+        type="submit"
+        onClick={handleSubmit}
+      >
+        {buttonName}
+      </Button>
+    </div>
+  );
+};
+
+export default PostButton;
