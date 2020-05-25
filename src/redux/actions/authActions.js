@@ -1,6 +1,12 @@
-import { CREATE_USER, SIGN_IN, LOGOUT_SUCCESS } from "./types";
-import { signUpQuery } from "../../graphql/signUpQueries";
-import { signInQuery } from "../../graphql/signInQueries";
+import {
+  CREATE_USER,
+  SIGN_IN,
+  LOGOUT_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_FAIL,
+  AUTH_ERROR,
+} from "./types";
+import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
 export const signIn = ({ password, email }) => async (dispatch) => {
   const res = await fetch("http://localhost:8080/graphql", {
@@ -12,10 +18,13 @@ export const signIn = ({ password, email }) => async (dispatch) => {
   });
   const resData = await res.json();
   if (resData.errors && resData.errors[0].status === 422)
-    throw new Error(
-      `Validation has failed. Make sure that you've entered the right details!`
-    );
-  else if (resData.errors) throw new Error(`User validation has failed.`);
+    return dispatch({
+      type: AUTH_ERROR,
+    });
+  else if (resData.errors)
+    return dispatch({
+      type: LOGIN_FAIL,
+    });
 
   return dispatch({
     type: SIGN_IN,
@@ -34,10 +43,13 @@ export const createUser = ({ firstName, lastName, email, password }) => {
     });
     const resData = await res.json();
     if (resData.errors && resData.errors[0].status === 422)
-      throw new Error(
-        `Validation has failed. Make sure the email address isn't used yet!`
-      );
-    if (resData.errors) throw new Error(`User creation has failed`);
+      return dispatch({
+        type: AUTH_ERROR,
+      });
+    else if (resData.errors)
+      return dispatch({
+        type: REGISTER_FAIL,
+      });
     return dispatch({
       type: CREATE_USER,
     });
