@@ -1,5 +1,16 @@
-import { expiryDate, setLocalStorageAuth } from "../../utils/consts/authConsts";
-import { SIGN_IN, CREATE_USER } from "../actions/types";
+import {
+  expiryDate,
+  setLocalStorageAuth,
+  emptyLocalStorage,
+} from "../../utils/consts/authConsts";
+import {
+  SIGN_IN,
+  CREATE_USER,
+  LOGOUT_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_FAIL,
+  AUTH_ERROR,
+} from "../actions/types";
 
 const initialState = {
   userId: localStorage.getItem("userId"),
@@ -19,6 +30,16 @@ export default function authReducer(state = initialState, action) {
         userId: action.payload.userId,
         token: action.payload.token,
         isAuth: true,
+      };
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case REGISTER_FAIL:
+    case LOGOUT_SUCCESS:
+      emptyLocalStorage();
+      return {
+        userId: null,
+        token: null,
+        isAuth: false,
       };
     case CREATE_USER:
     default:

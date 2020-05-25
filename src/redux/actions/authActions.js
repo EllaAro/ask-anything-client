@@ -1,4 +1,4 @@
-import { CREATE_USER, SIGN_IN } from "./types";
+import { CREATE_USER, SIGN_IN, LOGOUT_SUCCESS } from "./types";
 import { signUpQuery } from "../../graphql/signUpQueries";
 import { signInQuery } from "../../graphql/signInQueries";
 
@@ -41,5 +41,11 @@ export const createUser = ({ firstName, lastName, email, password }) => {
     return dispatch({
       type: CREATE_USER,
     });
+  };
+};
+
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS,
   };
 };
