@@ -7,7 +7,7 @@ import PostButton from "../components/PostButton";
 import TagsAutoComplete from "../components/TagsAutoComplete";
 import { useStylesPaper } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../redux/reducers/posts";
+import { createPost } from "../redux/actions/postsActions";
 import {
   MAX_VALID_CONTENT_LENGTH,
   MIN_VALID_TITLE_LENGTH,

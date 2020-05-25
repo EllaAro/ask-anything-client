@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts } from "../redux/reducers/posts";
+import { fetchAllPosts } from "../redux/actions/postsActions";
 import { Paper } from "@material-ui/core";
 import { useStylesPaper } from "../theme";
 import Container from "@material-ui/core/Container";
