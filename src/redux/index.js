@@ -7,7 +7,7 @@ import authReducer from "./reducers/auth";
 const rootReducer = combineReducers({
   privateSettings: privateSettingsReducer,
   posts: postsReducer,
-  signin: authReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

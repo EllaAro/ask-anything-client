@@ -11,7 +11,7 @@ const logoutHandler = () => {
 };
 
 const App = () => {
-  const { userId, token, isAuth } = useSelector((state) => state.signin);
+  const { isAuth } = useSelector((state) => state.auth);
 
   useEffect(() => {
     // if (!token || !expiryDate) setIsLoggedIn(false);

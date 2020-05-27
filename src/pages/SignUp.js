@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createUser } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
@@ -23,6 +23,7 @@ const SignUp = () => {
   const [disableSignInButton, setDisableSignInButton] = useState(false);
   const { firstName, lastName, email, password } = signUpDetails;
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const history = useHistory();
 
   const handleInputChange = (event) => {
@@ -99,7 +100,13 @@ const SignUp = () => {
     if (isInputValid()) {
       setDisableSignInButton(true);
       dispatch(createUser({ firstName, lastName, email, password }))
-        .then((res) => history.push("/"))
+        .then((res) => {
+          console.log(auth);
+          // if (res.errorMessage) {
+          //   setDisableSignInButton(false);
+          //   setIsEmailTaken(true);
+          // } else history.push("/");
+        })
         .catch((err) => {
           setDisableSignInButton(false);
           setIsEmailTaken(true);

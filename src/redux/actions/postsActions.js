@@ -21,7 +21,7 @@ export const createPost = ({ postTitle, postContent, tagsValue, token }) => {
     if (resData.errors && resData.errors[0].status === 401)
       throw new Error(`Posting a post has failed, invalid input!`);
     else if (resData.errors) throw new Error(`Post creation has failed`);
-    return dispatch({
+    dispatch({
       type: CREATE_POST,
       post: resData.data.createPost,
     });
@@ -39,7 +39,7 @@ export const fetchAllPosts = () => {
         body: fetchAllPostsQuery,
       });
       const resData = await res.json();
-      return dispatch({
+      dispatch({
         type: FETCH_ALL_POSTS,
         posts: resData.data.fetchAllPosts.posts,
       });

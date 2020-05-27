@@ -16,6 +16,8 @@ const initialState = {
   userId: localStorage.getItem("userId"),
   token: localStorage.getItem("token"),
   isAuth: localStorage.getItem("isAuth"),
+  isLoading: false,
+  errorMessage: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -30,6 +32,7 @@ export default function authReducer(state = initialState, action) {
         userId: action.payload.userId,
         token: action.payload.token,
         isAuth: true,
+        isLoading: false,
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
@@ -40,6 +43,8 @@ export default function authReducer(state = initialState, action) {
         userId: null,
         token: null,
         isAuth: false,
+        isLoading: false,
+        errorMessage: action.errorMessage,
       };
     case CREATE_USER:
     default:

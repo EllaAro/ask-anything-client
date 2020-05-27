@@ -17,19 +17,16 @@ export const signIn = ({ password, email }) => async (dispatch) => {
     body: signInQuery(password, email),
   });
   const resData = await res.json();
-  if (resData.errors && resData.errors[0].status === 422)
-    return dispatch({
+  if (resData.errors)
+    dispatch({
       type: AUTH_ERROR,
+      errorMessage: "error",
     });
-  else if (resData.errors)
-    return dispatch({
-      type: LOGIN_FAIL,
+  else
+    dispatch({
+      type: SIGN_IN,
+      payload: resData.data.signIn,
     });
-
-  return dispatch({
-    type: SIGN_IN,
-    payload: resData.data.signIn,
-  });
 };
 
 export const createUser = ({ firstName, lastName, email, password }) => {
@@ -42,17 +39,15 @@ export const createUser = ({ firstName, lastName, email, password }) => {
       body: signUpQuery(firstName, lastName, password, email),
     });
     const resData = await res.json();
-    if (resData.errors && resData.errors[0].status === 422)
-      return dispatch({
+    if (resData.errors)
+      dispatch({
         type: AUTH_ERROR,
+        errorMessage: "error",
       });
-    else if (resData.errors)
-      return dispatch({
-        type: REGISTER_FAIL,
+    else
+      dispatch({
+        type: CREATE_USER,
       });
-    return dispatch({
-      type: CREATE_USER,
-    });
   };
 };
 
