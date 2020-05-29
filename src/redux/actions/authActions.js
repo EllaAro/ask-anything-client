@@ -18,18 +18,18 @@ export const signIn = ({ password, email }) => async (dispatch) => {
   dispatch({
     type: IS_AUTH_LOADING,
   });
-  const res = await fetch("http://localhost:8080/graphql", {
+  let res;
+  res = await fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: signInQuery(password, email),
-  });
+  }).catch((err) => console.log("lskdjfkjsdkl"));
   const resData = await res.json();
   if (resData.errors)
     dispatch({
       type: AUTH_ERROR,
-      errorMessage: "error",
     });
   else {
     setLocalStorageAuth(resData.data.signIn.token, expiryDate);
