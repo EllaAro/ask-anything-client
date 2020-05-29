@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 import theme from "./theme";
-import store from "./redux";
+import store from "./redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(

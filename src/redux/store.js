@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import privateSettingsReducer from "./reducers/privateSettings";
 import postsReducer from "./reducers/posts";
@@ -10,6 +11,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 store.subscribe(() => {});
 export default store;
