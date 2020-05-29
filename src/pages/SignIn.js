@@ -30,10 +30,7 @@ const SignIn = () => {
   const isInputValid = () => isEmailValid(email) && !isPasswordEmpty(password);
 
   const handleSignInButton = () => {
-    if (isInputValid())
-      dispatch(signIn({ password, email }))
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+    if (isInputValid()) dispatch(signIn({ password, email }));
   };
 
   return (

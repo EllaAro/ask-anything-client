@@ -12,45 +12,53 @@ import {
   setLocalStorageAuth,
   emptyLocalStorage,
 } from "../../utils/consts/authConsts";
+import { showNotification } from "./notificationActions";
 import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
-export const signIn = ({ password, email }) => async (dispatch) => {
+export const signIn = ({ password, email }) => (dispatch) => {
   dispatch({
     type: IS_AUTH_LOADING,
   });
-  let res;
-  res = await fetch("http://localhost:8080/graphql", {
+  fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: signInQuery(password, email),
-  }).catch((err) => console.log("lskdjfkjsdkl"));
-  const resData = await res.json();
-  if (resData.errors)
-    dispatch({
-      type: AUTH_ERROR,
+  })
+    .then((res) => res.json())
+    .then((resData) => {
+      if (resData.errors) {
+        dispatch(showNotification("User authentication has failed!"));
+        dispatch({
+          type: AUTH_ERROR,
+        });
+      } else {
+        setLocalStorageAuth(resData.data.signIn.token, expiryDate);
+        dispatch({
+          type: SIGN_IN,
+          payload: resData.data.signIn,
+        });
+      }
+    })
+    .catch((err) => {
+      dispatch(showNotification("User authentication has failed!"));
+      dispatch({
+        type: AUTH_ERROR,
+      });
     });
-  else {
-    setLocalStorageAuth(resData.data.signIn.token, expiryDate);
-    dispatch({
-      type: SIGN_IN,
-      payload: resData.data.signIn,
-    });
-  }
 };
 
-export const createUser = ({ firstName, lastName, email, password }) => {
-  return async (dispatch) => {
-    const res = await fetch("http://localhost:8080/graphql", {
+export const createUser = ({ firstName, lastName, email, password }) => (dispatch) => {
+    fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: signUpQuery(firstName, lastName, password, email),
-    });
-    const resData = await res.json();
-    if (resData.errors)
+    }).then(res => res.json()
+    .then(resData =>{
+      if (resData.errors)
       dispatch({
         type: AUTH_ERROR,
         errorMessage: "error",
@@ -59,8 +67,12 @@ export const createUser = ({ firstName, lastName, email, password }) => {
       dispatch({
         type: CREATE_USER,
       });
+    })
+    .catch( err => {
+      
+    })
   };
-};
+
 
 export const logout = () => {
   return {

@@ -8,3 +8,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const IS_AUTH_LOADING = "IS_AUTH_LOADING";
 export const IS_POSTS_LOADING = "IS_POSTS_LOADING";
+export const UPDATE_NOTIFICATION = "UPDATE_NOTIFICATION";

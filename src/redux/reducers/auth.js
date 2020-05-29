@@ -13,7 +13,6 @@ const initialState = {
   isAuth: localStorage.getItem("isAuth"),
   expiryDate: localStorage.getItem("expiryDate"),
   isLoading: false,
-  // errorMessage: null,
 };
 
 export default function authReducer(state = initialState, action) {
