@@ -13,7 +13,7 @@ const Posts = () => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const fetchedPosts = useSelector((state) => state.posts);
+  const fetchedPosts = useSelector((state) => state.posts.posts);
 
   const posts = fetchedPosts.map((post) => <Post postData={post} />);
 

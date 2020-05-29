@@ -6,4 +6,5 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const AUTH_ERROR = "AUTH_ERROR";
-export const IS_LOADING = "IS_LOADING";
+export const IS_AUTH_LOADING = "IS_AUTH_LOADING";
+export const IS_POSTS_LOADING = "IS_POSTS_LOADING";
