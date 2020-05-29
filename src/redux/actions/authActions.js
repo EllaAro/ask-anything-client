@@ -6,6 +6,11 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
 } from "./types";
+import {
+  expiryDate,
+  setLocalStorageAuth,
+  emptyLocalStorage,
+} from "../../utils/consts/authConsts";
 import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
 export const signIn = ({ password, email }) => async (dispatch) => {
@@ -22,11 +27,17 @@ export const signIn = ({ password, email }) => async (dispatch) => {
       type: AUTH_ERROR,
       errorMessage: "error",
     });
-  else
+  else {
+    setLocalStorageAuth(
+      resData.data.signIn.token,
+      resData.data.signIn.userId,
+      expiryDate
+    );
     dispatch({
       type: SIGN_IN,
       payload: resData.data.signIn,
     });
+  }
 };
 
 export const createUser = ({ firstName, lastName, email, password }) => {
