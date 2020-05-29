@@ -32,7 +32,7 @@ const NewPost = () => {
   const [tagsValue, setTagsValue] = useState([]);
   const [postButton, setPostButton] = useState("Post");
   const [enablePost, setEnablePost] = useState(false);
-  const { userId, token } = useSelector((state) => state.signin);
+  const { token } = useSelector((state) => state.auth);
 
   const handlePostValuesChange = (event) => {
     const { name, value } = event.target;
@@ -55,7 +55,7 @@ const NewPost = () => {
   const handleSubmitPost = () => {
     setPostButton("Sending");
     setEnablePost(true);
-    dispatch(createPost({ postTitle, postContent, tagsValue, userId, token }))
+    dispatch(createPost({ postTitle, postContent, tagsValue, token }))
       .then((res) => {
         resetValues();
       })

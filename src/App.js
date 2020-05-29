@@ -4,12 +4,6 @@ import { Grid } from "@material-ui/core";
 import NotLoggedInPages from "./pages/NotLoggedInPages";
 import LoggedInPages from "./pages/LoggedInPages";
 
-const logoutHandler = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expiryDate");
-  localStorage.removeItem("userId");
-};
-
 const App = () => {
   const { isAuth } = useSelector((state) => state.auth);
 

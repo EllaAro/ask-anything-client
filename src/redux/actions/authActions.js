@@ -5,6 +5,7 @@ import {
   REGISTER_FAIL,
   LOGIN_FAIL,
   AUTH_ERROR,
+  IS_AUTH_LOADING,
 } from "./types";
 import {
   expiryDate,
@@ -14,6 +15,9 @@ import {
 import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
 export const signIn = ({ password, email }) => async (dispatch) => {
+  dispatch({
+    type: IS_AUTH_LOADING,
+  });
   const res = await fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -28,11 +32,7 @@ export const signIn = ({ password, email }) => async (dispatch) => {
       errorMessage: "error",
     });
   else {
-    setLocalStorageAuth(
-      resData.data.signIn.token,
-      resData.data.signIn.userId,
-      expiryDate
-    );
+    setLocalStorageAuth(resData.data.signIn.token, expiryDate);
     dispatch({
       type: SIGN_IN,
       payload: resData.data.signIn,

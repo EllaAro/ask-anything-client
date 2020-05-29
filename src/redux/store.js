@@ -15,5 +15,5 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-store.subscribe(() => {});
+
 export default store;
