@@ -10,7 +10,7 @@ export const setLocalStorageAuth = (token, expiryDate) => {
 };
 
 export const emptyLocalStorage = () => {
-  localStorage.setItem("token", null);
-  localStorage.setItem("expiryDate", null);
-  localStorage.setItem("isAuth", false);
+  localStorage.removeItem("token");
+  localStorage.removeItem("expiryDate");
+  localStorage.removeItem("isAuth");
 };
