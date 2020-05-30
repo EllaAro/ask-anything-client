@@ -3,7 +3,6 @@ import {
   SIGN_IN,
   LOGOUT_SUCCESS,
   REGISTER_FAIL,
-  LOGIN_FAIL,
   AUTH_ERROR,
   IS_AUTH_LOADING,
 } from "./types";
@@ -46,35 +45,38 @@ export const signIn = ({ password, email }) => (dispatch) => {
       dispatch({
         type: AUTH_ERROR,
       });
+      emptyLocalStorage();
     });
 };
 
-export const createUser = ({ firstName, lastName, email, password }) => (dispatch) => {
-    fetch("http://localhost:8080/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: signUpQuery(firstName, lastName, password, email),
-    }).then(res => res.json()
-    .then(resData =>{
-      if (resData.errors)
-      dispatch({
-        type: AUTH_ERROR,
-        errorMessage: "error",
-      });
-    else
-      dispatch({
-        type: CREATE_USER,
-      });
+export const createUser = ({ firstName, lastName, email, password }) => (
+  dispatch
+) => {
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: signUpQuery(firstName, lastName, password, email),
+  })
+    .then((res) => res.json())
+    .then((resData) => {
+      if (resData.errors) {
+        dispatch(showNotification("User registration has failed!"));
+        dispatch({ type: REGISTER_FAIL });
+      } else
+        dispatch({
+          type: CREATE_USER,
+        });
     })
-    .catch( err => {
-      
-    })
-  };
-
+    .catch((err) => {
+      dispatch(showNotification("User registration has failed!"));
+      dispatch({ type: REGISTER_FAIL });
+    });
+};
 
 export const logout = () => {
+  emptyLocalStorage();
   return {
     type: LOGOUT_SUCCESS,
   };
