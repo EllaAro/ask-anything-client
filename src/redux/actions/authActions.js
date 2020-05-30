@@ -5,12 +5,14 @@ import {
   REGISTER_FAIL,
   AUTH_ERROR,
   IS_AUTH_LOADING,
+  REGISTER_LOADING,
 } from "./types";
 import {
   expiryDate,
   setLocalStorageAuth,
   emptyLocalStorage,
 } from "../../utils/consts/authConsts";
+import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
 import { showNotification } from "./notificationActions";
 import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
@@ -28,7 +30,7 @@ export const signIn = ({ password, email }) => (dispatch) => {
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
-        dispatch(showNotification("User authentication has failed!"));
+        dispatch(showNotification("User authentication has failed!", ERROR));
         dispatch({
           type: AUTH_ERROR,
         });
@@ -41,7 +43,7 @@ export const signIn = ({ password, email }) => (dispatch) => {
       }
     })
     .catch((err) => {
-      dispatch(showNotification("User authentication has failed!"));
+      dispatch(showNotification("User authentication has failed!", ERROR));
       dispatch({
         type: AUTH_ERROR,
       });
@@ -52,6 +54,7 @@ export const signIn = ({ password, email }) => (dispatch) => {
 export const createUser = ({ firstName, lastName, email, password }) => (
   dispatch
 ) => {
+  dispatch({ type: REGISTER_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -62,7 +65,12 @@ export const createUser = ({ firstName, lastName, email, password }) => (
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
-        dispatch(showNotification("User registration has failed!"));
+        dispatch(
+          showNotification(
+            "User registration has failed. The email you have entered is taken",
+            ERROR
+          )
+        );
         dispatch({ type: REGISTER_FAIL });
       } else
         dispatch({
@@ -70,7 +78,7 @@ export const createUser = ({ firstName, lastName, email, password }) => (
         });
     })
     .catch((err) => {
-      dispatch(showNotification("User registration has failed!"));
+      dispatch(showNotification("User registration has failed!", ERROR));
       dispatch({ type: REGISTER_FAIL });
     });
 };

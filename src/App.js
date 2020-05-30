@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import NotLoggedInPages from "./pages/NotLoggedInPages";
 import LoggedInPages from "./pages/LoggedInPages";
-import NotificationBar from "./components/NotificationBar";
+import NotificationToast from "./components/NotificationToast";
 
 const App = () => {
   const { isAuth } = useSelector((state) => state.auth);
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <NotificationBar />
+      <NotificationToast />
       <Grid container direction="column">
         {isAuth ? <LoggedInPages /> : <NotLoggedInPages />}
       </Grid>

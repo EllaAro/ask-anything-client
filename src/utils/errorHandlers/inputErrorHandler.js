@@ -33,12 +33,9 @@ export const isEmailValid = (email) =>
     email
   );
 
-export const helpTextEmailMessageForSignUp = (email, isEmailTaken) => {
+export const helpTextEmailMessageForSignUp = (email) => {
   if (!email) return `A valid email is of the form 'example@email.com'.`;
-  if (email && !isEmailTaken)
-    return isEmailValid(email) ? "" : "invalid email!";
-  else if (email && isEmailTaken)
-    return "This email is taken, please choose a different one!";
+  return email && isEmailValid(email) ? "" : "invalid email!";
 };
 
 export const helpTextEmailMessageForSignIn = (email) =>

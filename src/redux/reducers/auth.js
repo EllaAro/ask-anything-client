@@ -6,6 +6,7 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
   IS_AUTH_LOADING,
+  REGISTER_LOADING,
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +18,11 @@ const initialState = {
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
+    case REGISTER_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case IS_AUTH_LOADING:
       return {
         ...state,
@@ -31,6 +37,11 @@ export default function authReducer(state = initialState, action) {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case REGISTER_FAIL:
+      return {
+        token: null,
+        isAuth: false,
+        isLoading: false,
+      };
     case LOGOUT_SUCCESS:
       return {
         token: null,
@@ -38,6 +49,10 @@ export default function authReducer(state = initialState, action) {
         isLoading: false,
       };
     case CREATE_USER:
+      return {
+        ...state,
+        isLoading: false,
+      };
     default:
       return state;
   }

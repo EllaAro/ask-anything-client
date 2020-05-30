@@ -19,11 +19,9 @@ import {
 
 const SignUp = () => {
   const [signUpDetails, setSignUpDetails] = useState(initSignUpValues);
-  const [isEmailTaken, setIsEmailTaken] = useState(false);
-  const [disableSignInButton, setDisableSignInButton] = useState(false);
   const { firstName, lastName, email, password } = signUpDetails;
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.auth);
   const history = useHistory();
 
   const handleInputChange = (event) => {
@@ -75,8 +73,8 @@ const SignUp = () => {
 
   const emailField = () => (
     <TextField
-      error={(email && !isEmailValid(email)) || isEmailTaken}
-      helperText={helpTextEmailMessageForSignUp(email, isEmailTaken)}
+      error={email && !isEmailValid(email)}
+      helperText={helpTextEmailMessageForSignUp(email)}
       margin="normal"
       required
       fullWidth
@@ -94,30 +92,21 @@ const SignUp = () => {
     isPasswordValid(password, VALID_PASSWORD_LENGTH) &&
     isEmailValid(email);
 
-  const enableSignUpButton = () => !isInputValid();
+  const enableSignUpButton = () => {
+    console.log(isLoading);
+    return !isInputValid() || isLoading;
+  };
 
   const handleSignUpButton = () => {
     if (isInputValid()) {
-      setDisableSignInButton(true);
-      dispatch(createUser({ firstName, lastName, email, password }))
-        .then((res) => {
-          console.log(auth);
-          // if (res.errorMessage) {
-          //   setDisableSignInButton(false);
-          //   setIsEmailTaken(true);
-          // } else history.push("/");
-        })
-        .catch((err) => {
-          setDisableSignInButton(false);
-          setIsEmailTaken(true);
-        });
+      dispatch(createUser({ firstName, lastName, email, password }));
     }
   };
 
   return (
     <SignForm
       title="Sign Up"
-      buttonDisable={disableSignInButton || enableSignUpButton()}
+      buttonDisable={enableSignUpButton()}
       handleButtonClick={handleSignUpButton}
     >
       {inputFields()}
