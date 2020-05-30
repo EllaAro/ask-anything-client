@@ -31,7 +31,7 @@ const NotificationToast = () => {
     setOpen(false);
   };
 
-  return isVisible ? (
+  const notificationsToast = () => (
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={type}>
@@ -39,6 +39,8 @@ const NotificationToast = () => {
         </Alert>
       </Snackbar>
     </div>
-  ) : null;
+  );
+
+  return isVisible ? notificationsToast() : null;
 };
 export default NotificationToast;
