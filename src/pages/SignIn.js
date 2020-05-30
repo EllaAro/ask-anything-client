@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
@@ -16,6 +16,7 @@ const SignIn = () => {
   const [inputDetails, setInputDetails] = useState(initialInput);
   const { email, password } = inputDetails;
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,7 +37,7 @@ const SignIn = () => {
   return (
     <SignForm
       title="Sign In"
-      buttonDisable={!isInputValid()}
+      buttonDisable={!isInputValid() || isLoading}
       handleButtonClick={handleSignInButton}
     >
       <TextField

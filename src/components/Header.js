@@ -14,6 +14,8 @@ import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/actions/authActions";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
 
@@ -96,6 +98,7 @@ const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -142,6 +145,7 @@ const Header = () => {
           Private Settings
         </Link>
       </MenuItem>
+      <MenuItem onClick={() => dispatch(logout())}>Log Out</MenuItem>
     </Menu>
   );
 

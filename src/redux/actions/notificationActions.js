@@ -10,3 +10,14 @@ export const showNotification = (message, notificationType) => (dispatch) => {
     },
   });
 };
+
+export const hideNotification = () => (dispatch) => {
+  dispatch({
+    type: UPDATE_NOTIFICATION,
+    payload: {
+      message: null,
+      notificationType: null,
+      isVisible: false,
+    },
+  });
+};

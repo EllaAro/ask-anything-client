@@ -67,15 +67,17 @@ export const createUser = ({ firstName, lastName, email, password }) => (
       if (resData.errors) {
         dispatch(
           showNotification(
-            "User registration has failed. The email you have entered is taken",
+            "User registration has failed. The email you have entered is taken.",
             ERROR
           )
         );
         dispatch({ type: REGISTER_FAIL });
-      } else
+      } else {
         dispatch({
           type: CREATE_USER,
         });
+        dispatch(showNotification("User registration has succeeded!", SUCCESS));
+      }
     })
     .catch((err) => {
       dispatch(showNotification("User registration has failed!", ERROR));

@@ -22,7 +22,6 @@ const SignUp = () => {
   const { firstName, lastName, email, password } = signUpDetails;
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
-  const history = useHistory();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
