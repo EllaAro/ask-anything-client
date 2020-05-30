@@ -1,10 +1,6 @@
 import { UPDATE_NOTIFICATION } from "./types";
 
-export const showNotification = (
-  message,
-  notificationType,
-  visibilityTime = 2000
-) => (dispatch) => {
+export const showNotification = (message, notificationType) => (dispatch) => {
   dispatch({
     type: UPDATE_NOTIFICATION,
     payload: {
@@ -13,11 +9,4 @@ export const showNotification = (
       isVisible: true,
     },
   });
-
-  setTimeout(() => {
-    dispatch({
-      type: UPDATE_NOTIFICATION,
-      payload: { message: null, notificationType: null, isVisible: false },
-    });
-  }, visibilityTime);
 };
