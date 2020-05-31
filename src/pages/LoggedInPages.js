@@ -7,6 +7,7 @@ import Main from "./Main";
 import NewPost from "./NewPost";
 import Header from "../components/Header";
 import { Grid } from "@material-ui/core";
+import ClippedDrawer from "../components/ClippedDrawer";
 
 const router = (
   <Switch>
@@ -31,10 +32,12 @@ const router = (
 
 const LoggedInPages = () => {
   return (
-    <div>
-      <Grid item>
+    <React.Fragment>
+      <Grid item style={{ display: "flex" }}>
         <Header />
+        <ClippedDrawer />
       </Grid>
+
       <Grid item container>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
@@ -42,7 +45,7 @@ const LoggedInPages = () => {
         </Grid>
         <Grid item xs={false} sm={2} />
       </Grid>
-    </div>
+    </React.Fragment>
   );
 };
 

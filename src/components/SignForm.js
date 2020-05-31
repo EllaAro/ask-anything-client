@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  // children: {
+  //   maxHeight: "350px",
+  //   overFlow: "auto",
+  // },
 }));
 
 const SignForm = ({ title, buttonDisable, handleButtonClick, children }) => {
@@ -41,7 +45,7 @@ const SignForm = ({ title, buttonDisable, handleButtonClick, children }) => {
         <Typography component="h1" variant="h5">
           {title}
         </Typography>
-        {children}
+        <div className={classes.children}>{children}</div>
         <Button
           type="submit"
           fullWidth

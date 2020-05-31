@@ -22,6 +22,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    zIndex: theme.zIndex.drawer + 1,
   },
   title: {
     display: "none",
@@ -192,7 +193,7 @@ const Header = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.AppBarStyle}>
+      <AppBar position="fixed" className={classes.AppBarStyle}>
         <Toolbar>
           <Link exact to="/" className={classes.title}>
             <Typography variant="header" noWrap style={{ fontWeight: "bold" }}>
