@@ -18,13 +18,13 @@ const Posts = () => {
   const posts = fetchedPosts.map((post) => <Post postData={post} />);
 
   return (
-    <Paper className={useStylesPaper().rootPaper} elevation={4}>
-      <Container>
-        <br />
-        {posts}
-        <br />
-      </Container>
-    </Paper>
+    <React.Fragment>
+      <br />
+      <br />
+      <br />
+      <br />
+      {posts}
+    </React.Fragment>
   );
 };
 

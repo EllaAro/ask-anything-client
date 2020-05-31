@@ -8,6 +8,13 @@ import NewPost from "./NewPost";
 import Header from "../components/Header";
 import { Grid } from "@material-ui/core";
 import ClippedDrawer from "../components/ClippedDrawer";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  content: {
+    position: "center",
+  },
+});
 
 const router = (
   <Switch>
@@ -31,14 +38,15 @@ const router = (
 );
 
 const LoggedInPages = () => {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <Grid item style={{ display: "flex" }}>
         <Header />
         <ClippedDrawer />
       </Grid>
-
-      <Grid item container>
+      <Grid item container className={classes.cotent}>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
           {router}
