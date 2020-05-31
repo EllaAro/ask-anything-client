@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../redux/actions/postsActions";
-import { Paper } from "@material-ui/core";
-import { useStylesPaper } from "../theme";
-import Container from "@material-ui/core/Container";
 import Post from "./Post";
 
 const Posts = () => {
@@ -17,15 +14,7 @@ const Posts = () => {
 
   const posts = fetchedPosts.map((post) => <Post postData={post} />);
 
-  return (
-    <React.Fragment>
-      <br />
-      <br />
-      <br />
-      <br />
-      {posts}
-    </React.Fragment>
-  );
+  return <div style={{ margin: "5em" }}>{posts}</div>;
 };
 
 export default Posts;

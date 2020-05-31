@@ -11,15 +11,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles({
   root: {
-    width: "75%",
+    width: "90%",
     margin: "0.5em",
-    display: "inline-block",
   },
   media: {
     height: 300,
   },
   bullet: {
-    // display: "inline-block",
     margin: "0 2px",
     transform: "scale(0.8)",
   },
