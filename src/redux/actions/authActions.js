@@ -43,7 +43,12 @@ export const signIn = ({ password, email }) => (dispatch) => {
       }
     })
     .catch((err) => {
-      dispatch(showNotification("User authentication has failed!", ERROR));
+      dispatch(
+        showNotification(
+          "User authentication has failed. Please try again later.",
+          ERROR
+        )
+      );
       dispatch({
         type: AUTH_ERROR,
       });
@@ -80,7 +85,12 @@ export const createUser = ({ firstName, lastName, email, password }) => (
       }
     })
     .catch((err) => {
-      dispatch(showNotification("User registration has failed!", ERROR));
+      dispatch(
+        showNotification(
+          "User registration has failed. Please try again later.",
+          ERROR
+        )
+      );
       dispatch({ type: REGISTER_FAIL });
     });
 };
