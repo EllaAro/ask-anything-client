@@ -12,9 +12,10 @@ export const useStylesPaper = makeStyles((theme) => ({
   rootPaper: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "1em",
+    marginTop: "5em",
     borderRadius: 3,
     textAlign: "center",
+    marginLeft: "50px",
   },
 }));
 

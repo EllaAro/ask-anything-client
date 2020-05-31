@@ -10,7 +10,7 @@ import WhatshotIcon from "@material-ui/icons/Whatshot";
 import PersonIcon from "@material-ui/icons/Person";
 import StarsIcon from "@material-ui/icons/Stars";
 
-const drawerWidth = 230;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
   root: {
