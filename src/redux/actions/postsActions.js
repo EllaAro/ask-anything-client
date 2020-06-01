@@ -1,5 +1,11 @@
 import { createPostQuery, fetchAllPostsQuery } from "../../graphql/postQueries";
-import { CREATE_POST, FETCH_ALL_POSTS } from "./types";
+import {
+  CREATE_POST,
+  FETCH_ALL_POSTS,
+  IS_POSTS_LOADING,
+  IS_POST_CREATE_LOADING,
+  CREATE_POST_ERROR,
+} from "./types";
 
 const fromArrToQlArr = (arr) => {
   let returnVal = ``;
@@ -7,8 +13,36 @@ const fromArrToQlArr = (arr) => {
   return returnVal;
 };
 
-export const createPost = ({ postTitle, postContent, tagsValue, token }) => {
+export const createPost = ({
+  postTitle,
+  postContent,
+  tagsValue,
+  postImage,
+  token,
+}) => {
   return async (dispatch) => {
+    dispatch({ type: IS_POST_CREATE_LOADING });
+
+    const formData = new FormData();
+    formData.append("image", postImage);
+
+    const resImg = await fetch(
+      "http://localhost:8080/api/file-upload/image-upload",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }
+    );
+
+    const resImgData = await resImg.json();
+    const imageUrl = resImgData.filePath;
+    console.log(imageUrl);
+
+    // add imageUrl into graphql query
+
     const res = await fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {

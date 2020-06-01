@@ -3,23 +3,21 @@ import { Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
+import ImageUpload from "../components/ImageUpload";
 import PostButton from "../components/PostButton";
 import TagsAutoComplete from "../components/TagsAutoComplete";
 import { useStylesPaper } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../redux/actions/postsActions";
+import { categories, initPostValues } from "../utils/consts/newPostConsts";
 import {
-  MAX_VALID_CONTENT_LENGTH,
-  MIN_VALID_TITLE_LENGTH,
-  MAX_VALID_TITLE_LENGTH,
-  MIN_VALID_CONTENT_LENGTH,
-  categories,
-  initPostValues,
-} from "../utils/consts/newPostConsts";
-import {
-  isTextLengthValid,
   isTagsLengthValid,
-  helpTextMessage,
+  isPostTitleValid,
+  isPostContentValid,
+  displayPostTitleError,
+  displayPostContentError,
+  postTitleTextHelper,
+  PostContentTextHelper,
 } from "../utils/errorHandlers/inputErrorHandler";
 
 const NewPost = () => {
@@ -28,7 +26,7 @@ const NewPost = () => {
   const fixedOptions = [];
 
   const [postValues, setPostValues] = useState(initPostValues);
-  const { postTitle, postContent } = postValues;
+  const { postTitle, postContent, postImage } = postValues;
   const [tagsValue, setTagsValue] = useState([]);
   const [postButton, setPostButton] = useState("Post");
   const [enablePost, setEnablePost] = useState(false);
@@ -52,10 +50,21 @@ const NewPost = () => {
     ]);
   };
 
+  const handleImageChange = (event) => {
+    setPostValues((prevPostValues) => {
+      return {
+        ...prevPostValues,
+        postImage: event.target.files[0],
+      };
+    });
+  };
+
   const handleSubmitPost = () => {
     setPostButton("Sending");
     setEnablePost(true);
-    dispatch(createPost({ postTitle, postContent, tagsValue, token }))
+    dispatch(
+      createPost({ postTitle, postContent, tagsValue, postImage, token })
+    )
       .then((res) => {
         resetValues();
       })
@@ -71,17 +80,10 @@ const NewPost = () => {
 
   const isSendButtonEnabled = () => {
     return (
-      isTextLengthValid(
-        MIN_VALID_TITLE_LENGTH,
-        MAX_VALID_TITLE_LENGTH,
-        postTitle
-      ) &&
-      isTextLengthValid(
-        MIN_VALID_CONTENT_LENGTH,
-        MAX_VALID_CONTENT_LENGTH,
-        postContent
-      ) &&
-      isTagsLengthValid(tagsValue)
+      isPostTitleValid(postTitle) &&
+      isPostContentValid(postContent) &&
+      isTagsLengthValid(tagsValue) &&
+      postImage
     );
   };
 
@@ -91,42 +93,18 @@ const NewPost = () => {
         <br />
         <Typography variant="h5">Create A New Post</Typography>
         <TextField
-          error={
-            postTitle &&
-            !isTextLengthValid(
-              MIN_VALID_TITLE_LENGTH,
-              MAX_VALID_TITLE_LENGTH,
-              postTitle
-            )
-          }
-          helperText={helpTextMessage(
-            MIN_VALID_TITLE_LENGTH,
-            MAX_VALID_TITLE_LENGTH,
-            postTitle,
-            "Title"
-          )}
+          error={displayPostTitleError(postTitle)}
+          helperText={postTitleTextHelper(postTitle)}
           fullWidth
           margin="normal"
           name="postTitle"
-          label="Post Name"
+          label="Post Title"
           value={postTitle}
           onChange={handlePostValuesChange}
         />
         <TextField
-          error={
-            postContent &&
-            !isTextLengthValid(
-              MIN_VALID_CONTENT_LENGTH,
-              MAX_VALID_CONTENT_LENGTH,
-              postContent
-            )
-          }
-          helperText={helpTextMessage(
-            MIN_VALID_CONTENT_LENGTH,
-            MAX_VALID_CONTENT_LENGTH,
-            postContent,
-            "Content"
-          )}
+          error={displayPostContentError(postContent)}
+          helperText={PostContentTextHelper(postContent)}
           fullWidth
           margin="normal"
           name="postContent"
@@ -146,6 +124,7 @@ const NewPost = () => {
           setValue={setTagsValue}
           handleChange={handleTagsChange}
         />
+        <ImageUpload handleImageChange={handleImageChange} />
         <PostButton
           disabled={!isSendButtonEnabled() || enablePost}
           buttonName={postButton}

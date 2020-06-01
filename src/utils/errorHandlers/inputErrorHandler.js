@@ -1,3 +1,10 @@
+import {
+  MAX_VALID_CONTENT_LENGTH,
+  MIN_VALID_TITLE_LENGTH,
+  MAX_VALID_TITLE_LENGTH,
+  MIN_VALID_CONTENT_LENGTH,
+} from "../consts/newPostConsts";
+
 export const isTextLengthValid = (minLength, maxLength, txt) =>
   txt.length > minLength && txt.length <= maxLength;
 
@@ -49,3 +56,35 @@ export const helpTextField = (fieldValue) =>
     : "The value cannot be empty nor contain white spaces!";
 
 export const isPasswordEmpty = (password) => password.length < 1;
+
+export const isPostTitleValid = (postTitle) =>
+  isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle);
+
+export const isPostContentValid = (postContent) =>
+  isTextLengthValid(
+    MIN_VALID_CONTENT_LENGTH,
+    MAX_VALID_CONTENT_LENGTH,
+    postContent
+  );
+
+export const displayPostTitleError = (postTitle) =>
+  postTitle && !isPostTitleValid(postTitle);
+
+export const displayPostContentError = (postContent) =>
+  postContent && !isPostContentValid(postContent);
+
+export const postTitleTextHelper = (postTitle) =>
+  helpTextMessage(
+    MIN_VALID_TITLE_LENGTH,
+    MAX_VALID_TITLE_LENGTH,
+    postTitle,
+    "Title"
+  );
+
+export const PostContentTextHelper = (postContent) =>
+  helpTextMessage(
+    MIN_VALID_CONTENT_LENGTH,
+    MAX_VALID_CONTENT_LENGTH,
+    postContent,
+    "Content"
+  );

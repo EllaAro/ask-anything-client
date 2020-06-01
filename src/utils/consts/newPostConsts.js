@@ -14,4 +14,8 @@ export const categories = [
   { title: "TV Shows", id: 5 },
 ];
 
-export const initPostValues = { postTitle: "", postContent: "" };
+export const initPostValues = {
+  postTitle: "",
+  postContent: "",
+  postImage: null,
+};
