@@ -80,23 +80,22 @@ export const createPost = ({
     });
 };
 
-export const fetchAllPosts = () => {
-  return async (dispatch) => {
-    try {
-      const res = await fetch("http://localhost:8080/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: fetchAllPostsQuery,
-      });
-      const resData = await res.json();
+export const fetchAllPosts = () => (dispatch) => {
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: fetchAllPostsQuery,
+  })
+    .then((res) => res.json())
+    .then((resData) => {
       dispatch({
         type: FETCH_ALL_POSTS,
         posts: resData.data.fetchAllPosts.posts,
       });
-    } catch (err) {
+    })
+    .catch((err) => {
       return console.log(err);
-    }
-  };
+    });
 };

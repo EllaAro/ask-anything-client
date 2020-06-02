@@ -10,6 +10,7 @@ import { useStylesPaper } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../redux/actions/postsActions";
 import { categories, initPostValues } from "../utils/consts/newPostConsts";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import {
   isTagsLengthValid,
   isPostTitleValid,
@@ -80,9 +81,8 @@ const NewPost = () => {
 
   return (
     <Paper className={useStylesPaper().rootPaper} elevation={4}>
+      <CssBaseline />
       <Container>
-        <br />
-        <Typography variant="h5">Create A New Post</Typography>
         <TextField
           error={displayPostTitleError(postTitle)}
           helperText={postTitleTextHelper(postTitle)}

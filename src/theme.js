@@ -12,7 +12,7 @@ export const useStylesPaper = makeStyles((theme) => ({
   rootPaper: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "5em",
+    marginTop: "6em",
     borderRadius: 3,
     textAlign: "center",
     marginLeft: "50px",

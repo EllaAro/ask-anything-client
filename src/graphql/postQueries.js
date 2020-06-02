@@ -20,6 +20,7 @@ export const fetchAllPostsQuery = JSON.stringify({
                   title,
                   content,
                   tags,
+                  imageUrl,
                   createdAt}
       }
     }`,

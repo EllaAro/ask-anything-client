@@ -11,7 +11,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles({
   root: {
-    width: "90%",
+    width: "100%",
     margin: "0.5em",
   },
   media: {
@@ -31,31 +31,6 @@ const useStyles = makeStyles({
 
 const Post = ({ postData }) => {
   const classes = useStyles();
-  // return (
-  //   <Card className={classes.root} variant="outlined">
-  //     <CardContent>
-  //       <Typography variant="h5" component="h2" noWrap={true}>
-  //         {postData.title}
-  //       </Typography>
-  //       <Typography className={classes.pos} color="textSecondary" noWrap={true}>
-  //         {postData.tags.toString()}
-  //       </Typography>
-  //       <Typography variant="body2" component="p" noWrap={true}>
-  //         {postData.content}
-  //       </Typography>
-  //     </CardContent>
-  //     <CardActions>
-  //       <Link
-  //         exact
-  //         to={`/posts/post/${postData._id}`}
-  //         style={{ textDecoration: "none" }}
-  //       >
-  //         <Button size="small">KEEP READING</Button>
-  //       </Link>
-  //     </CardActions>
-  //   </Card>
-  // );
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
