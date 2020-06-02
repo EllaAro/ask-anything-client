@@ -5,6 +5,7 @@ import {
   IS_POSTS_LOADING,
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
+  FETCH_POSTS_ERROR,
 } from "./types";
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
@@ -54,6 +55,7 @@ export const createPost = ({
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
+        console.log(resData.errors);
         dispatch(
           showNotification(
             "Post submitting has failed. Make sure you have entered a valid content.",
@@ -81,6 +83,7 @@ export const createPost = ({
 };
 
 export const fetchAllPosts = () => (dispatch) => {
+  dispatch({ type: IS_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -96,6 +99,6 @@ export const fetchAllPosts = () => (dispatch) => {
       });
     })
     .catch((err) => {
-      return console.log(err);
+      dispatch({ type: FETCH_POSTS_ERROR });
     });
 };

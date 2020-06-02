@@ -22,7 +22,6 @@ export default function postsReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        posts: [...state.posts, action.post],
         isPostCreated: true,
       };
     case FETCH_ALL_POSTS:

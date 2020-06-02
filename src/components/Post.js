@@ -36,7 +36,7 @@ const Post = ({ postData }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://github.githubassets.com/images/modules/open_graph/github-octocat.png"
+          image={postData.imageUrl}
           title={postData.title}
         />
         <CardContent>
