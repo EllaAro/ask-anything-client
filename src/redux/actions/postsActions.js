@@ -6,6 +6,8 @@ import {
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
 } from "./types";
+import { showNotification } from "./notificationActions";
+import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
 
 const fromArrToQlArr = (arr) => {
   let returnVal = ``;
@@ -19,48 +21,63 @@ export const createPost = ({
   tagsValue,
   postImage,
   token,
-}) => {
-  return async (dispatch) => {
-    dispatch({ type: IS_POST_CREATE_LOADING });
+}) => (dispatch) => {
+  dispatch({ type: IS_POST_CREATE_LOADING });
 
-    const formData = new FormData();
-    formData.append("image", postImage);
+  const formData = new FormData();
+  formData.append("image", postImage);
 
-    const resImg = await fetch(
-      "http://localhost:8080/api/file-upload/image-upload",
-      {
+  fetch("http://localhost:8080/api/file-upload/image-upload", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  })
+    .then((resImg) => resImg.json())
+    .then((resImgData) => {
+      const imageUrl = resImgData.imageUrl;
+      return fetch("http://localhost:8080/graphql", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        body: formData,
+        body: createPostQuery(
+          postTitle,
+          postContent,
+          fromArrToQlArr(tagsValue),
+          imageUrl
+        ),
+      });
+    })
+    .then((res) => res.json())
+    .then((resData) => {
+      if (resData.errors) {
+        dispatch(
+          showNotification(
+            "Post submitting has failed. Make sure you have entered a valid content.",
+            ERROR
+          )
+        );
+        dispatch({ type: CREATE_POST_ERROR });
+      } else {
+        dispatch({
+          type: CREATE_POST,
+          post: resData.data.createPost,
+        });
+        dispatch(showNotification("Post submission has succeeded!", SUCCESS));
       }
-    );
-
-    const resImgData = await resImg.json();
-    const imageUrl = resImgData.filePath;
-    console.log(imageUrl);
-
-    // add imageUrl into graphql query
-
-    const res = await fetch("http://localhost:8080/graphql", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: createPostQuery(postTitle, postContent, fromArrToQlArr(tagsValue)),
+    })
+    .catch((err) => {
+      dispatch({ type: CREATE_POST_ERROR });
+      dispatch(
+        showNotification(
+          "Something went wrong. Please try to submit a post again later.",
+          ERROR
+        )
+      );
     });
-    const resData = await res.json();
-    console.log(resData.errors);
-    if (resData.errors && resData.errors[0].status === 401)
-      throw new Error(`Posting a post has failed, invalid input!`);
-    else if (resData.errors) throw new Error(`Post creation has failed`);
-    dispatch({
-      type: CREATE_POST,
-      post: resData.data.createPost,
-    });
-  };
 };
 
 export const fetchAllPosts = () => {

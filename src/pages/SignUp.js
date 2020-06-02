@@ -92,7 +92,6 @@ const SignUp = () => {
     isEmailValid(email);
 
   const enableSignUpButton = () => {
-    console.log(isLoading);
     return !isInputValid() || isLoading;
   };
 

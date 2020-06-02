@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -22,15 +22,22 @@ import {
 
 const NewPost = () => {
   const dispatch = useDispatch();
-
   const fixedOptions = [];
 
   const [postValues, setPostValues] = useState(initPostValues);
   const { postTitle, postContent, postImage } = postValues;
   const [tagsValue, setTagsValue] = useState([]);
-  const [postButton, setPostButton] = useState("Post");
-  const [enablePost, setEnablePost] = useState(false);
   const { token } = useSelector((state) => state.auth);
+  const { isLoading, isPostCreated } = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    if (isPostCreated) resetValues();
+  }, [isPostCreated]);
+
+  const resetValues = () => {
+    setPostValues(initPostValues);
+    setTagsValue([]);
+  };
 
   const handlePostValuesChange = (event) => {
     const { name, value } = event.target;
@@ -60,32 +67,16 @@ const NewPost = () => {
   };
 
   const handleSubmitPost = () => {
-    setPostButton("Sending");
-    setEnablePost(true);
     dispatch(
       createPost({ postTitle, postContent, tagsValue, postImage, token })
-    )
-      .then((res) => {
-        resetValues();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const resetValues = () => {
-    setPostButton("Post");
-    setEnablePost(false);
-    setPostValues(initPostValues);
-    setTagsValue([]);
-  };
-
-  const isSendButtonEnabled = () => {
-    return (
-      isPostTitleValid(postTitle) &&
-      isPostContentValid(postContent) &&
-      isTagsLengthValid(tagsValue) &&
-      postImage
     );
   };
+
+  const isSendButtonEnabled = () =>
+    isPostTitleValid(postTitle) &&
+    isPostContentValid(postContent) &&
+    isTagsLengthValid(tagsValue) &&
+    postImage;
 
   return (
     <Paper className={useStylesPaper().rootPaper} elevation={4}>
@@ -126,8 +117,8 @@ const NewPost = () => {
         />
         <ImageUpload handleImageChange={handleImageChange} />
         <PostButton
-          disabled={!isSendButtonEnabled() || enablePost}
-          buttonName={postButton}
+          disabled={!isSendButtonEnabled() || isLoading}
+          buttonName={"Post"}
           handleSubmit={handleSubmitPost}
         />
       </Container>
