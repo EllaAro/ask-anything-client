@@ -1,4 +1,4 @@
-export const createCommentQuery = (content, postId) =>
+export const createCommentQuery = (postId, content) =>
   JSON.stringify({
     query: `mutation {
         createComment(commentInput: {
@@ -9,4 +9,22 @@ export const createCommentQuery = (content, postId) =>
                 _id
             }
     }`,
+  });
+
+export const fetchCommentsQuery = (postId) =>
+  JSON.stringify({
+    query: `query {
+      fetchAllComments(fetchCommentsInput: {
+          postId: "${postId}", 
+          }),
+          {
+            comments {
+              _id,
+              firstName,
+              lastName,
+              content,
+              createdAt,
+            }
+          }
+  }`,
   });

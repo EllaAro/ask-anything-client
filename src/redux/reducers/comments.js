@@ -1,12 +1,13 @@
 import {
   IS_COMMENT_CREATE_LOADING,
   CREATE_COMMENT,
-  FETCH_COMMENT,
+  FETCH_COMMENTS,
+  CREATE_COMMENT_ERROR,
 } from "../actions/types";
 
 const initialState = {
   isLoading: false,
-  comment: "",
+  comments: [],
   commentCreated: false,
 };
 
@@ -16,17 +17,26 @@ export default function commentsReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
+        commentCreated: false,
       };
     case CREATE_COMMENT:
       return {
         ...state,
         isLoading: false,
+        commentCreated: true,
       };
-    case FETCH_COMMENT:
+    case FETCH_COMMENTS:
       return {
         ...state,
         isLoading: false,
-        comment: action.payload.comment,
+        commentCreated: false,
+        comments: action.payload.comments,
+      };
+    case CREATE_COMMENT_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        commentCreated: false,
       };
 
     default:

@@ -14,7 +14,7 @@ const FullPost = ({ id }) => {
           <br />
         </Container>
       </Paper>
-      <CommentsBox />
+      <CommentsBox postId={id} />
     </React.Fragment>
   );
 };
