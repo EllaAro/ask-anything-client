@@ -6,7 +6,6 @@ const imgLink =
 
 const Comment = ({ userInfo }) => {
   const { content, createdAt, firstName, lastName } = userInfo;
-  console.log(userInfo);
   return (
     <Grid container wrap="nowrap" spacing={2}>
       <Grid item>

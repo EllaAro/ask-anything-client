@@ -5,6 +5,7 @@ import { Divider, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     margin: "30px 0",
+  },
+  title: {
+    marginTop: "1em",
   },
 }));
 
@@ -39,11 +43,11 @@ const CommentsBox = ({ postId }) => {
 
   return (
     <div className={classes.root}>
-      <h1>Comments</h1>
-      <Paper className={classes.paper}>
-        {fetchedComments}
-        <AddComment postId={postId} />
-      </Paper>
+      <Typography variant="h4" className={classes.title}>
+        Comments
+      </Typography>
+      <AddComment postId={postId} />
+      <Paper className={classes.paper}>{fetchedComments}</Paper>
     </div>
   );
 };
