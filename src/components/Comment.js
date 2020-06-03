@@ -12,7 +12,7 @@ const Comment = () => {
       </Grid>
       <Grid justifyContent="left" item xs zeroMinWidth>
         <h4 style={{ margin: 0, textAlign: "left" }}>Michel Michel</h4>
-        <p style={{ textAlign: "left" }}>ae ex. </p>
+        <p style={{ textAlign: "left" }}>dummy text. </p>
         <p style={{ textAlign: "left", color: "gray" }}>posted 1 minute ago</p>
       </Grid>
     </Grid>

@@ -4,6 +4,7 @@ import {
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
 } from "../actions/types";
+
 const initialState = {
   isLoading: false,
   posts: [],

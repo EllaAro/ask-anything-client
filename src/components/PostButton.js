@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    marginTop: "1em",
     marginBottom: "2em",
     "&:hover": {
       backgroundColor: "##ea80fc",

@@ -102,7 +102,6 @@ const NewPost = () => {
           label="post Content"
           multiline
           rows={5}
-          defaultValue="Default Value"
           variant="outlined"
           value={postContent}
           onChange={handlePostValuesChange}
