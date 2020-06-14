@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
 import SignForm from "../components/SignForm";
-import {
-  initSignUpValues,
-  VALID_PASSWORD_LENGTH,
-} from "../utils/consts/signUpConsts";
+import { initSignUpValues } from "../utils/consts/signUpConsts";
 import {
   errorSignUpPassword,
   isSignUpPasswordValid,
@@ -25,28 +22,37 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setSignUpDetails((prevSignUpDetails) => {
-      return {
-        ...prevSignUpDetails,
-        [name]: value,
-      };
-    });
-  };
+  const handleInputChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
+      setSignUpDetails((prevSignUpDetails) => {
+        return {
+          ...prevSignUpDetails,
+          [name]: value,
+        };
+      });
+    },
+    [setSignUpDetails, signUpDetails]
+  );
 
-  const isInputValid = () =>
+  const isInputValid = (firstName, lastName, password, email) =>
     isFieldValueValid(firstName) &&
     isFieldValueValid(lastName) &&
     isSignUpPasswordValid(password) &&
     isEmailValid(email);
 
-  const enableSignUpButton = () => {
-    return !isInputValid() || isLoading;
+  const enableSignUpButton = (
+    firstName,
+    lastName,
+    password,
+    email,
+    isLoading
+  ) => {
+    return !isInputValid(firstName, lastName, password, email) || isLoading;
   };
 
-  const handleSignUpButton = () => {
-    if (isInputValid()) {
+  const handleSignUpButton = (firstName, lastName, password, email) => {
+    if (isInputValid(firstName, lastName, password, email)) {
       dispatch(createUser({ firstName, lastName, email, password }));
     }
   };
@@ -104,8 +110,16 @@ const SignUp = () => {
   return (
     <SignForm
       title="Sign Up"
-      buttonDisable={enableSignUpButton()}
-      handleButtonClick={handleSignUpButton}
+      buttonDisable={enableSignUpButton(
+        firstName,
+        lastName,
+        password,
+        email,
+        isLoading
+      )}
+      handleButtonClick={() =>
+        handleSignUpButton(firstName, lastName, password, email)
+      }
     >
       {inputFields()}
       {passwordField()}
