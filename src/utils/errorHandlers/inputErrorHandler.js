@@ -5,6 +5,8 @@ import {
   MIN_VALID_CONTENT_LENGTH,
 } from "../consts/newPostConsts";
 
+import { VALID_PASSWORD_LENGTH } from "../consts/signUpConsts";
+
 export const isTextLengthValid = (minLength, maxLength, txt) =>
   txt.length > minLength && txt.length <= maxLength;
 
@@ -58,6 +60,17 @@ export const helpTextField = (fieldValue) =>
     : "The value cannot be empty nor contain white spaces!";
 
 export const isPasswordEmpty = (password) => password.length < 1;
+
+export const errorSignUpEmail = (email) => email && !isEmailValid(email);
+
+export const errorSignUpPassword = (password) =>
+  password && !isPasswordValid(password, VALID_PASSWORD_LENGTH);
+
+export const errorSignUpInputField = (field) =>
+  field && !isFieldValueValid(field);
+
+export const signUpPasswordTextHelper = (password) =>
+  helpTextPasswordMessage(password, VALID_PASSWORD_LENGTH);
 
 export const isPostTitleValid = (postTitle) =>
   isTextLengthValid(MIN_VALID_TITLE_LENGTH, MAX_VALID_TITLE_LENGTH, postTitle);

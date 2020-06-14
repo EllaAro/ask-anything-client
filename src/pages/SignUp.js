@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { createUser } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
 import SignForm from "../components/SignForm";
@@ -10,11 +9,14 @@ import {
 } from "../utils/consts/signUpConsts";
 import {
   isPasswordValid,
-  helpTextPasswordMessage,
+  signUpPasswordTextHelper,
   isEmailValid,
   helpTextEmailMessageForSignUp,
   isFieldValueValid,
   helpTextField,
+  errorSignUpEmail,
+  errorSignUpPassword,
+  errorSignUpInputField,
 } from "../utils/errorHandlers/inputErrorHandler";
 
 const SignUp = () => {
@@ -33,58 +35,6 @@ const SignUp = () => {
     });
   };
 
-  const inputFields = () => {
-    return Object.keys(signUpDetails)
-      .filter((field) => field !== "email" && field !== "password")
-      .map((field) => (
-        <TextField
-          error={
-            signUpDetails[field] && !isFieldValueValid(signUpDetails[field])
-          }
-          helperText={helpTextField(signUpDetails[field])}
-          margin="normal"
-          required
-          fullWidth
-          label={field}
-          name={field}
-          value={signUpDetails.field}
-          autoFocus
-          onChange={handleInputChange}
-        />
-      ));
-  };
-
-  const passwordField = () => (
-    <TextField
-      error={password && !isPasswordValid(password, VALID_PASSWORD_LENGTH)}
-      helperText={helpTextPasswordMessage(password, VALID_PASSWORD_LENGTH)}
-      type="password"
-      margin="normal"
-      required
-      fullWidth
-      label="password"
-      name="password"
-      value={password}
-      autoFocus
-      onChange={handleInputChange}
-    />
-  );
-
-  const emailField = () => (
-    <TextField
-      error={email && !isEmailValid(email)}
-      helperText={helpTextEmailMessageForSignUp(email)}
-      margin="normal"
-      required
-      fullWidth
-      label="email"
-      name="email"
-      value={email}
-      autoFocus
-      onChange={handleInputChange}
-    />
-  );
-
   const isInputValid = () =>
     isFieldValueValid(firstName) &&
     isFieldValueValid(lastName) &&
@@ -100,6 +50,56 @@ const SignUp = () => {
       dispatch(createUser({ firstName, lastName, email, password }));
     }
   };
+
+  const inputFields = () => {
+    return Object.keys(signUpDetails)
+      .filter((field) => field !== "email" && field !== "password")
+      .map((field) => (
+        <TextField
+          error={errorSignUpInputField(signUpDetails[field])}
+          helperText={helpTextField(signUpDetails[field])}
+          margin="normal"
+          required
+          fullWidth
+          label={field}
+          name={field}
+          value={signUpDetails.field}
+          autoFocus
+          onChange={handleInputChange}
+        />
+      ));
+  };
+
+  const passwordField = () => (
+    <TextField
+      error={errorSignUpPassword(password)}
+      helperText={signUpPasswordTextHelper(password)}
+      type="password"
+      margin="normal"
+      required
+      fullWidth
+      label="password"
+      name="password"
+      value={password}
+      autoFocus
+      onChange={handleInputChange}
+    />
+  );
+
+  const emailField = () => (
+    <TextField
+      error={errorSignUpEmail(email)}
+      helperText={helpTextEmailMessageForSignUp(email)}
+      margin="normal"
+      required
+      fullWidth
+      label="email"
+      name="email"
+      value={email}
+      autoFocus
+      onChange={handleInputChange}
+    />
+  );
 
   return (
     <SignForm
