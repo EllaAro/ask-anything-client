@@ -10,18 +10,16 @@ import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-    display: "block",
+  img: {
     marginLeft: "auto",
     marginRight: "auto",
-    width: "30%",
-  },
-  img: {
+    marginBottom: "1em",
+    marginTop: "0.5em",
     width: theme.spacing(25),
     height: theme.spacing(25),
+  },
+  content: {
+    margin: "1.5em",
   },
 }));
 
@@ -40,13 +38,11 @@ const FullPost = ({ id }) => {
     <React.Fragment>
       <Typography variant="h4">{currentPost.title}</Typography>
       <Typography variant="body2">{currentPost.tags}</Typography>
-      <div className={classes.root}>
-        <Avatar
-          variant="square"
-          src={currentPost.imageUrl}
-          className={classes.img}
-        />
-      </div>
+      <Avatar
+        variant="square"
+        src={currentPost.imageUrl}
+        className={classes.img}
+      />
       <Typography variant="body1">{currentPost.content}</Typography>
     </React.Fragment>
   ) : null;
@@ -54,7 +50,7 @@ const FullPost = ({ id }) => {
   return (
     <React.Fragment>
       <Paper elevation={4} className={useStylesPaper().rootPaper}>
-        <Container>{content}</Container>
+        <Container className={classes.content}>{content}</Container>
       </Paper>
       <CommentsBox postId={id} />
     </React.Fragment>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import Profile from "./Profile";
 import PrivateSettings from "./PrivateSettings";
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const router = (
+const router = (isAuth) => (
   <Switch>
     <Route exact path="/">
       <Main />
@@ -39,6 +40,7 @@ const router = (
 
 const LoggedInPages = () => {
   const classes = useStyles();
+  const { isAuth } = useSelector((state) => state.auth);
 
   return (
     <React.Fragment>
@@ -49,7 +51,7 @@ const LoggedInPages = () => {
       <Grid item container className={classes.cotent}>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
-          {router}
+          {router(isAuth)}
         </Grid>
         <Grid item xs={false} sm={2} />
       </Grid>
