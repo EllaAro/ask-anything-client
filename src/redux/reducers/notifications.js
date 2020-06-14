@@ -6,7 +6,7 @@ const initialState = {
   type: null,
 };
 
-export default function authReducer(state = initialState, action) {
+export default function notificationsReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_NOTIFICATION:
       return {

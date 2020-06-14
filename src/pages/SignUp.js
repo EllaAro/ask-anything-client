@@ -73,7 +73,6 @@ const SignUp = () => {
           label={field}
           name={field}
           value={signUpDetails.field}
-          autoFocus
           onChange={handleInputChange}
         />
       ));
@@ -90,7 +89,6 @@ const SignUp = () => {
       label="password"
       name="password"
       value={password}
-      autoFocus
       onChange={handleInputChange}
     />
   );
@@ -105,7 +103,6 @@ const SignUp = () => {
       label="email"
       name="email"
       value={email}
-      autoFocus
       onChange={handleInputChange}
     />
   );
