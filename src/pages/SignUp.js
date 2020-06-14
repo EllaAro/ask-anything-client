@@ -35,27 +35,30 @@ const SignUp = () => {
     [setSignUpDetails, signUpDetails]
   );
 
-  const isInputValid = (firstName, lastName, password, email) =>
-    isFieldValueValid(firstName) &&
-    isFieldValueValid(lastName) &&
-    isSignUpPasswordValid(password) &&
-    isEmailValid(email);
+  const isInputValid = useCallback(
+    (firstName, lastName, password, email) =>
+      isFieldValueValid(firstName) &&
+      isFieldValueValid(lastName) &&
+      isSignUpPasswordValid(password) &&
+      isEmailValid(email),
+    [firstName, lastName, password, email]
+  );
 
-  const enableSignUpButton = (
-    firstName,
-    lastName,
-    password,
-    email,
-    isLoading
-  ) => {
-    return !isInputValid(firstName, lastName, password, email) || isLoading;
-  };
+  const enableSignUpButton = useCallback(
+    (firstName, lastName, password, email, isLoading) => {
+      return !isInputValid(firstName, lastName, password, email) || isLoading;
+    },
+    [firstName, lastName, password, email, isLoading]
+  );
 
-  const handleSignUpButton = (firstName, lastName, password, email) => {
-    if (isInputValid(firstName, lastName, password, email)) {
-      dispatch(createUser({ firstName, lastName, email, password }));
-    }
-  };
+  const handleSignUpButton = useCallback(
+    (firstName, lastName, password, email) => {
+      if (isInputValid(firstName, lastName, password, email)) {
+        dispatch(createUser({ firstName, lastName, email, password }));
+      }
+    },
+    [firstName, lastName, password, email]
+  );
 
   const inputFields = () => {
     return Object.keys(signUpDetails)
