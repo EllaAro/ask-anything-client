@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import ImageUpload from "../components/ImageUpload";

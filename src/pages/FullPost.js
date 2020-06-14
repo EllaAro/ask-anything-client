@@ -34,7 +34,7 @@ const FullPost = ({ id }) => {
 
   const fetchedPosts = useSelector((state) => state.posts.posts);
 
-  const currentPost = fetchedPosts.filter((post) => post._id == id)[0];
+  const currentPost = fetchedPosts.find((post) => post._id === id);
 
   const content = currentPost ? (
     <React.Fragment>
