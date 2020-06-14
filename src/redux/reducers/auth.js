@@ -19,10 +19,6 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case REGISTER_LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      };
     case IS_AUTH_LOADING:
       return {
         ...state,
@@ -37,11 +33,6 @@ export default function authReducer(state = initialState, action) {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case REGISTER_FAIL:
-      return {
-        token: null,
-        isAuth: false,
-        isLoading: false,
-      };
     case LOGOUT_SUCCESS:
       return {
         token: null,
