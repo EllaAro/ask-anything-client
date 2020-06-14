@@ -45,6 +45,8 @@ export const helpTextEmailMessageForSignUp = (email) => {
   return email && isEmailValid(email) ? "" : "invalid email!";
 };
 
+export const errorSignInEmail = (email) => email && !isEmailValid(email);
+
 export const helpTextEmailMessageForSignIn = (email) =>
   email ? (isEmailValid(email) ? `` : `invalid email!`) : ``;
 

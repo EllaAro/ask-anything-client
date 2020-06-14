@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -30,53 +30,65 @@ const NewPost = () => {
   const { token } = useSelector((state) => state.auth);
   const { isLoading, isPostCreated } = useSelector((state) => state.posts);
 
+  const resetValues = useCallback(() => {
+    setPostValues(initPostValues);
+    setTagsValue([]);
+  }, [setPostValues, setTagsValue]);
+
   useEffect(() => {
     if (isPostCreated) resetValues();
   }, [isPostCreated]);
 
-  const resetValues = () => {
-    setPostValues(initPostValues);
-    setTagsValue([]);
-  };
+  const handlePostValuesChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
 
-  const handlePostValuesChange = (event) => {
-    const { name, value } = event.target;
+      setPostValues((prevPostValues) => {
+        return {
+          ...prevPostValues,
+          [name]: value,
+        };
+      });
+    },
+    [setPostValues, postTitle, postContent]
+  );
 
-    setPostValues((prevPostValues) => {
-      return {
-        ...prevPostValues,
-        [name]: value,
-      };
-    });
-  };
+  const handleTagsChange = useCallback(
+    (event, newValue) => {
+      setTagsValue([
+        ...fixedOptions,
+        ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
+      ]);
+    },
+    [setTagsValue, tagsValue]
+  );
 
-  const handleTagsChange = (event, newValue) => {
-    setTagsValue([
-      ...fixedOptions,
-      ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
-    ]);
-  };
+  const handleImageChange = useCallback(
+    (event) => {
+      setPostValues((prevPostValues) => {
+        return {
+          ...prevPostValues,
+          postImage: event.target.files[0],
+        };
+      });
+    },
+    [setPostValues, postImage]
+  );
 
-  const handleImageChange = (event) => {
-    setPostValues((prevPostValues) => {
-      return {
-        ...prevPostValues,
-        postImage: event.target.files[0],
-      };
-    });
-  };
-
-  const handleSubmitPost = () => {
+  const handleSubmitPost = useCallback(() => {
     dispatch(
       createPost({ postTitle, postContent, tagsValue, postImage, token })
     );
-  };
+  }, [postTitle, postContent, tagsValue, postImage, token]);
 
-  const isSendButtonEnabled = () =>
-    isPostTitleValid(postTitle) &&
-    isPostContentValid(postContent) &&
-    isTagsLengthValid(tagsValue) &&
-    postImage;
+  const isSendButtonEnabled = useCallback(
+    () =>
+      isPostTitleValid(postTitle) &&
+      isPostContentValid(postContent) &&
+      isTagsLengthValid(tagsValue) &&
+      postImage,
+    [postTitle, postContent, tagsValue, postImage]
+  );
 
   return (
     <Paper className={useStylesPaper().rootPaper} elevation={4}>

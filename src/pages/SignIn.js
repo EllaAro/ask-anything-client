@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../redux/actions/authActions";
 import TextField from "@material-ui/core/TextField";
@@ -9,6 +9,7 @@ import {
   helpTextEmailMessageForSignIn,
   isEmailValid,
   isPasswordEmpty,
+  errorSignInEmail,
 } from "../utils/errorHandlers/inputErrorHandler";
 
 const SignIn = () => {
@@ -18,30 +19,41 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setInputDetails((prevSignUpDetails) => {
-      return {
-        ...prevSignUpDetails,
-        [name]: value,
-      };
-    });
-  };
+  const handleInputChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
+      setInputDetails((prevSignUpDetails) => {
+        return {
+          ...prevSignUpDetails,
+          [name]: value,
+        };
+      });
+    },
+    [setInputDetails]
+  );
 
-  const isInputValid = () => isEmailValid(email) && !isPasswordEmpty(password);
+  const isInputValid = useCallback(
+    () => isEmailValid(email) && !isPasswordEmpty(password),
+    [email, password]
+  );
 
-  const handleSignInButton = () => {
-    if (isInputValid()) dispatch(signIn({ password, email }));
-  };
+  const isButtonDisabled = useCallback(() => !isInputValid() || isLoading, [
+    isInputValid,
+    isLoading,
+  ]);
+
+  const handleSignInButton = useCallback(() => {
+    if (isInputValid) dispatch(signIn({ password, email }));
+  }, [dispatch, isInputValid, password, email]);
 
   return (
     <SignForm
       title="Sign In"
-      buttonDisable={!isInputValid() || isLoading}
+      buttonDisable={isButtonDisabled()}
       handleButtonClick={handleSignInButton}
     >
       <TextField
-        error={email && !isEmailValid(email)}
+        error={errorSignInEmail(email)}
         helperText={helpTextEmailMessageForSignIn(email)}
         margin="normal"
         required
