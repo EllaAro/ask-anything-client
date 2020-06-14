@@ -8,14 +8,14 @@ import {
   VALID_PASSWORD_LENGTH,
 } from "../utils/consts/signUpConsts";
 import {
-  isPasswordValid,
+  errorSignUpPassword,
+  isSignUpPasswordValid,
   signUpPasswordTextHelper,
   isEmailValid,
   helpTextEmailMessageForSignUp,
   isFieldValueValid,
   helpTextField,
   errorSignUpEmail,
-  errorSignUpPassword,
   errorSignUpInputField,
 } from "../utils/errorHandlers/inputErrorHandler";
 
@@ -38,7 +38,7 @@ const SignUp = () => {
   const isInputValid = () =>
     isFieldValueValid(firstName) &&
     isFieldValueValid(lastName) &&
-    isPasswordValid(password, VALID_PASSWORD_LENGTH) &&
+    isSignUpPasswordValid(password) &&
     isEmailValid(email);
 
   const enableSignUpButton = () => {

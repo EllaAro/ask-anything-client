@@ -66,6 +66,9 @@ export const errorSignUpEmail = (email) => email && !isEmailValid(email);
 export const errorSignUpPassword = (password) =>
   password && !isPasswordValid(password, VALID_PASSWORD_LENGTH);
 
+export const isSignUpPasswordValid = (password) =>
+  isPasswordValid(password, VALID_PASSWORD_LENGTH);
+
 export const errorSignUpInputField = (field) =>
   field && !isFieldValueValid(field);
 
