@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "30px 0",
   },
   title: {
-    marginTop: "1em",
+    marginBottom: "1em",
+    marginRight: "65%",
   },
 }));
 
@@ -43,11 +44,13 @@ const CommentsBox = ({ postId }) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" className={classes.title}>
-        Comments
-      </Typography>
       <AddComment postId={postId} />
-      <Paper className={classes.paper}>{fetchedComments}</Paper>
+      <Paper className={classes.paper}>
+        <Typography variant="h4" className={classes.title}>
+          Comments
+        </Typography>
+        {fetchedComments}
+      </Paper>
     </div>
   );
 };
