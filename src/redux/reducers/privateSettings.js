@@ -1,15 +1,6 @@
 const initialState = {
-  userName: "initUserName",
-  firstName: "initFirstName",
-  lastName: "initLastName",
-  email: "initEmail",
-};
-
-const updateUserInfo = (userInfo) => {
-  return {
-    type: "UPDATE_USER_INFO",
-    userInfo: userInfo,
-  };
+  firstName: "",
+  lastName: "",
 };
 
 export default function privateSettingsReducer(state = initialState, action) {

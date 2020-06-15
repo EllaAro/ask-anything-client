@@ -7,26 +7,21 @@ import PostButton from "../components/PostButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import { useStylesPaper } from "../theme";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: "1em",
-    border: 0,
-    borderRadius: 3,
-    margin: "0 auto",
-    textAlign: "center",
-    flexWrap: "wrap",
-    marginBottom: "1em",
-    "& .MuiTextField-root": {
-      margin: theme.spacing(3),
-      width: "35ch",
-    },
+  header: {
+    margin: "0.5em",
   },
-  large: {
+  textField: {
+    marginBottom: "1.5em",
+    marginLeft: "1.5em",
+  },
+  img: {
     margin: "0 auto",
     marginTop: "1em",
-    width: theme.spacing(25),
-    height: theme.spacing(23),
+    width: theme.spacing(23),
+    height: theme.spacing(21),
   },
 }));
 
@@ -64,25 +59,16 @@ const PrivateSettings = () => {
   };
 
   return (
-    <Paper className={classes.root} elevation={4}>
+    <Paper className={useStylesPaper().rootPaper} elevation={4}>
       <Container>
-        <br />
-        <Typography variant="h4">{title}</Typography>
-        <Avatar
-          alt="User Photo"
-          src="https://i.ytimg.com/vi/krGH1iByk8c/maxresdefault.jpg"
-          className={classes.large}
-        />
-        <TextField
-          name="userName"
-          label="User Name"
-          onChange={handleTextChange}
-          value={userInfo.userName}
-          InputProps={isEdit ? {} : { readOnly: true }}
-        />
+        <Typography variant="h4" className={classes.header}>
+          {title}
+        </Typography>
+        <Avatar alt="User Photo" className={classes.img} />
         <TextField
           name="firstName"
           label="First Name"
+          className={classes.textField}
           onChange={handleTextChange}
           value={userInfo.firstName}
           InputProps={isEdit ? {} : { readOnly: true }}
@@ -90,15 +76,9 @@ const PrivateSettings = () => {
         <TextField
           name="lastName"
           label="Last Name"
+          className={classes.textField}
           onChange={handleTextChange}
           value={userInfo.lastName}
-          InputProps={isEdit ? {} : { readOnly: true }}
-        />
-        <TextField
-          name="email"
-          label="Email"
-          onChange={handleTextChange}
-          value={userInfo.email}
           InputProps={isEdit ? {} : { readOnly: true }}
         />
         <PostButton buttonName={buttonText} handleSubmit={handleEdit} />

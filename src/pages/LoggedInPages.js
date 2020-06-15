@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import Profile from "./Profile";
 import PrivateSettings from "./PrivateSettings";
 import FullPost from "./FullPost";
 import Main from "./Main";
@@ -22,9 +21,6 @@ const router = (isAuth) => (
   <Switch>
     <Route exact path="/">
       <Main />
-    </Route>
-    <Route exact path="/account/profile">
-      <Profile />
     </Route>
     <Route exact path="/account/private-settings">
       <PrivateSettings />
