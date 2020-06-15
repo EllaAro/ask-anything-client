@@ -24,6 +24,7 @@ export default function commentsReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         commentCreated: true,
+        comments: [action.payload.comment, ...state.comments],
       };
     case FETCH_COMMENTS:
       return {

@@ -6,7 +6,11 @@ export const createCommentQuery = (postId, content) =>
             content: "${content}", 
             }),
             {
-                _id
+                _id,
+                firstName,
+                lastName,
+                content,
+                createdAt,
             }
     }`,
   });

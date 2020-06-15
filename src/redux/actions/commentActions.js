@@ -33,6 +33,7 @@ export const createComment = ({ postId, content, token }) => (dispatch) => {
       } else {
         dispatch({
           type: CREATE_COMMENT,
+          payload: { comment: resData.data.createComment },
         });
         dispatch(
           showNotification("Comment submission has succeeded!", SUCCESS)

@@ -31,7 +31,7 @@ const PrivateSettings = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const initialUserInfo = useSelector((state) => state.privateSettings);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const classes = useStyles();
 
   useEffect(() => {
