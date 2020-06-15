@@ -10,10 +10,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/authActions";
 
@@ -100,6 +100,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
+  const history = createBrowserHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -121,6 +122,11 @@ const Header = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogOutButton = () => {
+    dispatch(logout());
+    history.push("/");
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -133,11 +139,6 @@ const Header = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link exact to="/account/profile" className={classes.accountDetails}>
-          Profile
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
         <Link
           exact
           to="/account/private-settings"
@@ -146,7 +147,7 @@ const Header = () => {
           Private Settings
         </Link>
       </MenuItem>
-      <MenuItem onClick={() => dispatch(logout())}>Log Out</MenuItem>
+      <MenuItem onClick={handleLogOutButton}>Log Out</MenuItem>
     </Menu>
   );
 
@@ -161,14 +162,6 @@ const Header = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
@@ -220,11 +213,6 @@ const Header = () => {
                 Add A Post
               </Link>
             </Button>
-            <IconButton aria-label="show new mails" color="inherit">
-              <Badge badgeContent={1} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
             <IconButton aria-label="show new notifications" color="inherit">
               <Badge badgeContent={1} color="secondary">
                 <NotificationsIcon />

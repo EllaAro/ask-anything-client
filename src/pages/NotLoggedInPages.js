@@ -45,6 +45,7 @@ const NotLoggedInPages = () => (
       <Route exact path="/sign-up">
         <SignUp />
       </Route>
+      <Route render={() => <SignIn />} />
     </Switch>
     <ParticlesBg type="custom" config={config} bg={true} />
   </React.Fragment>
