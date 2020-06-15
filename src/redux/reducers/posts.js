@@ -24,13 +24,14 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         isPostCreated: true,
+        posts: [action.payload.post, ...state.posts],
       };
     case FETCH_ALL_POSTS:
       return {
         ...state,
         isLoading: false,
         isPostCreated: false,
-        posts: action.posts,
+        posts: action.payload.posts,
       };
     case CREATE_POST_ERROR:
       return {

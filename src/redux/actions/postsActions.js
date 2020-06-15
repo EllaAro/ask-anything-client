@@ -66,7 +66,7 @@ export const createPost = ({
       } else {
         dispatch({
           type: CREATE_POST,
-          post: resData.data.createPost,
+          payload: { post: resData.data.createPost },
         });
         dispatch(showNotification("Post submission has succeeded!", SUCCESS));
       }
@@ -95,7 +95,7 @@ export const fetchAllPosts = () => (dispatch) => {
     .then((resData) => {
       dispatch({
         type: FETCH_ALL_POSTS,
-        posts: resData.data.fetchAllPosts.posts,
+        payload: { posts: resData.data.fetchAllPosts.posts },
       });
     })
     .catch((err) => {

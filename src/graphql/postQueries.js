@@ -8,7 +8,12 @@ export const createPostQuery = (postTitle, postContent, tagsValue, imageUrl) =>
                 imageUrl: "${imageUrl}"
             }),
             {
-                _id
+                _id,
+                title,
+                content,
+                tags,
+                imageUrl,
+                createdAt
             }
     }`,
   });
