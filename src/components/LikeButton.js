@@ -14,14 +14,16 @@ const useStyles = makeStyles((theme) => ({
 
 const LikeButton = () => {
   const classes = useStyles();
+
   const [isLiked, setIsLiked] = useState(false);
+
+  const handleOnClick = () => {
+    setIsLiked((prevState) => !prevState);
+  };
 
   return (
     <div className={classes.root}>
-      <IconButton
-        aria-label="like"
-        onClick={() => setIsLiked((prevState) => !prevState)}
-      >
+      <IconButton aria-label="like" onClick={handleOnClick}>
         {isLiked ? (
           <ThumbUpAltIcon color="primary" />
         ) : (

@@ -6,6 +6,7 @@ import postsReducer from "./reducers/posts";
 import authReducer from "./reducers/auth";
 import notificationsReducer from "./reducers/notifications";
 import commentReducer from "./reducers/comments";
+import likesReducer from "./reducers/likes";
 
 const rootReducer = combineReducers({
   privateSettings: privateSettingsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   notifications: notificationsReducer,
   comments: commentReducer,
+  likes: likesReducer,
 });
 
 const store = createStore(
