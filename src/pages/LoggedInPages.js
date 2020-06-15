@@ -7,6 +7,7 @@ import FullPost from "./FullPost";
 import Main from "./Main";
 import NewPost from "./NewPost";
 import Header from "../components/Header";
+import NotFoundPage from "./NotFoundPage";
 import { Grid } from "@material-ui/core";
 import ClippedDrawer from "../components/ClippedDrawer";
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,6 +36,7 @@ const router = (isAuth) => (
       path="/posts/post/:id"
       render={({ match }) => <FullPost id={match.params.id} />}
     />
+    <Route render={() => <NotFoundPage />} />
   </Switch>
 );
 
