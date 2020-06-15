@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
@@ -13,10 +13,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LikeButton = () => {
+  const classes = useStyles();
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
-    <React.Fragment>
-      <div></div>
-    </React.Fragment>
+    <div className={classes.root}>
+      <IconButton
+        aria-label="like"
+        onClick={() => setIsLiked((prevState) => !prevState)}
+      >
+        {isLiked ? (
+          <ThumbUpAltIcon color="primary" />
+        ) : (
+          <ThumbUpAltOutlinedIcon color="primary" />
+        )}
+      </IconButton>
+    </div>
   );
 };
 
