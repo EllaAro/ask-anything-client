@@ -20,7 +20,7 @@ export const likePost = ({ postId, token }) => (dispatch) => {
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
-        dispatch({ action: LIKE_POST_ERROR });
+        dispatch({ type: LIKE_POST_ERROR });
         dispatch(
           showNotification(
             "Something went wrong, please try again later",
@@ -34,7 +34,7 @@ export const likePost = ({ postId, token }) => (dispatch) => {
       }
     })
     .catch((err) => {
-      dispatch({ action: LIKE_POST_ERROR });
+      dispatch({ type: LIKE_POST_ERROR });
       dispatch(
         showNotification("Something went wrong, please try again later", ERROR)
       );
@@ -53,7 +53,7 @@ export const unlikePost = ({ postId, token }) => (dispatch) => {
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
-        dispatch({ action: UNLIKE_POST_ERROR });
+        dispatch({ type: UNLIKE_POST_ERROR });
         dispatch(
           showNotification(
             "Something went wrong, please try again later",
@@ -67,7 +67,7 @@ export const unlikePost = ({ postId, token }) => (dispatch) => {
       }
     })
     .catch((err) => {
-      dispatch({ action: UNLIKE_POST_ERROR });
+      dispatch({ type: UNLIKE_POST_ERROR });
       dispatch(
         showNotification("Something went wrong, please try again later", ERROR)
       );

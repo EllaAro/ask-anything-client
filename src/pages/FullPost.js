@@ -8,7 +8,7 @@ import CommentsBox from "../components/CommentsBox";
 import { Typography } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
-import LinkeButton from "../components/LikeButton";
+import LikeButton from "../components/LikeButton";
 
 const useStyles = makeStyles((theme) => ({
   img: {
@@ -45,7 +45,7 @@ const FullPost = ({ id }) => {
         className={classes.img}
       />
       <Typography variant="body1">{currentPost.content}</Typography>
-      <LinkeButton />
+      <LikeButton postId={id} />
     </React.Fragment>
   ) : null;
 

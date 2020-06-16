@@ -5,18 +5,18 @@ import {
   UNLIKE_POST_ERROR,
 } from "../actions/types";
 const initialState = {
-  isLiked: false,
+  likedPostsIds: [],
 };
 
 export default function likesReducer(state = initialState, action) {
   switch (action.type) {
     case POST_LIKED:
       return {
-        isLiked: true,
+        likedPostsIds: state.likedPostsIds,
       };
     case POST_UNLIKED:
       return {
-        isLiked: false,
+        likedPostsIds: state.likedPostsIds,
       };
     case UNLIKE_POST_ERROR:
     case LIKE_POST_ERROR:

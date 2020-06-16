@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useIsMount } from "../customHooks";
+import { likePost, unlikePost } from "../redux/actions/likeActions";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
@@ -12,14 +15,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LikeButton = () => {
+const LikeButton = ({ postId }) => {
   const classes = useStyles();
-
   const [isLiked, setIsLiked] = useState(false);
+  const isMount = useIsMount();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   const handleOnClick = () => {
     setIsLiked((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    if (!isMount)
+      isLiked
+        ? dispatch(likePost({ postId, token }))
+        : dispatch(unlikePost({ postId, token }));
+  }, [isLiked]);
 
   return (
     <div className={classes.root}>

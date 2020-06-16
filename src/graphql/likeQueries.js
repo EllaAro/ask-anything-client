@@ -21,3 +21,13 @@ export const unlikePostQuery = (postId) =>
             }
     }`,
   });
+
+export const fetchLikedPostsQuery = () => {
+  JSON.stringify({
+    query: `query {
+      fetchLikedPosts {
+            likes 
+          }
+  }`,
+  });
+};
