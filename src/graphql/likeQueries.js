@@ -22,12 +22,11 @@ export const unlikePostQuery = (postId) =>
     }`,
   });
 
-export const fetchLikedPostsQuery = () => {
+export const fetchLikedPostsQuery = () =>
   JSON.stringify({
     query: `query {
       fetchLikedPosts {
-            likes 
+        postsId 
           }
-  }`,
+    }`,
   });
-};

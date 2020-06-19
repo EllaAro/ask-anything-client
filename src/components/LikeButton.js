@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import { fetchLikedPosts } from "../redux/actions/likeActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,10 +22,18 @@ const LikeButton = ({ postId }) => {
   const isMount = useIsMount();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const { likedPostsIds } = useSelector((state) => state.likes);
 
-  const handleOnClick = () => {
-    setIsLiked((prevState) => !prevState);
-  };
+  useEffect(() => dispatch(fetchLikedPosts(token)), []);
+
+  // const wasLiked =
+  useEffect(() => {
+    likedPostsIds.filter((id) => id === postId).length > 0
+      ? setIsLiked(true)
+      : setIsLiked(false);
+  }, [likedPostsIds]);
+
+  const handleOnClick = () => (isLiked ? setIsLiked(false) : setIsLiked(true));
 
   useEffect(() => {
     if (!isMount)
