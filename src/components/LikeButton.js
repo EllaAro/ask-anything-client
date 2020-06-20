@@ -24,9 +24,10 @@ const LikeButton = ({ postId }) => {
   const { token } = useSelector((state) => state.auth);
   const { likedPostsIds } = useSelector((state) => state.likes);
 
-  useEffect(() => dispatch(fetchLikedPosts(token)), []);
+  useEffect(() => {
+    if (token) dispatch(fetchLikedPosts({ token }));
+  }, [token]);
 
-  // const wasLiked =
   useEffect(() => {
     likedPostsIds.filter((id) => id === postId).length > 0
       ? setIsLiked(true)
