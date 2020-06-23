@@ -1,4 +1,8 @@
-import { createPostQuery, fetchAllPostsQuery } from "../../graphql/postQueries";
+import {
+  createPostQuery,
+  fetchAllPostsQuery,
+  fetchAllPostsByUserIdQuery,
+} from "../../graphql/postQueries";
 import {
   CREATE_POST,
   FETCH_ALL_POSTS,
@@ -6,6 +10,7 @@ import {
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
   FETCH_POSTS_ERROR,
+  FETCH_ALL_POSTS_BY_USER_ID,
 } from "./types";
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
@@ -96,6 +101,29 @@ export const fetchAllPosts = () => (dispatch) => {
       dispatch({
         type: FETCH_ALL_POSTS,
         payload: { posts: resData.data.fetchAllPosts.posts },
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: FETCH_POSTS_ERROR });
+    });
+};
+
+export const fetchAllPostsByUserId = ({ token }) => (dispatch) => {
+  dispatch({ type: IS_POSTS_LOADING });
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: fetchAllPostsByUserIdQuery,
+  })
+    .then((res) => res.json())
+    .then((resData) => {
+      console.log(resData.data.fetchAllUserPosts.posts);
+      dispatch({
+        type: FETCH_ALL_POSTS_BY_USER_ID,
+        payload: { posts: resData.data.fetchAllUserPosts.posts },
       });
     })
     .catch((err) => {

@@ -8,7 +8,6 @@ import {
   REGISTER_LOADING,
 } from "./types";
 import {
-  expiryDate,
   setLocalStorageAuth,
   emptyLocalStorage,
 } from "../../utils/consts/authConsts";
@@ -35,7 +34,7 @@ export const signIn = ({ password, email }) => (dispatch) => {
           type: AUTH_ERROR,
         });
       } else {
-        setLocalStorageAuth(resData.data.signIn.token, expiryDate);
+        setLocalStorageAuth(resData.data.signIn.token);
         dispatch({
           type: SIGN_IN,
           payload: resData.data.signIn,

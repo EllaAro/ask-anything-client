@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import PrivateSettings from "./PrivateSettings";
 import FullPost from "./FullPost";
 import Main from "./Main";
+import UserPostsPage from "./UserPostsPage";
 import NewPost from "./NewPost";
 import Header from "../components/Header";
 import NotFoundPage from "./NotFoundPage";
@@ -21,6 +22,9 @@ const router = (isAuth) => (
   <Switch>
     <Route exact path="/">
       <Main />
+    </Route>
+    <Route exact path="/user-posts">
+      <UserPostsPage />
     </Route>
     <Route exact path="/account/private-settings">
       <PrivateSettings />

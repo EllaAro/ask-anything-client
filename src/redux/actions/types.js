@@ -2,6 +2,7 @@ export const SIGN_IN = "SIGN_IN";
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_POST = "CREATE_POST";
 export const FETCH_ALL_POSTS = "FETCH_ALL_POSTS";
+export const FETCH_ALL_POSTS_BY_USER_ID = "FETCH_ALL_POSTS_BY_USER_ID";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_FAIL = "LOGIN_FAIL";

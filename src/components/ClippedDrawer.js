@@ -9,6 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import PersonIcon from "@material-ui/icons/Person";
 import StarsIcon from "@material-ui/icons/Stars";
+import Link from "@material-ui/core/Link";
 
 const drawerWidth = 220;
 
@@ -53,7 +54,14 @@ const ClippedDrawer = () => {
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
-              <ListItemText primary={"Your Posts"} />
+              <Link
+                color="inherit"
+                underline="none"
+                href="/user-posts"
+                variant="body2"
+              >
+                <ListItemText primary={"Your Posts"} />
+              </Link>
             </ListItem>
             <ListItem button key="3">
               <ListItemIcon>

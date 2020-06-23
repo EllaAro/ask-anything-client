@@ -3,11 +3,13 @@ import {
   FETCH_ALL_POSTS,
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
+  FETCH_ALL_POSTS_BY_USER_ID,
 } from "../actions/types";
 
 const initialState = {
   isLoading: false,
   posts: [],
+  userPosts: [],
   isPostCreated: false,
 };
 
@@ -25,6 +27,7 @@ export default function postsReducer(state = initialState, action) {
         isLoading: false,
         isPostCreated: true,
         posts: [action.payload.post, ...state.posts],
+        userPosts: [action.payload.post, ...state.userPosts],
       };
     case FETCH_ALL_POSTS:
       return {
@@ -32,6 +35,11 @@ export default function postsReducer(state = initialState, action) {
         isLoading: false,
         isPostCreated: false,
         posts: action.payload.posts,
+      };
+    case FETCH_ALL_POSTS_BY_USER_ID:
+      return {
+        ...state,
+        userPosts: action.payload.posts,
       };
     case CREATE_POST_ERROR:
       return {

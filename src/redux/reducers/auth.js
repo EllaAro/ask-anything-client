@@ -12,7 +12,6 @@ import {
 const initialState = {
   token: localStorage.getItem("token"),
   isAuth: localStorage.getItem("isAuth"),
-  expiryDate: localStorage.getItem("expiryDate"),
   isLoading: false,
 };
 
