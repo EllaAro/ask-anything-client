@@ -59,7 +59,7 @@ export const fetchRecommendedUserPostsQuery = JSON.stringify({
 
 export const fetchTendingUserPostsQuery = JSON.stringify({
   query: `query {
-    fetchRecommendedUserPosts {
+    fetchTrendingPosts {
            posts { _id,
                   title,
                   content,
