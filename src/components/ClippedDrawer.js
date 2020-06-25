@@ -67,7 +67,14 @@ const ClippedDrawer = () => {
               <ListItemIcon>
                 <StarsIcon />
               </ListItemIcon>
-              <ListItemText primary={"Recommended"} />
+              <Link
+                color="inherit"
+                underline="none"
+                href="/recommended-posts"
+                variant="body2"
+              >
+                <ListItemText primary={"Recommended"} />
+              </Link>
             </ListItem>
           </List>
         </div>

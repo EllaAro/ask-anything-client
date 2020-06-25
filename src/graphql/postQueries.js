@@ -43,3 +43,16 @@ export const fetchAllPostsByUserIdQuery = JSON.stringify({
       }
     }`,
 });
+
+export const fetchRecommendedUserPostsQuery = JSON.stringify({
+  query: `query {
+    fetchRecommendedUserPosts {
+           posts { _id,
+                  title,
+                  content,
+                  tags,
+                  imageUrl,
+                  createdAt}
+      }
+    }`,
+});

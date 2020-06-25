@@ -2,6 +2,7 @@ import {
   createPostQuery,
   fetchAllPostsQuery,
   fetchAllPostsByUserIdQuery,
+  fetchRecommendedUserPostsQuery,
 } from "../../graphql/postQueries";
 import {
   CREATE_POST,
@@ -11,6 +12,7 @@ import {
   CREATE_POST_ERROR,
   FETCH_POSTS_ERROR,
   FETCH_ALL_POSTS_BY_USER_ID,
+  FETCH_RECOMMENDED_POSTS,
 } from "./types";
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
@@ -124,6 +126,28 @@ export const fetchAllPostsByUserId = ({ token }) => (dispatch) => {
       dispatch({
         type: FETCH_ALL_POSTS_BY_USER_ID,
         payload: { posts: resData.data.fetchAllUserPosts.posts },
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: FETCH_POSTS_ERROR });
+    });
+};
+
+export const fetchRecommendedPosts = ({ token }) => (dispatch) => {
+  dispatch({ type: IS_POSTS_LOADING });
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: fetchRecommendedUserPostsQuery,
+  })
+    .then((res) => res.json())
+    .then((resData) => {
+      dispatch({
+        type: FETCH_RECOMMENDED_POSTS,
+        payload: { posts: resData.data.fetchRecommendedUserPosts.posts },
       });
     })
     .catch((err) => {
