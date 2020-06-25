@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 import theme from "./theme";
@@ -20,5 +19,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-serviceWorker.unregister();
