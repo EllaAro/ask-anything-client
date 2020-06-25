@@ -7,6 +7,7 @@ import {
   FETCH_ALL_POSTS_BY_USER_ID,
   FETCH_RECOMMENDED_POSTS,
   FETCH_POSTS_ERROR,
+  FETCH_TRENDING_POSTS,
 } from "../actions/types";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   posts: [],
   userPosts: [],
   recommendedPosts: [],
+  trendingPosts: [],
   isPostCreated: false,
 };
 
@@ -52,6 +54,12 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         recommendedPosts: action.payload.posts,
+      };
+    case FETCH_TRENDING_POSTS:
+      return {
+        ...state,
+        isLoading: false,
+        trendingPosts: action.payload.posts,
       };
     case FETCH_POSTS_ERROR:
     case CREATE_POST_ERROR:

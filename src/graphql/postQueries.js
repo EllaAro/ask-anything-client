@@ -56,3 +56,16 @@ export const fetchRecommendedUserPostsQuery = JSON.stringify({
       }
     }`,
 });
+
+export const fetchTendingUserPostsQuery = JSON.stringify({
+  query: `query {
+    fetchRecommendedUserPosts {
+           posts { _id,
+                  title,
+                  content,
+                  tags,
+                  imageUrl,
+                  createdAt}
+      }
+    }`,
+});

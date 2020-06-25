@@ -6,6 +6,7 @@ import FullPost from "./FullPost";
 import Main from "./Main";
 import UserPostsPage from "./UserPostsPage";
 import RecommendedUserPostsPage from "./RecommendedUserPostsPage";
+import TrendingPostsPage from "./TrendingPostsPage";
 import NewPost from "./NewPost";
 import Header from "../components/Header";
 import NotFoundPage from "./NotFoundPage";
@@ -29,6 +30,9 @@ const router = (isAuth) => (
     </Route>
     <Route exact path="/recommended-posts">
       <RecommendedUserPostsPage />
+    </Route>
+    <Route exact path="/trending-posts">
+      <TrendingPostsPage />
     </Route>
     <Route exact path="/account/private-settings">
       <PrivateSettings />

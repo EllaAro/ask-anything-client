@@ -48,7 +48,14 @@ const ClippedDrawer = () => {
               <ListItemIcon>
                 <WhatshotIcon />
               </ListItemIcon>
-              <ListItemText primary={"Trending"} />
+              <Link
+                color="inherit"
+                underline="none"
+                href="/trending-posts"
+                variant="body2"
+              >
+                <ListItemText primary={"Trending"} />
+              </Link>
             </ListItem>
             <ListItem button key="2">
               <ListItemIcon>

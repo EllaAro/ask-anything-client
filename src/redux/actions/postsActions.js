@@ -3,6 +3,7 @@ import {
   fetchAllPostsQuery,
   fetchAllPostsByUserIdQuery,
   fetchRecommendedUserPostsQuery,
+  fetchTendingUserPostsQuery,
 } from "../../graphql/postQueries";
 import {
   CREATE_POST,
@@ -13,6 +14,7 @@ import {
   FETCH_POSTS_ERROR,
   FETCH_ALL_POSTS_BY_USER_ID,
   FETCH_RECOMMENDED_POSTS,
+  FETCH_TRENDING_POSTS,
 } from "./types";
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
@@ -148,6 +150,28 @@ export const fetchRecommendedPosts = ({ token }) => (dispatch) => {
       dispatch({
         type: FETCH_RECOMMENDED_POSTS,
         payload: { posts: resData.data.fetchRecommendedUserPosts.posts },
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: FETCH_POSTS_ERROR });
+    });
+};
+
+export const fetchTrendingPosts = ({ token }) => (dispatch) => {
+  dispatch({ type: IS_POSTS_LOADING });
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: fetchTendingUserPostsQuery,
+  })
+    .then((res) => res.json())
+    .then((resData) => {
+      dispatch({
+        type: FETCH_TRENDING_POSTS,
+        payload: { posts: resData.data.fetchTrendingPosts.posts },
       });
     })
     .catch((err) => {
