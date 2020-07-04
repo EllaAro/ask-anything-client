@@ -5,7 +5,7 @@ The website was mainly inspirited by websites as such as 'Quora' and 'Stackoverf
 ## Technology Wise
 These next technologies are the ones used in this project:
 * React.js
-* Redux.js
+* Redux.js (redux-thunk, actions, reducers, store)
 * Purely functional components ( useState, useEffect, useDispatch, useSelector, custom hooks, etc..)
 * GraphQL (REST)
 * Material-UI
