@@ -30,26 +30,26 @@ Packages :
 ```
 npm install npm@latest -g
 
-npm install react --save
+npm install --save react
 
-npm install react-dom --save
+npm install --save react-dom
 
-npm install react-redux --save
+npm install --save react-redux
 
-npm install redux --save
+npm install --save redux 
 
-npm install date-fns --save
+npm install --save date-fns
 
-npm install react-router-dom --save
+npm install --save react-router-dom
 
-npm install redux-thunk --save
+npm install --save redux-thunk 
 
-npm install @material-ui/core --save
+npm install --save @material-ui/core
 
-npm install @material-ui/icons --save
+npm install --save @material-ui/icons
 
-npm install @material-ui/lab --save
+npm install --save @material-ui/lab
 
-npm install @material-ui/styles --save
+npm install --save @material-ui/styles
 
 ```
