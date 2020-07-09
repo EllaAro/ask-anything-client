@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import PostButton from "./PostButton";
+import PostButton from "./sharedComponents/PostButton";
 import { createComment } from "../redux/actions/commentActions";
 
 const useStyles = makeStyles((theme) => ({

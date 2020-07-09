@@ -15,14 +15,14 @@ const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    // display: "flex",
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
+    maxWidth: drawerWidth,
   },
   drawerContainer: {
     overflow: "auto",

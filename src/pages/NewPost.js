@@ -3,7 +3,7 @@ import { Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import ImageUpload from "../components/ImageUpload";
-import PostButton from "../components/PostButton";
+import PostButton from "../components/sharedComponents/PostButton";
 import TagsAutoComplete from "../components/TagsAutoComplete";
 import { useStylesPaper } from "../theme";
 import { useDispatch, useSelector } from "react-redux";

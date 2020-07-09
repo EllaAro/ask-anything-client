@@ -12,7 +12,9 @@ const Posts = () => {
 
   const fetchedPosts = useSelector((state) => state.posts.posts);
 
-  const posts = fetchedPosts.map((post) => <Post postData={post} />);
+  const posts = fetchedPosts.map((post) => (
+    <Post key={post.id} postData={post} />
+  ));
 
   return <div style={{ margin: "5em" }}>{posts}</div>;
 };
