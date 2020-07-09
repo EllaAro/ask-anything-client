@@ -10,11 +10,13 @@ const Posts = () => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const { mainPosts } = useSelector((state) => state.posts);
+  const { posts, loading, fetched, eror } = useSelector(
+    (state) => state.posts.mainPosts
+  );
 
-  const posts = mainPosts.map((post) => <Post postData={post} />);
+  const resPosts = posts.map((post) => <Post postData={post} />);
 
-  return <div style={{ margin: "5em" }}>{posts}</div>;
+  return <div style={{ margin: "5em" }}>{resPosts}</div>;
 };
 
 export default Posts;

@@ -11,15 +11,13 @@ const UserPostsPage = () => {
     dispatch(fetchAllPostsByUserId(token));
   }, []);
 
-  const fetchedPosts = useSelector((state) => state.posts.userPosts);
-  const posts =
-    fetchedPosts.length > 0 ? (
-      fetchedPosts.map((post) => <Post postData={post} />)
-    ) : (
-      <div />
-    );
+  const { posts, loading, fetched, eror } = useSelector(
+    (state) => state.posts.userPosts
+  );
+  const resPosts =
+    posts.length > 0 ? posts.map((post) => <Post postData={post} />) : <div />;
 
-  return <div style={{ margin: "5em" }}>{posts}</div>;
+  return <div style={{ margin: "5em" }}>{resPosts}</div>;
 };
 
 export default UserPostsPage;

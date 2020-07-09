@@ -12,10 +12,30 @@ import {
 
 const initialState = {
   isPostCreated: false,
-  mainPosts: [],
-  userPosts: [],
-  recommendedPosts: [],
-  trendingPosts: [],
+  mainPosts: {
+    posts: [],
+    loading: false,
+    fetched: false,
+    eror: false,
+  },
+  userPosts: {
+    posts: [],
+    loading: false,
+    fetched: false,
+    eror: false,
+  },
+  recommendedPosts: {
+    posts: [],
+    loading: false,
+    fetched: false,
+    eror: false,
+  },
+  trendingPosts: {
+    posts: [],
+    loading: false,
+    fetched: false,
+    eror: false,
+  },
 };
 
 export default function postsReducer(state = initialState, action) {
@@ -30,31 +50,49 @@ export default function postsReducer(state = initialState, action) {
       return {
         ...state,
         isPostCreated: true,
-        mainPosts: [action.payload.post, ...state.mainPosts],
-        userPosts: [action.payload.post, ...state.userPosts],
+        mainPosts: {
+          ...state.mainPosts,
+          posts: [action.payload.post, ...state.mainPosts.posts],
+        },
+        userPosts: {
+          ...state.userPosts,
+          posts: [action.payload.post, ...state.userPosts.posts],
+        },
       };
     case FETCH_ALL_POSTS:
       return {
         ...state,
         isPostCreated: false,
-        mainPosts: action.payload.posts,
+        mainPosts: {
+          ...state.mainPosts,
+          posts: action.payload.posts,
+        },
       };
     case FETCH_ALL_POSTS_BY_USER_ID:
       return {
         ...state,
-        userPosts: action.payload.posts,
+        userPosts: {
+          ...state.userPosts,
+          posts: action.payload.posts,
+        },
       };
     case FETCH_RECOMMENDED_POSTS:
       return {
         ...state,
 
-        recommendedPosts: action.payload.posts,
+        recommendedPosts: {
+          ...state.recommendedPosts,
+          posts: action.payload.posts,
+        },
       };
     case FETCH_TRENDING_POSTS:
       return {
         ...state,
 
-        trendingPosts: action.payload.posts,
+        trendingPosts: {
+          ...state.trendingPosts,
+          posts: action.payload.posts,
+        },
       };
     case FETCH_POSTS_ERROR:
     case CREATE_POST_ERROR:
