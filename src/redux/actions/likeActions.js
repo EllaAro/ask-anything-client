@@ -14,7 +14,7 @@ import {
 import { showNotification } from "./notificationActions";
 import { ERROR } from "../../utils/consts/notificationTypes";
 
-export const likePost = ({ postId, token }) => (dispatch) => {
+export const likePost = (postId, token) => (dispatch) => {
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -50,7 +50,7 @@ export const likePost = ({ postId, token }) => (dispatch) => {
     });
 };
 
-export const unlikePost = ({ postId, token }) => (dispatch) => {
+export const unlikePost = (postId, token) => (dispatch) => {
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -84,7 +84,7 @@ export const unlikePost = ({ postId, token }) => (dispatch) => {
     });
 };
 
-export const fetchLikedPosts = ({ token }) => (dispatch) => {
+export const fetchLikedPosts = (token) => (dispatch) => {
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {

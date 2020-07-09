@@ -13,7 +13,7 @@ import {
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
 
-export const createComment = ({ postId, content, token }) => (dispatch) => {
+export const createComment = (postId, content, token) => (dispatch) => {
   dispatch({ type: IS_COMMENT_CREATE_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",

@@ -54,7 +54,7 @@ const SignUp = () => {
   const handleSignUpButton = useCallback(
     (firstName, lastName, password, email) => {
       if (isInputValid(firstName, lastName, password, email)) {
-        dispatch(createUser({ firstName, lastName, email, password }));
+        dispatch(createUser(firstName, lastName, email, password));
       }
     },
     [firstName, lastName, password, email]

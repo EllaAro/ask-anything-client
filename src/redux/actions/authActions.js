@@ -15,7 +15,7 @@ import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
 import { showNotification } from "./notificationActions";
 import { signInQuery, signUpQuery } from "../../graphql/authQueries";
 
-export const signIn = ({ password, email }) => (dispatch) => {
+export const signIn = (password, email) => (dispatch) => {
   dispatch({
     type: IS_AUTH_LOADING,
   });
@@ -55,7 +55,7 @@ export const signIn = ({ password, email }) => (dispatch) => {
     });
 };
 
-export const createUser = ({ firstName, lastName, email, password }) => (
+export const createUser = (firstName, lastName, email, password) => (
   dispatch
 ) => {
   dispatch({ type: REGISTER_LOADING });

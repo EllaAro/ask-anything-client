@@ -43,7 +43,7 @@ const SignIn = () => {
   ]);
 
   const handleSignInButton = useCallback(() => {
-    if (isInputValid) dispatch(signIn({ password, email }));
+    if (isInputValid) dispatch(signIn(password, email));
   }, [dispatch, isInputValid, password, email]);
 
   return (

@@ -8,7 +8,7 @@ const TrendingPostsPage = () => {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(fetchTrendingPosts({ token }));
+    dispatch(fetchTrendingPosts(token));
   }, []);
 
   const fetchedPosts = useSelector((state) => state.posts.trendingPosts);

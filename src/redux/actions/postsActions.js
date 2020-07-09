@@ -157,7 +157,7 @@ export const fetchRecommendedPosts = (token) => (dispatch) => {
     });
 };
 
-export const fetchTrendingPosts = ({ token }) => (dispatch) => {
+export const fetchTrendingPosts = (token) => (dispatch) => {
   dispatch({ type: IS_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",

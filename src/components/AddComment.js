@@ -28,7 +28,7 @@ const AddComment = ({ postId }) => {
   };
 
   const handleButtonSubmit = () => {
-    dispatch(createComment({ postId, content: commentContent, token }));
+    dispatch(createComment(postId, commentContent, token));
   };
 
   return (
