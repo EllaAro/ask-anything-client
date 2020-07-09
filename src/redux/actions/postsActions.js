@@ -8,10 +8,10 @@ import {
 import {
   CREATE_POST,
   FETCH_ALL_POSTS,
-  IS_POSTS_LOADING,
+  IS_ALL_POSTS_LOADING,
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
-  FETCH_POSTS_ERROR,
+  FETCH_ALL_POSTS_ERROR,
   FETCH_ALL_POSTS_BY_USER_ID,
   FETCH_RECOMMENDED_POSTS,
   FETCH_TRENDING_POSTS,
@@ -92,7 +92,7 @@ export const createPost = (
 };
 
 export const fetchAllPosts = () => (dispatch) => {
-  dispatch({ type: IS_POSTS_LOADING });
+  dispatch({ type: IS_ALL_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -108,12 +108,12 @@ export const fetchAllPosts = () => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_POSTS_ERROR });
+      dispatch({ type: FETCH_ALL_POSTS_ERROR });
     });
 };
 
 export const fetchAllPostsByUserId = (token) => (dispatch) => {
-  dispatch({ type: IS_POSTS_LOADING });
+  dispatch({ type: IS_ALL_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -131,12 +131,12 @@ export const fetchAllPostsByUserId = (token) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_POSTS_ERROR });
+      dispatch({ type: FETCH_ALL_POSTS_ERROR });
     });
 };
 
 export const fetchRecommendedPosts = (token) => (dispatch) => {
-  dispatch({ type: IS_POSTS_LOADING });
+  dispatch({ type: IS_ALL_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -153,12 +153,12 @@ export const fetchRecommendedPosts = (token) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_POSTS_ERROR });
+      dispatch({ type: FETCH_ALL_POSTS_ERROR });
     });
 };
 
 export const fetchTrendingPosts = (token) => (dispatch) => {
-  dispatch({ type: IS_POSTS_LOADING });
+  dispatch({ type: IS_ALL_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -175,6 +175,6 @@ export const fetchTrendingPosts = (token) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_POSTS_ERROR });
+      dispatch({ type: FETCH_ALL_POSTS_ERROR });
     });
 };
