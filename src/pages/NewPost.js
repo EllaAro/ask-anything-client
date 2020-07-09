@@ -79,9 +79,7 @@ const NewPost = () => {
 
   // usage of useCallBack hook in order to prevent function re-rendering
   const handleSubmitPost = useCallback(() => {
-    dispatch(
-      createPost({ postTitle, postContent, tagsValue, postImage, token })
-    );
+    dispatch(createPost(postTitle, postContent, tagsValue, postImage, token));
   }, [postTitle, postContent, tagsValue, postImage, token]);
 
   // usage of useCallBack hook in order to prevent function re-rendering

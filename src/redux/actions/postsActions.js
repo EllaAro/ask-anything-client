@@ -25,13 +25,13 @@ const fromArrToQlArr = (arr) => {
   return returnVal;
 };
 
-export const createPost = ({
+export const createPost = (
   postTitle,
   postContent,
   tagsValue,
   postImage,
-  token,
-}) => (dispatch) => {
+  token
+) => (dispatch) => {
   dispatch({ type: IS_POST_CREATE_LOADING });
 
   const formData = new FormData();
@@ -112,7 +112,7 @@ export const fetchAllPosts = () => (dispatch) => {
     });
 };
 
-export const fetchAllPostsByUserId = ({ token }) => (dispatch) => {
+export const fetchAllPostsByUserId = (token) => (dispatch) => {
   dispatch({ type: IS_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
@@ -135,7 +135,7 @@ export const fetchAllPostsByUserId = ({ token }) => (dispatch) => {
     });
 };
 
-export const fetchRecommendedPosts = ({ token }) => (dispatch) => {
+export const fetchRecommendedPosts = (token) => (dispatch) => {
   dispatch({ type: IS_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",

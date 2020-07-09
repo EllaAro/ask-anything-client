@@ -8,7 +8,7 @@ const RecommendedUserPostsPage = () => {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(fetchRecommendedPosts({ token }));
+    dispatch(fetchRecommendedPosts(token));
   }, []);
 
   const fetchedPosts = useSelector((state) => state.posts.recommendedPosts);

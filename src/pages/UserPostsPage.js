@@ -8,7 +8,7 @@ const UserPostsPage = () => {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(fetchAllPostsByUserId({ token }));
+    dispatch(fetchAllPostsByUserId(token));
   }, []);
 
   const fetchedPosts = useSelector((state) => state.posts.userPosts);
