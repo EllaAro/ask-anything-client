@@ -10,11 +10,9 @@ const Posts = () => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const fetchedPosts = useSelector((state) => state.posts.posts);
+  const { mainPosts } = useSelector((state) => state.posts);
 
-  const posts = fetchedPosts.map((post) => (
-    <Post key={post.id} postData={post} />
-  ));
+  const posts = mainPosts.map((post) => <Post postData={post} />);
 
   return <div style={{ margin: "5em" }}>{posts}</div>;
 };
