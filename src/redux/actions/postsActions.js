@@ -7,23 +7,23 @@ import {
 } from "../../graphql/postQueries";
 import {
   CREATE_POST,
-  FETCH_ALL_POSTS,
-  IS_ALL_POSTS_LOADING,
   IS_POST_CREATE_LOADING,
   CREATE_POST_ERROR,
-  FETCH_ALL_POSTS_ERROR,
+  FETCH_ALL_POSTS,
   FETCH_ALL_POSTS_BY_USER_ID,
   FETCH_RECOMMENDED_POSTS,
   FETCH_TRENDING_POSTS,
+  IS_ALL_POSTS_LOADING,
+  IS_USER_POSTS_LOADING,
+  IS_RECOMMENDED_POSTS_LOADING,
+  IS_TRENDING_POSTS_LOADING,
+  FETCH_ALL_POSTS_ERROR,
+  FETCH_TRENDING_POSTS_ERROR,
+  FETCH_RECOMMENDED_POSTS_ERROR,
+  FETCH_USER_POSTS_ERROR,
 } from "./types";
 import { showNotification } from "./notificationActions";
 import { SUCCESS, ERROR } from "../../utils/consts/notificationTypes";
-
-const fromArrToQlArr = (arr) => {
-  let returnVal = ``;
-  arr.forEach((element) => (returnVal += `"${element.title}", `));
-  return returnVal;
-};
 
 export const createPost = (
   postTitle,
@@ -53,12 +53,7 @@ export const createPost = (
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: createPostQuery(
-          postTitle,
-          postContent,
-          fromArrToQlArr(tagsValue),
-          imageUrl
-        ),
+        body: createPostQuery(postTitle, postContent, tagsValue, imageUrl),
       });
     })
     .then((res) => res.json())

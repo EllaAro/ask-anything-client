@@ -31,9 +31,9 @@ const FullPost = ({ id }) => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const fetchedPosts = useSelector((state) => state.posts.posts);
+  const { posts } = useSelector((state) => state.posts.mainPosts);
 
-  const currentPost = fetchedPosts.find((post) => post._id === id);
+  const currentPost = posts.find((post) => post._id === id);
 
   const content = currentPost ? (
     <React.Fragment>

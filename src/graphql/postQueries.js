@@ -1,10 +1,23 @@
-export const createPostQuery = (postTitle, postContent, tagsValue, imageUrl) =>
-  JSON.stringify({
+const fromArrToQlArr = (arr) => {
+  let returnVal = ``;
+  arr.forEach((element) => (returnVal += `"${element.title}", `));
+  return returnVal;
+};
+
+export const createPostQuery = (
+  postTitle,
+  postContent,
+  tagsValue,
+  imageUrl
+) => {
+  const tags = fromArrToQlArr(tagsValue);
+
+  return JSON.stringify({
     query: `mutation {
         createPost(postInput: {
                 title: "${postTitle}", 
                 content: "${postContent}", 
-                tags: [${tagsValue}],
+                tags: [${tags}],
                 imageUrl: "${imageUrl}"
             }),
             {
@@ -17,6 +30,7 @@ export const createPostQuery = (postTitle, postContent, tagsValue, imageUrl) =>
             }
     }`,
   });
+};
 
 export const fetchAllPostsQuery = JSON.stringify({
   query: `query {
