@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchComments } from "../redux/actions/commentActions";
 import { Divider, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Comment from "./Comment";
+import Comment from "./sharedComponents/Comment";
 import AddComment from "./AddComment";
 import { Typography } from "@material-ui/core";
 

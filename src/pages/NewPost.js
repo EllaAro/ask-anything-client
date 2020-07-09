@@ -9,7 +9,6 @@ import { useStylesPaper } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../redux/actions/postsActions";
 import { categories, initPostValues } from "../utils/consts/newPostConsts";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import {
   isTagsLengthValid,
   isPostTitleValid,
@@ -39,6 +38,7 @@ const NewPost = () => {
     if (isPostCreated) resetValues();
   }, [isPostCreated]);
 
+  // usage of useCallBack hook in order to prevent function re-rendering
   const handlePostValuesChange = useCallback(
     (event) => {
       const { name, value } = event.target;
@@ -53,6 +53,7 @@ const NewPost = () => {
     [setPostValues, postTitle, postContent]
   );
 
+  // usage of useCallBack hook in order to prevent function re-rendering
   const handleTagsChange = useCallback(
     (event, newValue) => {
       setTagsValue([
@@ -63,6 +64,7 @@ const NewPost = () => {
     [setTagsValue, tagsValue]
   );
 
+  // usage of useCallBack hook in order to prevent function re-rendering
   const handleImageChange = useCallback(
     (event) => {
       setPostValues((prevPostValues) => {
@@ -75,12 +77,14 @@ const NewPost = () => {
     [setPostValues, postImage]
   );
 
+  // usage of useCallBack hook in order to prevent function re-rendering
   const handleSubmitPost = useCallback(() => {
     dispatch(
       createPost({ postTitle, postContent, tagsValue, postImage, token })
     );
   }, [postTitle, postContent, tagsValue, postImage, token]);
 
+  // usage of useCallBack hook in order to prevent function re-rendering
   const isSendButtonEnabled = useCallback(
     () =>
       isPostTitleValid(postTitle) &&
@@ -92,7 +96,6 @@ const NewPost = () => {
 
   return (
     <Paper className={useStylesPaper().rootPaper} elevation={4}>
-      <CssBaseline />
       <Container>
         <TextField
           error={displayPostTitleError(postTitle)}

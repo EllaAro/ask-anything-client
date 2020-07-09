@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../redux/actions/postsActions";
-import Post from "./Post";
+import Post from "./sharedComponents/Post";
 
 const Posts = () => {
   const dispatch = useDispatch();

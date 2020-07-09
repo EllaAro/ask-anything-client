@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { convertTimezone } from "../utils/helperHandler";
+import { convertTimezone } from "../../utils/helperHandler";
 
 const useStyles = makeStyles({
   name: {
