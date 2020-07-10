@@ -22,31 +22,30 @@ const initialState = {
     posts: [],
     loading: false,
     fetched: false,
-    eror: false,
+    error: false,
   },
   userPosts: {
     posts: [],
     loading: false,
     fetched: false,
-    eror: false,
+    error: false,
   },
   recommendedPosts: {
     posts: [],
     loading: false,
     fetched: false,
-    eror: false,
+    error: false,
   },
   trendingPosts: {
     posts: [],
     loading: false,
     fetched: false,
-    eror: false,
+    error: false,
   },
 };
 
 export default function postsReducer(state = initialState, action) {
   switch (action.type) {
-    case IS_ALL_POSTS_LOADING:
     case IS_POST_CREATE_LOADING:
       return {
         ...state,
@@ -79,6 +78,8 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         userPosts: {
           ...state.userPosts,
+          loading: false,
+          fetched: true,
           posts: action.payload.posts,
         },
       };
@@ -97,10 +98,78 @@ export default function postsReducer(state = initialState, action) {
 
         trendingPosts: {
           ...state.trendingPosts,
+          loading: false,
           posts: action.payload.posts,
         },
       };
+    case IS_ALL_POSTS_LOADING:
+      return {
+        ...state,
+        mainPosts: {
+          ...state.mainPosts,
+          loading: true,
+        },
+      };
+    case IS_USER_POSTS_LOADING:
+      return {
+        ...state,
+        userPosts: {
+          ...state.userPosts,
+          loading: true,
+        },
+      };
+    case IS_RECOMMENDED_POSTS_LOADING:
+      return {
+        ...state,
+        recommendedPosts: {
+          ...state.recommendedPosts,
+          loading: true,
+        },
+      };
+    case IS_TRENDING_POSTS_LOADING:
+      return {
+        ...state,
+        trendingPosts: {
+          ...state.trendingPosts,
+          loading: true,
+        },
+      };
+    case FETCH_USER_POSTS_ERROR:
+      return {
+        ...state,
+        userPosts: {
+          ...state.userPosts,
+          loading: false,
+          error: true,
+        },
+      };
     case FETCH_ALL_POSTS_ERROR:
+      return {
+        ...state,
+        mainPosts: {
+          ...state.mainPosts,
+          loading: false,
+          error: true,
+        },
+      };
+    case FETCH_RECOMMENDED_POSTS_ERROR:
+      return {
+        ...state,
+        recommendedPosts: {
+          ...state.recommendedPosts,
+          loading: false,
+          error: true,
+        },
+      };
+    case FETCH_TRENDING_POSTS_ERROR:
+      return {
+        ...state,
+        trendingPosts: {
+          ...state.trendingPosts,
+          loading: false,
+          error: true,
+        },
+      };
     case CREATE_POST_ERROR:
       return {
         ...state,

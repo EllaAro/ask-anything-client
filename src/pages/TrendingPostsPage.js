@@ -11,7 +11,7 @@ const TrendingPostsPage = () => {
     dispatch(fetchTrendingPosts(token));
   }, []);
 
-  const { posts, loading, fetched, eror } = useSelector(
+  const { posts, loading, fetched, error } = useSelector(
     (state) => state.posts.trendingPosts
   );
   const resPosts =

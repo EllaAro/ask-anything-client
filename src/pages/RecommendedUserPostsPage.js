@@ -11,7 +11,7 @@ const RecommendedUserPostsPage = () => {
     dispatch(fetchRecommendedPosts(token));
   }, []);
 
-  const { posts, loading, fetched, eror } = useSelector(
+  const { posts, loading, fetched, error } = useSelector(
     (state) => state.posts.recommendedPosts
   );
   const resPosts =

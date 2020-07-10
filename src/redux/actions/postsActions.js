@@ -59,7 +59,6 @@ export const createPost = (
     .then((res) => res.json())
     .then((resData) => {
       if (resData.errors) {
-        console.log(resData.errors);
         dispatch(
           showNotification(
             "Post submitting has failed. Make sure you have entered a valid content.",
@@ -97,10 +96,12 @@ export const fetchAllPosts = () => (dispatch) => {
   })
     .then((res) => res.json())
     .then((resData) => {
-      dispatch({
-        type: FETCH_ALL_POSTS,
-        payload: { posts: resData.data.fetchAllPosts.posts },
-      });
+      if (resData.errors) dispatch({ type: FETCH_ALL_POSTS_ERROR });
+      else
+        dispatch({
+          type: FETCH_ALL_POSTS,
+          payload: { posts: resData.data.fetchAllPosts.posts },
+        });
     })
     .catch((err) => {
       dispatch({ type: FETCH_ALL_POSTS_ERROR });
@@ -108,7 +109,7 @@ export const fetchAllPosts = () => (dispatch) => {
 };
 
 export const fetchAllPostsByUserId = (token) => (dispatch) => {
-  dispatch({ type: IS_ALL_POSTS_LOADING });
+  dispatch({ type: IS_USER_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -119,19 +120,20 @@ export const fetchAllPostsByUserId = (token) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((resData) => {
-      console.log(resData.data.fetchAllUserPosts.posts);
-      dispatch({
-        type: FETCH_ALL_POSTS_BY_USER_ID,
-        payload: { posts: resData.data.fetchAllUserPosts.posts },
-      });
+      if (resData.errors) dispatch({ type: FETCH_USER_POSTS_ERROR });
+      else
+        dispatch({
+          type: FETCH_ALL_POSTS_BY_USER_ID,
+          payload: { posts: resData.data.fetchAllUserPosts.posts },
+        });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_ALL_POSTS_ERROR });
+      dispatch({ type: FETCH_USER_POSTS_ERROR });
     });
 };
 
 export const fetchRecommendedPosts = (token) => (dispatch) => {
-  dispatch({ type: IS_ALL_POSTS_LOADING });
+  dispatch({ type: IS_RECOMMENDED_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -142,18 +144,20 @@ export const fetchRecommendedPosts = (token) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((resData) => {
-      dispatch({
-        type: FETCH_RECOMMENDED_POSTS,
-        payload: { posts: resData.data.fetchRecommendedUserPosts.posts },
-      });
+      if (resData.errors) dispatch({ type: FETCH_RECOMMENDED_POSTS_ERROR });
+      else
+        dispatch({
+          type: FETCH_RECOMMENDED_POSTS,
+          payload: { posts: resData.data.fetchRecommendedUserPosts.posts },
+        });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_ALL_POSTS_ERROR });
+      dispatch({ type: FETCH_RECOMMENDED_POSTS_ERROR });
     });
 };
 
 export const fetchTrendingPosts = (token) => (dispatch) => {
-  dispatch({ type: IS_ALL_POSTS_LOADING });
+  dispatch({ type: IS_TRENDING_POSTS_LOADING });
   fetch("http://localhost:8080/graphql", {
     method: "POST",
     headers: {
@@ -164,12 +168,14 @@ export const fetchTrendingPosts = (token) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((resData) => {
-      dispatch({
-        type: FETCH_TRENDING_POSTS,
-        payload: { posts: resData.data.fetchTrendingPosts.posts },
-      });
+      if (resData.errors) dispatch({ type: FETCH_TRENDING_POSTS_ERROR });
+      else
+        dispatch({
+          type: FETCH_TRENDING_POSTS,
+          payload: { posts: resData.data.fetchTrendingPosts.posts },
+        });
     })
     .catch((err) => {
-      dispatch({ type: FETCH_ALL_POSTS_ERROR });
+      dispatch({ type: FETCH_TRENDING_POSTS_ERROR });
     });
 };

@@ -10,7 +10,7 @@ const Posts = () => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const { posts, loading, fetched, eror } = useSelector(
+  const { posts, loading, fetched, error } = useSelector(
     (state) => state.posts.mainPosts
   );
 

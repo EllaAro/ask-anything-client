@@ -4,8 +4,10 @@ import Error from "../components/sharedComponents/Error";
 
 const notFoundContent = (
   <div>
-    <Typography variant="h2">404</Typography>
-    <Typography variant="h5">Page not found</Typography>
+    <Typography variant="h2">Error</Typography>
+    <Typography variant="h5">
+      Oops..something went wrong! Please try again later.
+    </Typography>
   </div>
 );
 
