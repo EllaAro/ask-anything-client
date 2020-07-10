@@ -70,6 +70,8 @@ export default function postsReducer(state = initialState, action) {
         isPostCreated: false,
         mainPosts: {
           ...state.mainPosts,
+          loading: false,
+          fetched: true,
           posts: action.payload.posts,
         },
       };

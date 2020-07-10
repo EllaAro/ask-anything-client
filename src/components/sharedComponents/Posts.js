@@ -28,7 +28,7 @@ export const Posts = ({ action, postsType }) => {
   const { posts, loading, fetched, error } = useSelector(
     (state) => state.posts[postsType]
   );
-  console.log(postsType);
+
   return (
     <div className={classes.root}>
       {loading && (
