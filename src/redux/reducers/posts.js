@@ -86,9 +86,10 @@ export default function postsReducer(state = initialState, action) {
     case FETCH_RECOMMENDED_POSTS:
       return {
         ...state,
-
         recommendedPosts: {
           ...state.recommendedPosts,
+          loading: false,
+          fetched: true,
           posts: action.payload.posts,
         },
       };
@@ -99,6 +100,7 @@ export default function postsReducer(state = initialState, action) {
         trendingPosts: {
           ...state.trendingPosts,
           loading: false,
+          fetched: true,
           posts: action.payload.posts,
         },
       };

@@ -1,23 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { fetchTrendingPosts } from "../redux/actions/postsActions";
-import Post from "../components/sharedComponents/Post";
+import { Posts } from "../components/sharedComponents/Posts";
 
 const TrendingPostsPage = () => {
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    dispatch(fetchTrendingPosts(token));
-  }, []);
-
-  const { posts, loading, fetched, error } = useSelector(
-    (state) => state.posts.trendingPosts
-  );
-  const resPosts =
-    posts.length > 0 ? posts.map((post) => <Post postData={post} />) : <div />;
-
-  return <div style={{ margin: "5em" }}>{resPosts}</div>;
+  // return <div></div>;
+  return <Posts action={fetchTrendingPosts} postsType="trendingPosts" />;
 };
 
 export default TrendingPostsPage;
