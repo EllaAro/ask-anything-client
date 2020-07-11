@@ -27,7 +27,9 @@ const NewPost = () => {
   const { postTitle, postContent, postImage } = postValues;
   const [tagsValue, setTagsValue] = useState([]);
   const { token } = useSelector((state) => state.auth);
-  const { isLoading, isPostCreated } = useSelector((state) => state.posts);
+  const { isPostBeingCreated, isPostCreated } = useSelector(
+    (state) => state.posts
+  );
 
   const resetValues = useCallback(() => {
     setPostValues(initPostValues);
@@ -128,7 +130,7 @@ const NewPost = () => {
         />
         <ImageUpload handleImageChange={handleImageChange} />
         <PostButton
-          disabled={!isSendButtonEnabled() || isLoading}
+          disabled={!isSendButtonEnabled() || isPostBeingCreated}
           buttonName={"Post"}
           handleSubmit={handleSubmitPost}
         />

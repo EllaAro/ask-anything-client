@@ -18,6 +18,7 @@ import {
 
 const initialState = {
   isPostCreated: false,
+  isPostBeingCreated: false,
   mainPosts: {
     posts: [],
     loading: false,
@@ -49,11 +50,12 @@ export default function postsReducer(state = initialState, action) {
     case IS_POST_CREATE_LOADING:
       return {
         ...state,
-        isPostCreated: false,
+        isPostBeingCreated: true,
       };
     case CREATE_POST:
       return {
         ...state,
+        isPostBeingCreated: false,
         isPostCreated: true,
         mainPosts: {
           ...state.mainPosts,
@@ -177,7 +179,7 @@ export default function postsReducer(state = initialState, action) {
     case CREATE_POST_ERROR:
       return {
         ...state,
-        isPostCreated: false,
+        isPostBeingCreated: false,
       };
     default:
       return state;
