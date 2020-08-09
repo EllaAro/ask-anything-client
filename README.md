@@ -14,7 +14,6 @@ These next technologies are the ones used in this project:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 ### Prerequisites
 Packages :
-* `npm`
 * `react`
 * `react-redux`
 * `redux`
